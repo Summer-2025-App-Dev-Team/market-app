@@ -1,10 +1,12 @@
-export default function() {
+export default function () {
     return (
         <header>
             <nav>
-                <span>Button 1</span>
-                <span>Button 2</span>
-                <span>Button 3</span>
+                <span>SAS Online Market</span>
+                <form role="search">
+                    <input type="search" placeholder="Search" />
+                </form>
+                <button className="btn btn-primary" type="submit">Add items</button>
             </nav>
         </header>
     )

@@ -3,3 +3,47 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Inter, sans-serif !important;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    padding: 15px 10px;
+    background-color: rgb(227, 227, 227);
+}
+
+header>nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header>nav>span:first-child {
+    font-size: 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header>nav input {
+    outline: none;
+    border: 1.5px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    user-select: none;
+    transition: 0.2s;
+}
+
+header>nav input:focus {
+    border: 1.5px solid blue;
+}
+
+header>nav>button {
+    margin-left: auto;
+}
