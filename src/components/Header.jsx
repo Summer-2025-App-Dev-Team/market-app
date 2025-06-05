@@ -2,11 +2,12 @@ export default function () {
     return (
         <header>
             <nav>
-                <span>SAS Online Market</span>
+                <a href="/" className="home-link">SAS Online Market</a>
                 <form role="search">
                     <input type="search" placeholder="Search" />
                 </form>
-                <button className="btn btn-primary" type="submit">Add items</button>
+                <button type="button" className="btn btn-primary">Add item</button>
+                <i className='bx bx-user-circle'></i> 
             </nav>
         </header>
     )
