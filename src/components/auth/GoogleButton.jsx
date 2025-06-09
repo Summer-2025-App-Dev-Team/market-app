@@ -3,7 +3,7 @@ import { auth } from "../lib/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
 
-export default function GoogleLoginButton() {
+export default function GoogleLoginButton(props) {
   const setUser = useAuthStore((state) => state.setUser);
 
   const handleLogin = async () => {
@@ -47,7 +47,7 @@ export default function GoogleLoginButton() {
         alt="Google logo"
         style={{ width: "18px", height: "18px", marginRight: "10px" }}
       />
-      Sign in with Google
+      {props.mode=="signin" ? "Sign in" : "Sign up"} in with Google
     </button>
   );
 }

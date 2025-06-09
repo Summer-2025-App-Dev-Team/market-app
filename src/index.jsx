@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import Login from "./components/auth/Login";
+import Logout from "./components/auth/Logout";
 import SignUp from "./components/auth/SignUp";
 import NotFoundPage from "./components/NotFoundPage";
 import AuthListener from "./components/auth/AuthListener";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login />
+    },
+    {
+        path: "/logout",
+        element: <Logout/>
     },
     {
         path: "/signup",

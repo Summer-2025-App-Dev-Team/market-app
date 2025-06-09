@@ -1,7 +1,7 @@
 import useAuthStore from '../store/useAuthStore';
 
 
-export default function ProfileOrLogin(){
+export default function LogoutOrLogin(){
     const user = useAuthStore((state) => state.user);
     if (user==null){
         return (
@@ -9,7 +9,7 @@ export default function ProfileOrLogin(){
         )
     } else{
         return (
-            <a href="Profile/">Profile</a>
+            <a href="logout/">Logout</a>
         )
     }
 }

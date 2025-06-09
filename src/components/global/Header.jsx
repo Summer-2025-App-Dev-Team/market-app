@@ -1,6 +1,6 @@
 import "../../assets/css/Header.css";
 import "../../assets/images/sas-logo.png"
-import ProfileOrLogin from "./ProfileOrLogin";
+import LogoutOrLogin from "./LogoutOrLogin";
 
 export default function Header() {
     return (
@@ -10,7 +10,7 @@ export default function Header() {
                 <a href="#">Home</a>
                 <a href="#">About us</a>
                 <a href="#">Contact</a>
-                <ProfileOrLogin/>
+                <LogoutOrLogin/>
             </nav>
         </header>
     )
