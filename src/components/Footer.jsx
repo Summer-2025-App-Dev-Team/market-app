@@ -1,7 +1,7 @@
 export default function Footer() {
     return (
         <footer>
-            @ Copyright amongus
+            &copy; Copyright amongus
         </footer>
     )
 }

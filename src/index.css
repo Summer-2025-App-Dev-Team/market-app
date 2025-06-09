@@ -4,12 +4,17 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
 body {
     font-family: Inter, sans-serif !important;
+}
+
+#root {
+    height: 100%;
 }
 
 header {
