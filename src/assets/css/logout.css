@@ -1,0 +1,9 @@
+.auth-card > button{
+    margin-top: 20px;
+    background-color: #170B2F;
+    color: #FDFDFD;
+    width: 100%;
+    padding: 10px;
+    border:none;
+    font-weight: 300;
+}
