@@ -1,5 +1,5 @@
-import "../assets/css/Header.css";
-import "../assets/images/sas-logo.png"
+import "../../assets/css/Header.css";
+import "../../assets/images/sas-logo.png"
 
 export default function Header() {
     return (

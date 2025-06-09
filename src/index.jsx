@@ -2,9 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Login from "./components/auth/Login";
+import SignUp from "./components/auth/SignUp";
 import NotFoundPage from "./components/NotFoundPage";
+import AuthListener from "./components/auth/AuthListener";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
 
 root.render(
     <StrictMode>
+        <AuthListener/>
         <RouterProvider router={router} />
     </StrictMode>
 )
