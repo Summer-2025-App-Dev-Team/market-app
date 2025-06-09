@@ -1,0 +1,49 @@
+header {
+    background-color: white;
+    padding: 10px 25px;
+}
+
+header>nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header>nav>img {
+    height: 100px;
+    width: auto;
+    margin-right: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+header>nav>a {
+    position: relative;
+    color: darkred;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+header>nav>a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: darkred;
+    transition: 0.3s;
+}
+
+header>nav>a:hover::before {
+    width: 100%;
+}
+
+header>nav>a:last-child {
+    font-weight: bold;
+}
