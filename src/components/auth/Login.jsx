@@ -4,8 +4,15 @@ import AuthHeading from "./AuthCardHeading";
 import '../../assets/css/auth.css';
 import GoogleButton from "./GoogleButton"
 import LoginForm from "./LoginForm";
+import { Navigate } from 'react-router-dom';
+import useAuthStore from '../store/useAuthStore';
 
 export default function Login() {
+    const user = useAuthStore((state) => state.user);
+
+    if (!(user==null)) {
+        return <Navigate to="/" replace />;
+    }
     return (
         <>
             <Header />

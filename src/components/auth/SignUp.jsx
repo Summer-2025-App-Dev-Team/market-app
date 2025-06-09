@@ -5,8 +5,14 @@ import '../../assets/css/auth.css';
 import '../../assets/css/signup.css';
 import GoogleButton from "./GoogleButton"
 import SignUpForm from "./SignUpForm";
+import useAuthStore from '../store/useAuthStore';
 
 export default function SignUp() {
+    const user = useAuthStore((state) => state.user);
+
+    if (!(user==null)) {
+        return <Navigate to="/" replace />;
+    }
     return (
         <>
             <Header/>
