@@ -1,0 +1,9 @@
+.password{
+    display:flex;
+    align-items: right;
+}
+
+.password > input{
+    width: calc(50% - 10px);
+    margin-right:10px;
+}

@@ -1,4 +1,3 @@
-// GoogleButton.js
 import React from "react";
 
 class GoogleButton extends React.Component {
@@ -7,7 +6,10 @@ class GoogleButton extends React.Component {
     script.src = "https://accounts.google.com/gsi/client";
     script.async = true;
     script.defer = true;
+
     script.onload = () => {
+      const { mode = "signin" } = this.props;
+
       window.google.accounts.id.initialize({
         client_id: "YOUR_GOOGLE_CLIENT_ID",
         callback: (response) => {
@@ -17,9 +19,18 @@ class GoogleButton extends React.Component {
 
       window.google.accounts.id.renderButton(
         document.getElementById("g_id_signin"),
-        { theme: "outline", size: "large" }
+        {
+          theme: "outline",
+          size: "large",
+          text: mode === "signup" ? "signup_with" : "signin_with", // optional
+        }
       );
+
+      if (mode === "signup") {
+        window.google.accounts.id.prompt(); // shows One Tap if enabled
+      }
     };
+
     document.body.appendChild(script);
   }
 
@@ -27,5 +38,4 @@ class GoogleButton extends React.Component {
     return <div id="g_id_signin"></div>;
   }
 }
-
 export default GoogleButton;
