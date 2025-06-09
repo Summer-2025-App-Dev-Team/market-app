@@ -2,6 +2,7 @@ import { auth } from "../lib/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
 const [name, setName] = useState("");
@@ -10,6 +11,8 @@ const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +38,7 @@ const [name, setName] = useState("");
       }
 
       console.log("User signed up:", userCredential.user);
+      navigate("/")
     } catch (err) {
       setError(err.message);
       console.error("Signup error:", err);
