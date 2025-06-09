@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import "../assets/css/login.css";
+import "../assets/css/Login.css";
 import GoogleButton from "./GoogleSignInButton";
 
 export default function () {

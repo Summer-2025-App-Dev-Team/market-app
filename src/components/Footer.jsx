@@ -1,7 +1,9 @@
+import "../assets/css/Footer.css";
+
 export default function Footer() {
     return (
         <footer>
-            &copy; Copyright amongus
+            &copy; 2025 | SAS Market App
         </footer>
     )
 }
