@@ -14,11 +14,11 @@ export default function SignUp() {
                     <div className="auth-card">
                         <AuthHeading head="Sign Up" sub="or Log in"/>
                         <form className="input-form"> 
-                            <input type="text" defaultValue={"Name"}></input>
-                            <input type="email" defaultValue={"Email"}></input>
+                            <input type="text" placeholder={"Name"}></input>
+                            <input type="email" placeholder={"Email"}></input>
                             <div class="password">
-                                <input type="text" defaultValue={"Password"}></input>
-                                <input type="text" defaultValue={"Confirm Password"}></input>
+                                <input type="text" placeholder={"Password"}></input>
+                                <input type="text" placeholder={"Confirm Password"}></input>
                             </div>
                             <button>Log in</button>
                         </form>

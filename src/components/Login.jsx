@@ -13,8 +13,8 @@ export default function Login() {
                     <div className="auth-card">
                         <AuthHeading head="Log in" sub="or Sign Up"/>
                         <form className="input-form"> 
-                            <input type="email" defaultValue={"Email"}></input>
-                            <input type="password" defaultValue={"Password"}></input>
+                            <input type="email" placeholder={"Email"}></input>
+                            <input type="password" placeholder={"Password"}></input>
                             <button>Log in</button>
                         </form>
                         <GoogleButton mode="signin"/>
