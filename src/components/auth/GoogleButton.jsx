@@ -24,24 +24,7 @@ export default function GoogleLoginButton(props) {
   };
 
   return (
-    <button
-      onClick={handleLogin}
-      style={{
-        marginTop:"10px",
-        display: "flex",
-        alignItems: "center",
-        padding: "10px 20px",
-        borderRadius: "4px",
-        border: "1px solid #ccc",
-        backgroundColor: "#fff",
-        width: "100%",
-        color: "#555",
-        fontSize: "14px",
-        fontWeight: "500",
-        fontFamily: "Roboto, sans-serif",
-        cursor: "pointer",
-      }}
-    >
+    <button onClick={handleLogin} class="google-button">
       <img
         src="https://developers.google.com/identity/images/g-logo.png"
         alt="Google logo"

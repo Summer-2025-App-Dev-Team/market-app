@@ -47,3 +47,17 @@ header>nav>a:hover::before {
 header>nav>a:last-child {
     font-weight: bold;
 }
+
+
+@media only screen and (max-width: 565px) {
+    header>nav>a {
+        font-size: 0.6em;
+        text-align: center;
+    } 
+    header>nav>img{
+        height: 30px;
+    }
+    header>nav{
+        gap: 10px;
+    }
+}

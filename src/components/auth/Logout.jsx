@@ -32,7 +32,7 @@ export default function Logout() {
             <div className="auth-background">
                 <div className="auth-card">
                     <AuthHeading head="Log out" sub="or Back" link="/"/>
-                    <button onClick={handleLogout}>Log out</button>
+                    <button className="log-out-button" onClick={handleLogout}>Log out</button>
                 </div>
             </div>
         </main>
