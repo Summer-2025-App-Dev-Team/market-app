@@ -31,7 +31,7 @@ export default function Logout() {
         <main>
             <div className="auth-background">
                 <div className="auth-card">
-                    <AuthHeading head="Log out" sub="or Back"/>
+                    <AuthHeading head="Log out" sub="or Back" link="/"/>
                     <button onClick={handleLogout}>Log out</button>
                 </div>
             </div>

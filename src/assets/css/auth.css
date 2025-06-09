@@ -23,6 +23,28 @@
     font-weight: 300;
 }
 
+.auth-card > h2 > a{
+    color: black;
+    text-decoration: none;
+    overflow: hidden;
+    position: relative;
+}
+
+.auth-card > h2 > a ::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    transition: 0.3s;
+}
+
+.auth-card > h2 > a:hover::before {
+    width: 100%;
+}
+
 .auth-background{
     background-color: #020A6E;
     padding:100px;

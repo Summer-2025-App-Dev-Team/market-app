@@ -29,15 +29,15 @@ header>nav>a {
     }
 }
 
-header>nav>a::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: darkred;
-    transition: 0.3s;
+.auth-card > h2 > a::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: black;
+  transition: width 0.3s ease;
 }
 
 header>nav>a:hover::before {

@@ -19,7 +19,7 @@ export default function SignUp() {
             <main>
                 <div className="auth-background">
                     <div className="auth-card">
-                        <AuthHeading head="Sign Up" sub="or Log in"/>
+                        <AuthHeading head="Sign Up" sub="or Log in" link="/login"/>
                         <SignUpForm/>
                         <GoogleButton mode="signup"/>
                     </div>
