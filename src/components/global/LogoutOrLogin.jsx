@@ -1,15 +1,15 @@
 import useAuthStore from '../store/useAuthStore';
-
+import { Link } from 'react-router-dom';
 
 export default function LogoutOrLogin() {
     const user = useAuthStore((state) => state.user);
     if (user == null) {
         return (
-            <a href="/login">Login</a>
+            <Link to={"/login"}>Login</Link>
         )
     } else {
         return (
-            <a href="/logout">Logout</a>
+            <Link to={"/logout"}>Logout</Link>
         )
     }
 }

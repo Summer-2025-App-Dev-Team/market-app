@@ -8,7 +8,6 @@ import AuthHeading from "./AuthCardHeading";
 import "../../assets/css/auth.css"
 import "../../assets/css/logout.css"
 
-
 export default function Logout() {
   const clearUser = useAuthStore((state) => state.clearUser);
 
