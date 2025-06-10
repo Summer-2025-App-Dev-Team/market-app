@@ -7,6 +7,7 @@ import Logout from "./components/auth/Logout";
 import SignUp from "./components/auth/SignUp";
 import NotFoundPage from "./components/NotFoundPage";
 import AuthListener from "./components/auth/AuthListener";
+import ItemPage from "./components/item-page/ItemPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
     {
         path: "/signup",
         element: <SignUp />
+    },
+    {
+        path: "/item-page",
+        element: <ItemPage />
     },
     {
         path: "*",
