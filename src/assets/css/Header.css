@@ -59,7 +59,7 @@ header>nav>a:last-child {
     height: 100%;
     padding-block: 15px;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgb(2, 10, 110, 0.8);
     visibility: hidden;
     color: white;
     text-transform: uppercase;
@@ -87,7 +87,8 @@ header>nav>a:last-child {
 
 .burger hr {
     margin-block: 10px 25px;
-    opacity: 0.5;
+    opacity: 1;
+    color: darkred;
 }
 
 .burger a {
