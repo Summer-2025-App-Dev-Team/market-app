@@ -10,20 +10,21 @@ import useAuthStore from '../store/useAuthStore';
 export default function Login() {
     const user = useAuthStore((state) => state.user);
 
-    if (!(user==null)) {
+    if (!(user == null)) {
         return <Navigate to="/" replace />;
     }
     return (
         <>
             <Header />
             <main>
-                <div className="auth-background">
-                    <div className="auth-card">
-                        <AuthHeading head="Log in" sub="or Sign Up" link="/signup"/>
-                        <LoginForm/>
-                        <GoogleButton mode="signin"/>
-                    </div>
+                {/* TODO: Remove the commented lines if not needed */}
+                {/* <div className="auth-background"> */}
+                <div className="auth-card">
+                    <AuthHeading head="Log in" sub="or Sign Up" link="/signup" />
+                    <LoginForm />
+                    <GoogleButton mode="signin" />
                 </div>
+                {/* </div> */}
             </main>
             <Footer />
         </>
