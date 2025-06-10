@@ -23,6 +23,7 @@ export default function () {
         const {email, password} = Object.fromEntries(formData);
         try{
             await signInWithEmailAndPassword(auth, email, password);
+            toast.success("login");
         } catch(err){
             console.log(err);
             toast.warn("an error occured: ");
@@ -31,7 +32,6 @@ export default function () {
             setLoading(false);
         }
 
-        toast.success("login");
     }
     const handleRegister = async (e) =>{
         e.preventDefault();
@@ -40,7 +40,7 @@ export default function () {
 
         const formData = new FormData(e.target);
 
-        const {email, password} = Object.fromEntries(formData);
+        const {username, email, password} = Object.fromEntries(formData);
         try{
             if (!email || !password || password.length < 6) {
                 toast.error("Please enter a valid email and a password with at least 6 characters.");
@@ -73,7 +73,6 @@ export default function () {
         toast.success("register");
     }
     const handleAvatar = (e) =>{
-        e.preventDefault();
         console.log("handling avatar");
         if(e.target.files[0]){
             setAvatar({
