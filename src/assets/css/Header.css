@@ -29,15 +29,15 @@ header>nav>a {
     }
 }
 
-.auth-card > h2 > a::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 0;
-  background-color: black;
-  transition: width 0.3s ease;
+header>nav>a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: darkred;
+    transition: width 0.3s ease;
 }
 
 header>nav>a:hover::before {
@@ -53,11 +53,13 @@ header>nav>a:last-child {
     header>nav>a {
         font-size: 0.6em;
         text-align: center;
-    } 
-    header>nav>img{
+    }
+
+    header>nav>img {
         height: 30px;
     }
-    header>nav{
+
+    header>nav {
         gap: 10px;
     }
 }

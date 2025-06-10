@@ -1,13 +1,13 @@
 import useAuthStore from '../store/useAuthStore';
 
 
-export default function LogoutOrLogin(){
+export default function LogoutOrLogin() {
     const user = useAuthStore((state) => state.user);
-    if (user==null){
+    if (user == null) {
         return (
             <a href="/login">Login</a>
         )
-    } else{
+    } else {
         return (
             <a href="/logout">Logout</a>
         )
