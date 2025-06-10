@@ -24,7 +24,7 @@ export default function GoogleLoginButton(props) {
   };
 
   return (
-    <button onClick={handleLogin} class="google-button">
+    <button onClick={handleLogin} className="google-button">
       <img
         src="https://developers.google.com/identity/images/g-logo.png"
         alt="Google logo"
