@@ -16,7 +16,7 @@ export default function AddItem() {
             <main className="add-item">
                 <div className="preview">
                     <h2>Preview</h2>
-                    <Service image={image} title={title} description={description}/>
+                    <Service image={image} title={title} description={description} noStars={true}/>
                 </div>
                 <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription}/>
             </main>

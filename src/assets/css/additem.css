@@ -120,3 +120,7 @@ main.add-item form>button {
     margin-left:auto;
     font-size: 40px;
 }
+
+.service-wrapper p{
+    margin-bottom:0;
+}
