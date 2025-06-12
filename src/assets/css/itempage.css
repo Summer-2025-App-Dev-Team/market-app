@@ -1,3 +1,7 @@
+main{
+    height: auto;
+}
+
 main.item-page {
     padding: 25px 80px;
     font-family: 'Poppins';
@@ -80,6 +84,10 @@ main.item-page {
     aspect-ratio: 3/ 2;
     object-fit: cover;       /* scale & crop to fill aspect ratio */
     object-position: center; /* center image content */
+}
+
+.service-wrapper p{
+    margin-bottom:5px;
 }
 
 .person-info {
