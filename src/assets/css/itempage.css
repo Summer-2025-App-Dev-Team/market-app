@@ -73,10 +73,13 @@ main.item-page {
     flex-direction: column;
 }
 
-.service-wrapper img {
+.service-wrapper>img {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    aspect-ratio: 3/ 2;
+    object-fit: cover;       /* scale & crop to fill aspect ratio */
+    object-position: center; /* center image content */
 }
 
 .person-info {
