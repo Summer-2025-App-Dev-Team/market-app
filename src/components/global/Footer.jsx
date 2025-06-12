@@ -1,4 +1,4 @@
-import "../../assets/css/Footer.css";
+import "../../assets/css/footer.css";
 
 
 export default function Footer() {

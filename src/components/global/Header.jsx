@@ -1,4 +1,4 @@
-import "../../assets/css/Header.css";
+import "../../assets/css/header.css";
 import logo from "../../assets/images/sas-logo.png"
 import burger_button from "../../assets/icons/burger-button.svg";
 import LogoutOrLogin from "./LogoutOrLogin";
