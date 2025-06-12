@@ -9,14 +9,14 @@ import useAuthStore from '../store/useAuthStore';
 
 export default function SignUp() {
     const user = useAuthStore((state) => state.user);
-
     if (!(user==null)) {
         return <Navigate to="/" replace />;
     }
+
     return (
         <>
             <Header/>
-            <main>
+            <main className="signup">
                 <div className="auth-background">
                     <div className="auth-card">
                         <AuthHeading head="Sign Up" sub="or Log in" link="/login"/>

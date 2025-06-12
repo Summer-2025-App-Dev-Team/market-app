@@ -1,34 +1,34 @@
-main{
+main.item-page {
     padding: 25px 80px;
-    font-family:'Poppins';
+    font-family: 'Poppins';
 }
 
 .title>h1 {
     font-size: 48px;
     font-weight: bold;
-    margin:0;
+    margin: 0;
 }
 
 .title>h2 {
     font-size: 18px;
     font-weight: 400;
-    margin:0;
+    margin: 0;
 }
 
-.description{
-    margin-top:30px;
+.description {
+    margin-top: 30px;
     font-size: 16px;
 }
 
-.scroll-container{
-    display:flex;
+.scroll-container {
+    display: flex;
     gap: 60px;
     overflow-x: auto;
     scroll-behavior: smooth;
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 
@@ -46,7 +46,7 @@ main{
   z-index: 2;
 } */
 
-.scroll-container button{
+.scroll-container button {
     padding: 7px 20px;
     border-radius: 50px;
     border: 2px solid black;
@@ -55,50 +55,50 @@ main{
     flex-shrink: 0;
 }
 
-.scroll-container button.active{
+.scroll-container button.active {
     background-color: black;
     color: white;
 }
 
-.service-grid{
-    display:grid;
+.service-grid {
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
     row-gap: 20px;
     column-gap: 20px;
     margin-top: 50px;
 }
 
-.service-wrapper{
-    display:flex;
+.service-wrapper {
+    display: flex;
     flex-direction: column;
 }
 
-.service-wrapper img{
-    width:100%;
-    height:auto;
+.service-wrapper img {
+    width: 100%;
+    height: auto;
     border-radius: 10px;
 }
 
-.person-info{
+.person-info {
     display: flex;
     align-items: center;
 }
 
-.person-info>img.profile{
+.person-info>img.profile {
     height: 15px;
-    width:auto;
+    width: auto;
     flex-grow: 0;
 }
 
-.person-info>img.stars{
+.person-info>img.stars {
     height: 15px;
-    width:auto;
+    width: auto;
 }
 
-.person-info>p{
+.person-info>p {
     align-items: center;
     justify-content: center;
     line-height: 100%;
-    margin:auto;
-    margin-left:5px;
+    margin: auto;
+    margin-left: 5px;
 }

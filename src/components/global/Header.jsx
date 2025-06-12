@@ -1,7 +1,8 @@
 import "../../assets/css/header.css";
 import logo from "../../assets/images/sas-logo.png"
-import burger_button from "../../assets/icons/burger-button.svg";
+import burger_button from "../../assets/svgs/burger-button.svg";
 import LogoutOrLogin from "./LogoutOrLogin";
+import MobileHeader from "./MobileHeader";
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -28,16 +29,8 @@ export default function Header() {
                 <LogoutOrLogin />
                 <img src={burger_button} alt="menu" draggable={false} className="show-mobile burger-button" onClick={showBurger} />
 
-                <div className="show-mobile burger">
-                    <b>SAS Market App</b>
-                    <hr />
-                    <ul>
-                        <li><Link to={"/"}>Home</Link></li>
-                        <li><Link to={"#"}>About us</Link></li>
-                        <li><Link to={"#"}>Contact</Link></li>
-                        <li><LogoutOrLogin /></li>
-                    </ul>
-                </div>
+                {/* For mobile or small screen devices */}
+                <MobileHeader />
             </nav>
         </header>
     )
