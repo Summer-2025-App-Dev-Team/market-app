@@ -1,0 +1,135 @@
+header {
+    /* position: fixed;
+    width: 100%; */
+    background-color: white;
+    padding: 10px 25px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+header>nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+header>nav>img.sas-logo {
+    height: 100px;
+    width: auto;
+    margin-right: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+header>nav>a {
+    position: relative;
+    color: darkred;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+header>nav>a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background-color: darkred;
+    transition: width 0.3s ease;
+}
+
+header>nav>a:hover::before {
+    width: 100%;
+}
+
+header>nav>a:last-child {
+    font-weight: bold;
+}
+
+.show-mobile {
+    display: none;
+}
+
+.burger {
+    position: fixed;
+    top: 0;
+    right: -500px;
+    height: 100%;
+    padding-block: 15px;
+    text-align: center;
+    background-color: rgb(2, 10, 110, 0.8);
+    visibility: hidden;
+    color: white;
+    text-transform: uppercase;
+    transition: 0.3s;
+    z-index: 100;
+}
+
+.burger.show {
+    visibility: visible;
+    right: 0;
+}
+
+.burger>ul {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.burger b {
+    margin-top: 25px;
+}
+
+.burger hr {
+    margin-block: 10px 25px;
+    opacity: 1;
+    color: darkred;
+}
+
+.burger a {
+    color: white;
+    text-decoration: none;
+    margin: 50px;
+
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+
+@media only screen and (max-width: 565px) {
+    .show-mobile {
+        display: block;
+    }
+
+    header {
+        padding: 10px 15px;
+    }
+
+    header>nav {
+        justify-content: space-between;
+    }
+
+    header>nav>img.sas-logo {
+        height: 50px;
+    }
+
+    header>nav>img.burger-button {
+        width: 40px;
+        height: 40px;
+    }
+
+    header>nav>a {
+        display: none;
+        /* font-size: 0.8rem;
+        text-align: center; */
+    }
+}
