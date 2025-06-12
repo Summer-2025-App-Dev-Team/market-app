@@ -1,6 +1,9 @@
 header {
+    /* position: fixed;
+    width: 100%; */
     background-color: white;
     padding: 10px 25px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 header>nav {

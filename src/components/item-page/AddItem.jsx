@@ -7,7 +7,7 @@ export default function AddItem() {
     return (
         <>
             <Header />
-            <main>
+            <main className="add-item">
                 <div className="preview">
                     <p>Title</p>
                     <p>Picture</p>

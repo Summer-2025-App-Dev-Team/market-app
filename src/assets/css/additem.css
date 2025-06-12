@@ -1,8 +1,92 @@
-main {
+main.add-item {
     display: flex;
     justify-content: center;
+    gap: 100px;
 }
 
-form input {
+main.add-item>div, main.add-item>form {
+    background-color: lightgrey;
+    padding: 30px;
+    border-radius: 20px;
+    height: fit-content;
+    margin-top: 100px;
+}
+
+main.add-item form>h1 {
+    font-weight: bold;
+}
+
+main.add-item form input {
     display: block;
+    width: 100%;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+main.add-item input[type="file"] {
+    display: none;
+}
+
+main.add-item label.file-upload {
+    display: inline-block;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        opacity: 0.6;
+    }
+}
+
+main.add-item form>div.inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &>div {
+        width: 50%;
+    }
+}
+
+main.add-item form input:not([type="file"]) {
+    border: 2px solid #dcdcdc;
+}
+
+main.add-item form>label, main.add-item form>div {
+    margin-top: 25px;
+}
+
+main.add-item form>label {
+    display: block;
+}
+
+main.add-item form div.input {
+    display: inline-block;
+}
+
+main.add-item form>button {
+    margin-top: 30px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: #3e829a;
+    color: white;
+    transition: 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        opacity: 0.6;
+    }
 }

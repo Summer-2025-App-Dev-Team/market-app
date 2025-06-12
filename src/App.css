@@ -19,6 +19,6 @@ main,
 a.add-item {
     margin-left: auto;
     margin-right: auto;
-    color: white !important;
+    color: black !important;
     font-size: 2rem;
 }

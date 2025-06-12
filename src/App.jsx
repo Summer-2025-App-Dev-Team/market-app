@@ -7,6 +7,15 @@ import { Link } from "react-router-dom";
 export default function App() {
   const user = useAuthStore((state) => state.user);
 
+  // TODO: currently not working
+  // function updateMainPadding() {
+  //   const padding = document.querySelector("header").offsetHeight;
+  //   document.querySelector("main").style.paddingTop = padding + "px";
+  // }
+
+  // document.addEventListener("DOMContentLoaded", updateMainPadding);
+  // window.addEventListener("resize", updateMainPadding);
+
   return (
     <>
       <Header />
