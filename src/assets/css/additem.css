@@ -1,18 +1,17 @@
-main{
+main {
     font-family: 'Poppins';
 }
 
 main.add-item {
     display: flex;
     justify-content: center;
-    align-items:center;
-    gap:100px;
+    align-items: center;
+    gap: 100px;
 }
 
 main.add-item>form {
-    /* background-color: lightgrey; a little too clashing*/
-    /* padding: 30px; */
-    /* border-radius: 20px; Looks too roundish */
+    padding: 30px;
+    border-radius: 20px;
     border-radius: 5px;
     height: fit-content;
     /* margin-top: 100px; */
@@ -23,9 +22,8 @@ main.add-item form>h1 {
     font-weight: bold;
 }
 
-main.add-item>form>input, 
-main.add-item>form>textarea 
-{
+main.add-item>form>input,
+main.add-item>form>textarea {
     display: block;
     width: 100%;
     padding: 5px;
@@ -67,8 +65,18 @@ main.add-item form>div.inputs {
     }
 }
 
-main.add-item form input:not([type="file"]) {
+main.add-item form input:not([type="file"]),
+main.add-item form textarea {
     border: 2px solid #dcdcdc;
+}
+
+main.add-item form textarea {
+    min-height: 100px;
+    overflow: auto;
+}
+
+main.add-item img {
+    user-select: none;
 }
 
 main.add-item form>div {
@@ -77,6 +85,7 @@ main.add-item form>div {
 
 main.add-item form>label {
     display: block;
+    margin-top: 5px;
 }
 
 main.add-item form div.input {
@@ -102,21 +111,21 @@ main.add-item form>button {
     }
 }
 
-.preview{
+.preview {
     width: 300px;
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
-.preview>h2{
+.preview>h2 {
     text-align: center;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     font-size: 30px;
 }
 
-.page-heading{
+.page-heading {
     margin-top: 20px;
-    margin-right:auto;
-    margin-left:auto;
+    margin-right: auto;
+    margin-left: auto;
     font-size: 40px;
 }

@@ -9,8 +9,8 @@ export default function AddItem() {
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("Title here");
     const [description, setDescription] = useState("Description here");
-    const [date, setDate] = useState("01/01/2010");
-    const [price, setPrice] = useState("0");
+    const [date, setDate] = useState("2010-01-01");
+    const [price, setPrice] = useState(0);
 
     return (
         <>
@@ -19,9 +19,9 @@ export default function AddItem() {
             <main className="add-item">
                 <div className="preview">
                     <h2>Preview</h2>
-                    <Service image={image} title={title} description={description} noStars={true}/>
+                    <Service image={image} title={title} description={description} date={date} price={price} noStars={true} />
                 </div>
-                <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription} setDate={setDate} setPrice={setPrice}/>
+                <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription} setDate={setDate} setPrice={setPrice} />
             </main>
             <Footer />
         </>

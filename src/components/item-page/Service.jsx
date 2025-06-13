@@ -1,17 +1,20 @@
 import Rating from "./Rating"
 import "../../assets/css/itempage.css"
 
-export default function Service(props){
+export default function Service(props) {
     return (
         <div className="service-wrapper">
-            <img src={props.image ? props.image : "https://media-public.canva.com/MADmeSNULTw/1/thumbnail_large.jpg"}/>
-            <p>{props.title ? props.title : "I make website with professional UI/UX with React and Svelte."}</p>
-            <div className="person-info">
-                <img className="profile" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"/>
-                <p>Mike Tyson</p>
-                {props.noStars? "" : <Rating/>}
+            <img src={props.image ? props.image : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} />
+            <div className="item-info">
+                <span className="title">{props.title ? props.title : "Title here"}</span>
+                <span className="date">{props.date}</span>
             </div>
-            <span className="price">$1.95</span>
+            <div className="person-info">
+                <img className="profile" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" />
+                <p>User</p>
+                {props.noStars ? "" : <Rating />}
+            </div>
+            <span className="price">${props.price ? props.price : 0}</span>
         </div>
     )
 }
