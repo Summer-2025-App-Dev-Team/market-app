@@ -15,7 +15,7 @@ export default function addItemForm(props) {
             <label htmlFor="picture" className="file-upload">Add image</label>
             <input type="file" name="picture" id="picture" accept="image/*" aria-label="picture" onChange={handelFileInput} />
             <label htmlFor="description">Listing Info</label>
-            <textarea name="description" id="description" aria-label="description" onChange={(e)=>{props.setDescription(e.target.value)}}/>
+            <textarea name="description" id="description" aria-label="description" onChange={(e) => { props.setDescription(e.target.value) }} />
             <button type="submit">Submit</button>
         </form>
     )
