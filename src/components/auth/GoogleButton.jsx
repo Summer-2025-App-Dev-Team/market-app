@@ -30,7 +30,7 @@ export default function GoogleLoginButton(props) {
         alt="Google logo"
         style={{ width: "18px", height: "18px", marginRight: "10px" }}
       />
-      {props.mode=="signin" ? "Sign in" : "Sign up"} in with Google
+      {props.mode=="signin" ? "Sign in" : "Sign up"} with Google
     </button>
   );
 }

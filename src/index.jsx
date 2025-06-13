@@ -9,8 +9,9 @@ import NotFoundPage from "./components/NotFoundPage";
 import AuthListener from "./components/auth/AuthListener";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+// Temporarily disabled Bootstrap because we are not really using it
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const root = createRoot(document.getElementById("root"));
 const router = createBrowserRouter([

@@ -47,7 +47,7 @@ header>nav>a:hover::before {
     width: 100%;
 }
 
-header>nav>a:last-child {
+header>nav>a.auth-button {
     font-weight: bold;
 }
 

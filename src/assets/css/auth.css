@@ -66,18 +66,8 @@ form.input-form {
     width: 100%;
 }
 
-/* TODO: Remove the properties under if not needed */
-.auth-background {
-    /* background-color: #020A6E;
-    background-image: url("/background.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding: 15vh 0;
-    height: 100vh; */
-}
-
 .input-form input {
+    position: relative;
     margin-top: 20px;
     width: 100%;
     border: none;
@@ -87,7 +77,17 @@ form.input-form {
     padding: 5px;
     font-size: 12px;
     font-weight: 300;
+
+    &:focus {
+        border-bottom: 1px solid #111111;
+        /* font-weight: bold; */
+    }
 }
+
+.input-form input:focus::placeholder {
+    font-weight: bold;
+}
+
 
 .input-form button {
     margin-top: 20px;
@@ -96,7 +96,18 @@ form.input-form {
     width: 100%;
     padding: 10px 20px;
     border: none;
-    font-weight: 300;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        opacity: 0.6;
+    }
 }
 
 .google-button {
