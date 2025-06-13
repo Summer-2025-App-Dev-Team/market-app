@@ -1,5 +1,5 @@
 main {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
 }
 
 main.add-item {
@@ -18,6 +18,11 @@ main.add-item>form {
     width: 30vw;
 }
 
+main.add-item>form,
+main.add-item>div {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 main.add-item form>h1 {
     font-weight: bold;
 }
@@ -26,7 +31,8 @@ main.add-item>form>input,
 main.add-item>form>textarea {
     display: block;
     width: 100%;
-    padding: 5px;
+    padding: 7.5px;
+    font-size: 0.9rem;
     border-radius: 5px;
     margin-bottom: 20px;
 }
@@ -76,6 +82,7 @@ main.add-item form textarea {
 }
 
 main.add-item img {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     user-select: none;
 }
 
@@ -94,13 +101,15 @@ main.add-item form div.input {
 
 main.add-item form>button {
     border: none;
-    padding: 7px 15px;
+    padding: 7.5px 15px;
     border-radius: 5px;
     font-weight: normal;
+    font-family: "Poppins", sans-serif;
     background-color: #3498db;
     color: white;
-    transition: 0.3s;
     font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
         opacity: 0.8;
@@ -112,9 +121,15 @@ main.add-item form>button {
 }
 
 .preview {
-    width: 300px;
     display: flex;
     flex-direction: column;
+    padding: 30px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+.preview img {
+    max-width: 300px;
 }
 
 .preview>h2 {
