@@ -1,47 +1,48 @@
-main {
-    font-family: 'Poppins', sans-serif;
+main.add-item>h1 {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-main.add-item {
+main.add-item>.content {
     display: flex;
-    justify-content: center;
+    /* Changed from gap: 100px to space-evenly */
+    justify-content: space-evenly;
     align-items: center;
-    gap: 100px;
 }
 
-main.add-item>form {
+main.add-item>.content>form {
     padding: 30px;
     border-radius: 20px;
     border-radius: 5px;
     height: fit-content;
-    /* margin-top: 100px; */
-    width: 30vw;
+    width: 30%;
 }
 
-main.add-item>form,
-main.add-item>div {
+main.add-item>.content>form,
+main.add-item>.content>div {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-main.add-item form>h1 {
+main.add-item>.content form>h1 {
     font-weight: bold;
 }
 
-main.add-item>form>input,
-main.add-item>form>textarea {
+main.add-item>.content>form>input,
+main.add-item>.content>form>textarea {
     display: block;
     width: 100%;
     padding: 7.5px;
     font-size: 0.9rem;
+    font-family: "Poppins", sans-serif;
     border-radius: 5px;
     margin-bottom: 20px;
 }
 
-main.add-item input[type="file"] {
+main.add-item>.content input[type="file"] {
     display: none;
 }
 
-main.add-item label.file-upload {
+main.add-item>.content label.file-upload {
     display: inline-block;
     padding: 10px;
     margin-bottom: 10px;
@@ -60,7 +61,7 @@ main.add-item label.file-upload {
     }
 }
 
-main.add-item form>div.inputs {
+main.add-item>.content form>div.inputs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -71,35 +72,35 @@ main.add-item form>div.inputs {
     }
 }
 
-main.add-item form input:not([type="file"]),
-main.add-item form textarea {
+main.add-item>.content form input:not([type="file"]),
+main.add-item>.content form textarea {
     border: 2px solid #dcdcdc;
 }
 
-main.add-item form textarea {
+main.add-item>.content form textarea {
     min-height: 100px;
     overflow: auto;
 }
 
-main.add-item img {
+main.add-item>.content img.preview-image {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     user-select: none;
 }
 
-main.add-item form>div {
+main.add-item>.content form>div {
     margin-top: 25px;
 }
 
-main.add-item form>label {
+main.add-item>.content form>label {
     display: block;
     margin-top: 5px;
 }
 
-main.add-item form div.input {
+main.add-item>.content form div.input {
     display: inline-block;
 }
 
-main.add-item form>button {
+main.add-item>.content form>button {
     border: none;
     padding: 7.5px 15px;
     border-radius: 5px;

@@ -1,6 +1,7 @@
-main {
+/* Removed this because it causes conflict with the login/sign up page */
+/* main {
     height: auto;
-}
+} */
 
 main.item-page {
     padding: 25px 80px;

@@ -15,13 +15,15 @@ export default function AddItem() {
     return (
         <>
             <Header />
-            <h1 className="page-heading">Enter Listing Details</h1>
             <main className="add-item">
-                <div className="preview">
-                    <h2>Preview</h2>
-                    <Service image={image} title={title} description={description} date={date} price={price} noStars={true} />
+                <h1 className="page-heading">Enter Listing Details</h1>
+                <div className="content">
+                    <div className="preview">
+                        <h2>Preview</h2>
+                        <Service image={image} title={title} description={description} date={date} price={price} noStars={true} />
+                    </div>
+                    <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription} setDate={setDate} setPrice={setPrice} />
                 </div>
-                <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription} setDate={setDate} setPrice={setPrice} />
             </main>
             <Footer />
         </>

@@ -1,3 +1,5 @@
+/* Global properties */
+
 * {
     margin: 0;
     padding: 0;
@@ -8,7 +10,7 @@ html,
 body,
 main,
 #root {
-    height: 100% !important;
+    height: 100%;
 }
 
 #root {
@@ -16,9 +18,15 @@ main,
     flex-direction: column;
 }
 
+main {
+    font-family: "Poppins", sans-serif;
+    /* To prevent the content from getting too close to the footer */
+    padding-bottom: 25px;
+}
+
 a.add-item {
     margin-left: auto;
     margin-right: auto;
-    color: black !important;
+    color: black;
     font-size: 2rem;
 }

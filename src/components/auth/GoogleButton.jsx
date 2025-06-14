@@ -1,7 +1,7 @@
-import React from "react";
 import { auth } from "../lib/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
+import google_logo from "../../assets/images/google-logo.png";
 
 export default function GoogleLoginButton(props) {
   const setUser = useAuthStore((state) => state.setUser);
@@ -26,9 +26,10 @@ export default function GoogleLoginButton(props) {
   return (
     <button onClick={handleLogin} className="google-button">
       <img
-        src="https://developers.google.com/identity/images/g-logo.png"
+        src={google_logo}
         alt="Google logo"
-        style={{ width: "18px", height: "18px", marginRight: "10px" }}
+        // Moved this to .css file
+        // style={{ width: "18px", height: "18px", marginRight: "10px" }}
       />
       {props.mode=="signin" ? "Sign in" : "Sign up"} with Google
     </button>

@@ -4,7 +4,7 @@ import "../../assets/css/itempage.css"
 export default function Service(props) {
     return (
         <div className="service-wrapper">
-            <img src={props.image ? props.image : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} />
+            <img src={props.image ? props.image : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} className="preview-image" draggable={false} />
             <div className="item-info">
                 <span className="title">{props.title ? props.title : "Title here"}</span>
                 <span className="date">{props.date}</span>

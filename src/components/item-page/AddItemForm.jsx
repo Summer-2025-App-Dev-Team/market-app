@@ -13,7 +13,9 @@ export default function addItemForm(props) {
 
     return (
         <form onSubmit={handelSubmit}>
-            <input type="text" name="name" id="name" aria-label="name" placeholder="Title" maxLength={50} onChange={(e) => { props.setTitle(e.target.value) }} autoFocus required />
+            <label htmlFor="name">Item name</label>
+            <input type="text" name="name" id="name" aria-label="name" placeholder="Name" maxLength={50} onChange={(e) => { props.setTitle(e.target.value) }} autoFocus required />
+            <label htmlFor="price">Item price</label>
             <input type="number" name="price" id="price" placeholder="Price (SGD)" min={0} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(e.target.value) }} required />
             <label htmlFor="date">Available until</label>
             <input type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />

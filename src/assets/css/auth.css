@@ -114,8 +114,10 @@ form.input-form {
     margin-top: 10px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 5px;
     padding: 10px 20px;
-    border-radius: 4px;
+    /* border-radius: 4px; */
     border: 1px solid #ccc;
     background-color: #fff;
     width: 100%;
@@ -124,6 +126,20 @@ form.input-form {
     font-weight: 500;
     font-family: Roboto, sans-serif;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        background-color: rgba(211, 211, 211, 0.8);
+    }
+
+    &:active {
+        background-color: rgba(211, 211, 211, 0.6);
+    }
+}
+
+.google-button>img {
+    width: 20px;
+    height: 20px;
 }
 
 @media only screen and (max-width: 565px) {
