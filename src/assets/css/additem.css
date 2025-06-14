@@ -20,7 +20,7 @@ main.add-item>.content>form {
 
 main.add-item>.content>form,
 main.add-item>.content>div {
-    background-color: rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 main.add-item>.content form>h1 {
@@ -125,7 +125,7 @@ main.add-item>.content form>button {
     display: flex;
     flex-direction: column;
     padding: 30px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    border: 2px solid black;
     border-radius: 5px;
 }
 
