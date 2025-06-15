@@ -3,9 +3,21 @@ import Footer from "../global/Footer"
 import AddItemForm from "./AddItemForm"
 import Service from "./Service"
 import "../../assets/css/additem.css"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import useAuthStore from "../store/useAuthStore"
+import { useNavigate } from "react-router-dom"
 
 export default function AddItem() {
+    const navigate = useNavigate();
+    const user = useAuthStore((state) => state.user);
+    const userIsLoggedIn = user == null ? false : true;
+
+    useEffect(() => {
+        if (!userIsLoggedIn) {
+            navigate("/login", {replace: true});
+        }
+    }, [userIsLoggedIn, user, navigate]);
+
     const [image, setImage] = useState("");
     const [title, setTitle] = useState("Title here");
     const [description, setDescription] = useState("Description here");
