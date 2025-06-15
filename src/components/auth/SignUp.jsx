@@ -6,6 +6,7 @@ import '../../assets/css/signup.css';
 import GoogleButton from "./GoogleButton"
 import SignUpForm from "./SignUpForm";
 import useAuthStore from '../store/useAuthStore';
+import { Navigate } from "react-router-dom";
 
 export default function SignUp() {
     const user = useAuthStore((state) => state.user);

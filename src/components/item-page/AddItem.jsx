@@ -18,7 +18,10 @@ export default function AddItem() {
         }
     }, [userIsLoggedIn, user, navigate]);
 
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState({
+        file: null,
+        url: ""
+    });
     const [title, setTitle] = useState("Title here");
     const [description, setDescription] = useState("Description here");
     const [date, setDate] = useState("2010-01-01");
@@ -32,9 +35,21 @@ export default function AddItem() {
                 <div className="content">
                     <div className="preview">
                         <h2>Preview</h2>
-                        <Service image={image} title={title} description={description} date={date} price={price} noStars={true} />
+                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
                     </div>
-                    <AddItemForm setImage={setImage} setTitle={setTitle} setDescription={setDescription} setDate={setDate} setPrice={setPrice} />
+                    <AddItemForm
+                    title={title}
+                    price={price}
+                    description={description}
+                    date={date}
+                    image={image}
+                    setImage={setImage}
+                    setTitle={setTitle}
+                    setDescription={setDescription}
+                    setDate={setDate}
+                    setPrice={setPrice}
+                    />
+
                 </div>
             </main>
             <Footer />

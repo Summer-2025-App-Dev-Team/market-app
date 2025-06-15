@@ -1,8 +1,9 @@
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function SignUpForm() {
   const [name, setName] = useState("");
@@ -14,6 +15,8 @@ export default function SignUpForm() {
 
   const navigate = useNavigate();
 
+  const setUser = useAuthStore((state) => state.setUser);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
@@ -22,8 +25,6 @@ export default function SignUpForm() {
       setError("Passwords do not match.");
       return;
     }
-
-    const setUser = useAuthStore((state) => state.setUser);
 
     setLoading(true);
 
@@ -36,6 +37,9 @@ export default function SignUpForm() {
           displayName: name,
         });
       }
+
+      const userDocRef = doc(db, "userListings", userCredential.user.uid);
+      await setDoc(userDocRef, {listings: []}); 
 
       console.log("User signed up:", userCredential.user);
       navigate("/")

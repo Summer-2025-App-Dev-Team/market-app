@@ -1,14 +1,42 @@
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import useAuthStore from "../store/useAuthStore";
+import upload from "../store/upload";
+
 export default function addItemForm(props) {
+    const user = useAuthStore((state) => state.user);
     function handelFileInput(e) {
-        const files = e.target.files;
-        const imageUrl = URL.createObjectURL(files[0]);
-        props.setImage(imageUrl);
+        const file = e.target.files[0];
+        const imageUrl = URL.createObjectURL(file);
+        props.setImage({
+            file: file, 
+            url: imageUrl
+        });
+
         document.querySelector(".file-upload").textContent = "Change picture";
+
     }
 
-    function handelSubmit(e) {
-        console.log("Form submitted!");
+    const handelSubmit = async (e) => {
         e.preventDefault();
+        console.log("Form submitted!");
+        const userDocRef = doc(db, "userListings", user.uid);
+
+        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
+
+        const newListing = {
+            name: props.title,
+            price: parseFloat(props.price),
+            availableUntil: props.date,
+            description: props.description,
+            createdAt: new Date(),
+            image: imageUrl || null
+        };
+
+        await updateDoc(userDocRef, {
+            listings: arrayUnion(newListing)
+        });
+        
     }
 
     return (

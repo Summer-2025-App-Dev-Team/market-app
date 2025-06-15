@@ -1,7 +1,8 @@
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
 import google_logo from "../../assets/images/google-logo.png";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function GoogleLoginButton(props) {
   const setUser = useAuthStore((state) => state.setUser);
@@ -11,12 +12,20 @@ export default function GoogleLoginButton(props) {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      setUser(user)
+      
       console.log("Signed in user:", user);
+
+      setUser(user);
 
       if (result._tokenResponse?.isNewUser) {
         console.log("New user signed up!");
+        
+        userDocRef = doc(db, "userListings", user.uid);
+        const userListings = [];
+        userDoc = setDoc(userDocRef, userListings); 
       }
+
+      
 
     } catch (error) {
       console.error("Login error:", error);
