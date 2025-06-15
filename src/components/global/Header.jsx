@@ -19,8 +19,20 @@ export default function Header() {
         }, 500);
     }
 
+    function handelSearchSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const value = formData.get("search-box");
+        window.location.href = `/item-page/?q=${value}`;
+    }
+
     function handelSearchOnChange(e) {
-        console.log(e.target.value);
+        const value = e.target.value;
+        if (value !== "") {
+            document.querySelector(".search-box-border").style.setProperty("--after-display", "none");
+        } else {
+            document.querySelector(".search-box-border").style.setProperty("--after-display", "inline-block");
+        }
     }
 
     useEffect(() => {
@@ -39,10 +51,22 @@ export default function Header() {
             }
         }
 
+        const handelSearchInputFocus = (e) => {
+            document.querySelector(".search-box-border").style.outline = "5px solid rgba(116, 116, 255, 0.5)";
+        }
+
+        const handelSearchInputBlur = (e) => {
+            document.querySelector(".search-box-border").style.outline = "5px solid transparent";
+        }
+
         document.addEventListener("keydown", handelKeyDown);
+        document.getElementById("search-box").addEventListener("focus", handelSearchInputFocus);
+        document.getElementById("search-box").addEventListener("blur", handelSearchInputBlur);
 
         return () => {
             document.removeEventListener("keydown", handelKeyDown);
+            document.getElementById("search-box").removeEventListener("focus", handelSearchInputFocus);
+            document.getElementById("search-box").removeEventListener("blur", handelSearchInputBlur);
         };
     }, []);
 
@@ -51,7 +75,9 @@ export default function Header() {
             <nav>
                 <img src={logo} alt="SAS logo" draggable={false} className="sas-logo" onClick={function () { window.location.href = "/" }} />
                 <div className="search-wrapper">
-                    <input type="search" placeholder="Search" name="search-box" id="search-box" onChange={handelSearchOnChange} />
+                    <form onSubmit={handelSearchSubmit}>
+                        <input type="search" placeholder="Search" name="search-box" id="search-box" onChange={handelSearchOnChange} />
+                    </form>
                     <div className="search-box-border"></div>
                 </div>
                 {/* Removed the Home Link because there is already the school logo */}

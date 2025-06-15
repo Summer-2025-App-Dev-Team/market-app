@@ -1,6 +1,4 @@
 header {
-    /* position: fixed;
-    width: 100%; */
     background-color: white;
     padding: 10px 25px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
@@ -24,7 +22,7 @@ header .search-wrapper {
     position: relative;
 }
 
-header .search-wrapper>input {
+header .search-wrapper input {
     padding: 7.5px;
     font-size: 1.2rem;
     border: 1px solid grey;
@@ -35,10 +33,6 @@ header .search-wrapper>input {
         border: 1px solid rgb(32, 169, 255);
     }
 
-    &:focus+div.search-box-border {
-        outline: 5px solid rgba(116, 116, 255, 0.2);
-    }
-
     &::-webkit-search-cancel-button {
         -webkit-appearance: none;
         appearance: none;
@@ -46,7 +40,7 @@ header .search-wrapper>input {
     }
 }
 
-header .search-wrapper>div.search-box-border {
+header .search-wrapper div.search-box-border {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -59,8 +53,9 @@ header .search-wrapper>div.search-box-border {
     transition: outline 0.3s ease-out;
 }
 
-header .search-wrapper>div.search-box-border::after {
+header .search-wrapper div.search-box-border::after {
     content: "/";
+    display: var(--after-display);
     position: absolute;
     right: 0;
     top: 50%;
@@ -71,10 +66,6 @@ header .search-wrapper>div.search-box-border::after {
     background-color: rgba(211, 211, 211, 0.6);
     padding: 4px 9px;
     border-radius: 5px;
-}
-
-header .search-wrapper>input:not(:placeholder-shown)+div.search-box-border::after {
-    display: none;
 }
 
 header>nav>a {
