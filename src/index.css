@@ -1,0 +1,36 @@
+/* Global properties */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+main,
+#root {
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    font-family: "Poppins", sans-serif;
+    /* To prevent the content from getting too close to the footer */
+    padding-bottom: 25px;
+}
+
+a.demo-link {
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    font-size: 2rem;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}

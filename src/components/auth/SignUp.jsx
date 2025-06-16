@@ -1,5 +1,3 @@
-import Header from "../global/Header"
-import Footer from "../global/Footer"
 import AuthHeading from "./AuthCardHeading";
 import '../../assets/css/auth.css';
 import '../../assets/css/signup.css';
@@ -10,23 +8,21 @@ import { Navigate } from "react-router-dom";
 
 export default function SignUp() {
     const user = useAuthStore((state) => state.user);
-    if (!(user==null)) {
+    if (!(user == null)) {
         return <Navigate to="/" replace />;
     }
 
     return (
         <>
-            <Header/>
             <main className="signup">
                 <div className="auth-background">
                     <div className="auth-card">
-                        <AuthHeading head="Sign Up" sub="or Log in" link="/login"/>
-                        <SignUpForm/>
-                        <GoogleButton mode="signup"/>
+                        <AuthHeading head="Sign Up" sub="or Log in" link="/login" />
+                        <SignUpForm />
+                        <GoogleButton mode="signup" />
                     </div>
                 </div>
             </main>
-            <Footer/>
         </>
     )
 }

@@ -1,5 +1,3 @@
-import Header from "../global/Header"
-import Footer from "../global/Footer"
 import '../../assets/css/itempage.css';
 import FilterBar from "./FilterBar";
 import Service from "./Service";
@@ -7,7 +5,6 @@ import Service from "./Service";
 export default function ItemPage() {
     return (
         <>
-            <Header />
             <main className="item-page">
                 <div className="title">
                     <h1>Services</h1>
@@ -25,7 +22,6 @@ export default function ItemPage() {
                     <Service />
                 </div>
             </main>
-            <Footer />
         </>
     )
 }

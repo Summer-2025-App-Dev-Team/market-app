@@ -1,5 +1,3 @@
-import Header from "../global/Header"
-import Footer from "../global/Footer"
 import AddItemForm from "./AddItemForm"
 import Service from "./Service"
 import "../../assets/css/additem.css"
@@ -29,7 +27,7 @@ export default function AddItem() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <main className="add-item">
                 <h1 className="page-heading">Enter Listing Details</h1>
                 <div className="content">
@@ -52,7 +50,7 @@ export default function AddItem() {
 
                 </div>
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }

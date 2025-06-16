@@ -1,5 +1,3 @@
-import Header from "../global/Header"
-import Footer from "../global/Footer"
 import AuthHeading from "./AuthCardHeading";
 import '../../assets/css/auth.css';
 import GoogleButton from "./GoogleButton"
@@ -15,7 +13,7 @@ export default function Login() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <main className="login">
                 {/* TODO: Remove the commented lines if not needed */}
                 {/* <div className="auth-background"> */}
@@ -26,7 +24,7 @@ export default function Login() {
                 </div>
                 {/* </div> */}
             </main>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
