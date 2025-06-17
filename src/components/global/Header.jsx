@@ -87,17 +87,28 @@ export default function Header() {
                 <LogoutOrLogin />
                 <img src={burger_button} alt="menu" draggable={false} className="show-mobile burger-button" onClick={showBurger} />
 
-                <div className="show-mobile burger">
-                    <b>SAS Market App</b>
-                    <hr />
-                    <ul>
-                        <li><Link to={"/"}>Home</Link></li>
-                        <li><Link to={"#"}>About us</Link></li>
-                        <li><Link to={"#"}>Contact</Link></li>
-                        <li><LogoutOrLogin /></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-    )
+          <div className="show-mobile burger">
+            <b>SAS Market App</b>
+            <hr />
+            <ul>
+              <li>
+                <Link to={"/"}>Home</Link>
+              </li>
+              <li>
+                <Link to={"#"}>About us</Link>
+              </li>
+              <li>
+                <Link to={"#"}>Contact</Link>
+              </li>
+              <li>
+                <Link to={"/item-page"}>Items</Link>
+              </li>
+              <li>
+                <LogoutOrLogin />
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+    );
 }

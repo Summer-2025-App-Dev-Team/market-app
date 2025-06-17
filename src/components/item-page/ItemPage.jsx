@@ -1,6 +1,7 @@
 import '../../assets/css/itempage.css';
 import FilterBar from "./FilterBar";
 import Service from "./Service";
+import StackGrid from "react-stack-grid";
 
 export default function ItemPage() {
     return (
