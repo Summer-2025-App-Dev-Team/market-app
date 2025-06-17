@@ -10,7 +10,7 @@ header>nav {
     gap: 20px;
 }
 
-header>nav>img.sas-logo {
+header>nav>img.logo {
     height: 100px;
     width: auto;
     margin-right: auto;
@@ -166,7 +166,7 @@ header>nav>a.auth-button {
         justify-content: space-between;
     }
 
-    header>nav>img.sas-logo {
+    header>nav>img.logo {
         height: 50px;
     }
 

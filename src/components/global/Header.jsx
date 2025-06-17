@@ -4,6 +4,7 @@ import burger_button from "../../assets/svgs/burger-button.svg";
 import LogoutOrLogin from "./LogoutOrLogin";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import icon from "/public/favicon.png"
 
 export default function Header() {
     function showBurger() {
@@ -73,7 +74,7 @@ export default function Header() {
     return (
         <header>
             <nav>
-                <img src={logo} alt="SAS logo" draggable={false} className="sas-logo" onClick={function () { window.location.href = "/" }} />
+                <img src={icon} alt="logo" draggable={false} className="logo" onClick={function () { window.location.href = "/" }} />
                 <div className="search-wrapper">
                     <form onSubmit={handelSearchSubmit}>
                         <input type="search" placeholder="Search" name="search-box" id="search-box" onChange={handelSearchOnChange} />
