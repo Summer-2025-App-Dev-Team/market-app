@@ -80,6 +80,12 @@ main.item-page {
     background-color: white;
     font-size: 16px;
     flex-shrink: 0;
+    transition: 0.3s;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(211, 211, 211, 0.8);
+    }
 }
 
 .scroll-container button.active {
@@ -98,6 +104,16 @@ main.item-page {
 .service-wrapper {
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+        transform: translateY(2px);
+    }
+
+    &:hover>img {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
 }
 
 .service-wrapper>img {

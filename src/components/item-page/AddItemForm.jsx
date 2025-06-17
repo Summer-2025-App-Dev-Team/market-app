@@ -9,7 +9,7 @@ export default function addItemForm(props) {
         const file = e.target.files[0];
         const imageUrl = URL.createObjectURL(file);
         props.setImage({
-            file: file, 
+            file: file,
             url: imageUrl
         });
 
@@ -36,7 +36,6 @@ export default function addItemForm(props) {
         await updateDoc(userDocRef, {
             listings: arrayUnion(newListing)
         });
-        
     }
 
     return (

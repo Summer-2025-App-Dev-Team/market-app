@@ -23,7 +23,7 @@ export default function Header() {
         e.preventDefault();
         const formData = new FormData(e.target);
         const value = formData.get("search-box");
-        window.location.href = `/item-page/?q=${value}`;
+        window.location.href = `/?q=${value}`;
     }
 
     function handelSearchOnChange(e) {
