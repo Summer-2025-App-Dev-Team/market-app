@@ -1,9 +1,8 @@
+/* Some attributes are set to !important becasue they are conflict to the auth.css properties */
 .password {
     display: flex;
+    flex-direction: row !important;
     align-items: center;
-}
-
-.password>input {
-    width: calc(50% - 10px);
-    margin-right: 10px;
+    gap: 15px !important;
+    margin: 0 !important;
 }

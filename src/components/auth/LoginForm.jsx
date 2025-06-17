@@ -30,21 +30,36 @@ export default function LoginForm() {
 
   return (
     <form className="input-form" onSubmit={handleSubmit}>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        autoFocus
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <div>
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          autoFocus
+        />
+        <label htmlFor="email"></label>
+      </div>
+      <div>
+        <input
+          id="password"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <label htmlFor="password"></label>
+      </div>
+      <div className="utils">
+        <div>
+          <input id="remember-me" type="checkbox" />
+          <label htmlFor="remember-me">Remember me</label>
+        </div>
+        <a href="#">Forget Password?</a>
+      </div>
       <button type="submit">Log in</button>
       {error && <p style={{ color: "red" }}>{error}</p>}
     </form>

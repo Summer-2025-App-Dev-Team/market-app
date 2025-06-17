@@ -39,7 +39,7 @@ export default function SignUpForm() {
       }
 
       const userDocRef = doc(db, "userListings", userCredential.user.uid);
-      await setDoc(userDocRef, {listings: []}); 
+      await setDoc(userDocRef, { listings: [] });
 
       console.log("User signed up:", userCredential.user);
       navigate("/")
@@ -52,36 +52,52 @@ export default function SignUpForm() {
   };
   return (
     <form className="input-form" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-        autoFocus
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+      <div>
+        <input
+          id="name"
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          autoFocus
+        />
+        <label htmlFor="name"></label>
+      </div>
+      <div>
+        <input
+          id="email"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label htmlFor="email"></label>
+      </div>
       <div className="password">
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Confirm Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <label htmlFor="password"></label>
+        </div>
+        <div>
+          <input
+            id="confirm-password"
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          <label htmlFor="confirm-password"></label>
+        </div>
       </div>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <button type="submit" disabled={loading}>
