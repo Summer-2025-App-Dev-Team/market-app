@@ -19,7 +19,7 @@ export default function SignUp() {
 
     return (
         <>
-            <main className={styles.signup}>
+            <main className={styles["signup"]}>
                 <div className={styles["auth-background"]}>
                     <div className={styles["auth-card"]}>
                         <AuthHeading head="Sign Up" sub="or Log in" link="/login" />

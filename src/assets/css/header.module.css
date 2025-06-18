@@ -28,16 +28,16 @@ header .search-wrapper input {
     border: 1px solid grey;
     outline: none;
     border-radius: 5px;
+}
 
-    &:focus {
-        border: 1px solid rgb(32, 169, 255);
-    }
+header .search-wrapper input:focus {
+    border: 1px solid rgb(32, 169, 255);
+}
 
-    &::-webkit-search-cancel-button {
-        -webkit-appearance: none;
-        appearance: none;
-        display: none;
-    }
+header .search-wrapper input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    display: none;
 }
 
 header .search-wrapper div.search-box-border {
@@ -74,10 +74,10 @@ header>nav>a {
     text-decoration: none;
     font-size: 1.2rem;
     text-transform: uppercase;
+}
 
-    &:active {
-        opacity: 0.8;
-    }
+header>nav>a:active {
+    opacity: 0.8;
 }
 
 header>nav>a::before {
@@ -146,10 +146,10 @@ header>nav>a.auth-button {
     color: white;
     text-decoration: none;
     margin: 50px;
+}
 
-    &:active {
-        opacity: 0.8;
-    }
+.burger a:active {
+    opacity: 0.8;
 }
 
 

@@ -9,12 +9,12 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+}
 
-    &:hover {
-        opacity: 0.8;
-    }
+.log-out-button:hover {
+    opacity: 0.8;
+}
 
-    &:active {
-        opacity: 0.6;
-    }
+.log-out-button:active {
+    opacity: 0.6;
 }

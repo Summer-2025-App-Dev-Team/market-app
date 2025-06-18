@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+main {
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    /* To give enough gap between the main content and the footer */
+    padding-bottom: 25px;
+}

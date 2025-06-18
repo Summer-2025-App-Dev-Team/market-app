@@ -1,20 +1,19 @@
-.main-additem{
+.main-additem {
     height: auto !important;
 }
 
-.main-additem.add-item>h1 {
+h1 {
     text-align: center;
     margin-bottom: 25px;
 }
 
-.main-additem.add-item>.content {
+.content {
     display: flex;
-    /* Changed from gap: 100px to space-evenly */
     justify-content: space-evenly;
     align-items: center;
 }
 
-.main-additem.add-item>.content>form {
+.content>form {
     padding: 30px;
     border-radius: 20px;
     border-radius: 5px;
@@ -22,27 +21,26 @@
     width: 30%;
 }
 
-
-.main-additem.add-item>.content form>h1 {
+.content form>h1 {
     font-weight: bold;
 }
 
-.main-additem.add-item>.content>form>input,
-.main-additem.add-item>.content>form>textarea {
+.content>form>input,
+.content>form>textarea {
     display: block;
     width: 100%;
     padding: 7.5px;
     font-size: 0.9rem;
     font-family: "Poppins", sans-serif;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-block: 3px 20px;
 }
 
-.main-additem.add-item>.content input[type="file"] {
+.content input[type="file"] {
     display: none;
 }
 
-.main-additem.add-item>.content label.file-upload {
+.content label.file-upload {
     display: inline-block;
     padding: 10px;
     margin-bottom: 10px;
@@ -51,17 +49,17 @@
     cursor: pointer;
     border-radius: 5px;
     transition: 0.3s;
-
-    &:hover {
-        opacity: 0.8;
-    }
-
-    &:active {
-        opacity: 0.6;
-    }
 }
 
-.main-additem.add-item>.content form>div.inputs {
+.content label.file-upload:hover {
+    opacity: 0.8;
+}
+
+.content label.file-upload:active {
+    opacity: 0.6;
+}
+
+.content form>div.inputs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,35 +70,37 @@
     }
 }
 
-.main-additem.add-item>.content form input:not([type="file"]),
-.main-additem.add-item>.content form textarea {
+.content form input:not([type="file"]),
+.content form textarea {
     border: 2px solid #dcdcdc;
 }
 
-.main-additem.add-item>.content form textarea {
+.content form textarea {
     min-height: 100px;
+    max-height: 250px;
+    resize: vertical;
     overflow: auto;
 }
 
-.main-additem.add-item>.content img.preview-image {
+.content img.preview-image {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     user-select: none;
 }
 
-.main-additem.add-item>.content form>div {
+.content form>div {
     margin-top: 25px;
 }
 
-.main-additem.add-item>.content form>label {
+.content form>label {
     display: block;
     margin-top: 5px;
 }
 
-.main-additem.add-item>.content form div.input {
+.content form div.input {
     display: inline-block;
 }
 
-.main-additem.add-item>.content form>button {
+.content form>button {
     border: none;
     padding: 7.5px 15px;
     border-radius: 5px;
@@ -111,14 +111,14 @@
     font-size: 20px;
     cursor: pointer;
     transition: 0.3s;
+}
 
-    &:hover {
-        opacity: 0.8;
-    }
+.content form>button:hover {
+    opacity: 0.8;
+}
 
-    &:active {
-        opacity: 0.6;
-    }
+.content form>button:active {
+    opacity: 0.6;
 }
 
 .preview {

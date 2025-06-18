@@ -1,8 +1,3 @@
-/* Removed this because it causes conflict with the login/sign up page */
-/* main {
-    height: auto;
-} */
-
 main.item-page {
     padding: 25px 50px;
     font-family: 'Poppins';
@@ -95,10 +90,10 @@ main.item-page {
     flex-shrink: 0;
     transition: 0.3s;
     cursor: pointer;
+}
 
-    &:hover {
-        background-color: rgba(211, 211, 211, 0.8);
-    }
+.scroll-container button:hover {
+    background-color: rgba(211, 211, 211, 0.8);
 }
 
 .scroll-container button.active {
@@ -119,14 +114,14 @@ main.item-page {
     flex-direction: column;
     border-radius: 10px;
     cursor: pointer;
+}
 
-    &:hover {
-        transform: translateY(2px);
-    }
+.service-wrapper:hover {
+    transform: translateY(2px);
+}
 
-    &:hover>img {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    }
+.service-wrapper:hover>img {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .service-wrapper>img {

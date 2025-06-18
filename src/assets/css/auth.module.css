@@ -1,8 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-html, body, .root {
-    margin: 0;
-    padding: 0;
-}
 
 
 main.login,
@@ -12,9 +8,11 @@ main.signup {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display:block;
-    margin:0;
-    padding:150px;
+    display: block;
+    margin: 0;
+
+    /* I feel the 150px doesn't really make sense */
+    /* padding: 150px; */
 }
 
 form.input-form {
@@ -41,14 +39,14 @@ form.input-form {
 .auth-card>h1 {
     font-size: 40px;
     font-weight: bold;
-    margin:0;
-    margin-bottom: 10px;
+    margin: 0;
+    margin-bottom: 5px;
 }
 
 .auth-card>h2 {
     font-size: 16px;
     font-weight: 300;
-    margin:0;
+    margin: 0;
 }
 
 .auth-card h2>a {
@@ -57,10 +55,10 @@ form.input-form {
     text-decoration: none;
     overflow: hidden;
     transition: 0.3s;
+}
 
-    &:hover {
-        color: rgb(31, 199, 255);
-    }
+.auth-card h2>a:hover {
+    color: rgb(31, 199, 255);
 }
 
 .auth-card h2>a::before {
@@ -78,7 +76,8 @@ form.input-form {
     width: 100%;
 }
 
-.input-form>div, .input-form .password>div {
+.input-form>div,
+.input-form div.password-div {
     display: flex;
     flex-direction: column;
     gap: 3px;
@@ -135,7 +134,8 @@ form.input-form {
     height: 12.5px;
 }
 
-.input-form div.utils>div>input, .input-form div.utils>div>label {
+.input-form div.utils>div>input,
+.input-form div.utils>div>label {
     cursor: pointer;
 }
 
@@ -143,14 +143,14 @@ form.input-form {
     color: #333;
     text-decoration: none;
     font-style: italic;
+}
 
-    &:hover {
-        text-decoration: underline;
-    }
+.input-form div.utils>a:hover {
+    text-decoration: underline;
 }
 
 .input-form button {
-    margin-top: 20px;
+    margin-top: 30px;
     background-color: #170B2F;
     color: #FDFDFD;
     width: 100%;
@@ -160,14 +160,14 @@ form.input-form {
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+}
 
-    &:hover {
-        opacity: 0.8;
-    }
+.input-form button:hover {
+    opacity: 0.8;
+}
 
-    &:active {
-        opacity: 0.6;
-    }
+.input-form button:active {
+    opacity: 0.6;
 }
 
 .google-button {
@@ -187,14 +187,14 @@ form.input-form {
     font-family: Roboto, sans-serif;
     cursor: pointer;
     transition: 0.3s;
+}
 
-    &:hover {
-        background-color: rgba(211, 211, 211, 0.8);
-    }
+.google-button:hover {
+    background-color: rgba(211, 211, 211, 0.8);
+}
 
-    &:active {
-        background-color: rgba(211, 211, 211, 0.6);
-    }
+.google-button:active {
+    background-color: rgba(211, 211, 211, 0.6);
 }
 
 .google-button>img {

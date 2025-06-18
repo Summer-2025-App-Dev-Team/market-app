@@ -4,6 +4,7 @@ import FilterBar from "./FilterBar";
 import Service from "./Service";
 
 export default function ItemPage() {
+    console.log(styles);
     useEffect(() => {
         const handelElementOnScroll = (e) => {
             // idk why but I have to -1 to the scrollwidth to make it work
@@ -21,11 +22,14 @@ export default function ItemPage() {
                 e.target.style.setProperty("--show-before-shadow", "1");
             }
         }
-
-        document.querySelector(".scroll-container").addEventListener("scroll", handelElementOnScroll);
+        const addScrollListener = () => {
+            document.querySelector(".scroll-container").addEventListener("scroll", handelElementOnScroll);
+        }
+        document.addEventListener("DOMContentLoaded", addScrollListener);
 
         return () => {
-            document.removeEventListener("scroll", handelElementOnScroll)
+            document.removeEventListener("DOMContentLoaded", addScrollListener);
+            document.removeEventListener("scroll", handelElementOnScroll);
         }
     }, []);
 

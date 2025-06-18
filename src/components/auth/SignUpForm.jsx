@@ -57,6 +57,7 @@ export default function SignUpForm() {
       setLoading(false);
     }
   };
+
   return (
     <form className={styles["input-form"]} onSubmit={handleSubmit}>
       <div>
@@ -82,8 +83,8 @@ export default function SignUpForm() {
         />
         <label htmlFor="email"></label>
       </div>
-      <div className={styles.password}>
-        <div>
+      <div className={styles["password"]}>
+        <div className={styles["password-div"]}>
           <input
             id="password"
             type="password"
@@ -94,7 +95,7 @@ export default function SignUpForm() {
           />
           <label htmlFor="password"></label>
         </div>
-        <div>
+        <div className={styles["password-div"]}>
           <input
             id="confirm-password"
             type="password"
