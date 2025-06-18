@@ -30,10 +30,6 @@ export default function AddItem() {
             <main className={styles["add-item"]}>
                 <h1 className={styles["page-heading"]}>Enter Listing Details</h1>
                 <div className={styles.content}>
-                    <div className={styles.preview}>
-                        <h2>Preview</h2>
-                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
-                    </div>
                     <AddItemForm
                         title={title}
                         price={price}
@@ -46,6 +42,10 @@ export default function AddItem() {
                         setDate={setDate}
                         setPrice={setPrice}
                     />
+                    <div className={styles.preview}>
+                        <h2>Preview</h2>
+                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
+                    </div>
                 </div>
             </main>
         </>

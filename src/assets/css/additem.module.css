@@ -1,17 +1,27 @@
-h1 {
+.add-item {
+  background-color: rgb(250, 247, 241);
+}
+
+
+.page-heading {
     text-align: center;
     margin-bottom: 25px;
 }
 
 .content {
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
+    justify-content: center;  /* NOT space-evenly */
+    gap: 50px;                 /* spacing between the form and the div */
+}
+
+
+.content>form, .content>div{
+    background-color: white;
 }
 
 .content>form {
     padding: 30px;
-    border-radius: 20px;
     border-radius: 5px;
     height: fit-content;
     width: 30%;
@@ -27,7 +37,6 @@ h1 {
     width: 100%;
     padding: 7.5px;
     font-size: 0.9rem;
-    font-family: "Poppins", sans-serif;
     border-radius: 5px;
     margin-block: 3px 20px;
 }
@@ -36,16 +45,40 @@ h1 {
     display: none;
 }
 
-.content label.file-upload {
-    display: inline-block;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
+.add-image-button {
+  display: inline-flex !important;      /* Makes icon and text appear side by side */
+  align-items: center;       /* Vertically align */
+  gap: 8px;                  /* Space between icon and text */
+  padding: 18px;
+  border: 1.5px dashed #ccc;
+  border-radius: 5px;
+  font-family: sans-serif;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  width:100%;
 }
+
+.file-upload-label{
+    margin:auto;
+    margin-left:0;
+}
+
+.plus-icon {
+  display: flex;              /* Needed for centering inside circle */
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin:auto;
+  margin-right:0;
+}
+
+
+
 
 .content label.file-upload:hover {
     opacity: 0.8;
@@ -83,8 +116,9 @@ h1 {
     user-select: none;
 }
 
-.content form>div {
-    margin-top: 25px;
+.content form>h3 {
+    font-weight:500;
+    font-size: 20px;
 }
 
 .content form>label {
@@ -101,8 +135,7 @@ h1 {
     padding: 7.5px 15px;
     border-radius: 5px;
     font-weight: normal;
-    font-family: "Poppins", sans-serif;
-    background-color: #3498db;
+    background-color: #000000;
     color: white;
     font-size: 20px;
     cursor: pointer;
@@ -129,7 +162,7 @@ h1 {
     max-width: 300px;
 }
 
-.preview>h2 {
+.preview > h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;
