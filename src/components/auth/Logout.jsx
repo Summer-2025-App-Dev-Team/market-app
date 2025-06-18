@@ -24,7 +24,7 @@ export default function Logout() {
 
   return (
     <>
-        <main>
+        <main className="login">
             <div className="auth-background">
                 <div className="auth-card">
                     <AuthHeading head="Log out" sub="or Back" link="/"/>

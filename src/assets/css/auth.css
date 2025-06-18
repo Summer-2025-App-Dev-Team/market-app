@@ -28,6 +28,7 @@ form.input-form {
     font-family: 'Poppins';
     padding: 30px;
     margin-top: 50px;
+    border-radius: 10px;
 }
 
 .auth-card>h1 {
@@ -192,10 +193,6 @@ form.input-form {
 }
 
 @media only screen and (max-width: 565px) {
-    .auth-background {
-        padding: 10vh 0;
-    }
-
     .auth-card {
         margin-top: 30%;
         width: min(75%, 400px);

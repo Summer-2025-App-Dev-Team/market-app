@@ -1,14 +1,14 @@
 .log-out-button {
-    margin-top: 20px;
-    background-color: #FF4C4C;
-    border-radius: 5px;
-    color: white;
+    margin-top: 30px;
+    background-color: #170B2F;
+    color: #FDFDFD;
     width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
         opacity: 0.8;
