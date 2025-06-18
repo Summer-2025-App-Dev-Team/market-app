@@ -3,6 +3,7 @@ import { auth } from "../lib/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import styles from '../../assets/css/auth.module.css';
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -29,7 +30,7 @@ export default function LoginForm() {
   };
 
   return (
-    <form className="input-form" onSubmit={handleSubmit}>
+    <form className={styles["input-form"]} onSubmit={handleSubmit}>
       <div>
         <input
           id="email"
@@ -53,7 +54,7 @@ export default function LoginForm() {
         />
         <label htmlFor="password"></label>
       </div>
-      <div className="utils">
+      <div className={styles.utils}>
         <div>
           <input id="remember-me" type="checkbox" />
           <label htmlFor="remember-me">Remember me</label>

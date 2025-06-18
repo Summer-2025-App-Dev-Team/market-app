@@ -4,6 +4,13 @@ import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import stylesA from "../../assets/css/auth.module.css";
+import stylesB from "../../assets/css/signup.module.css";
+
+const styles = {
+  ...stylesA,
+  ...stylesB
+}
 
 export default function SignUpForm() {
   const [name, setName] = useState("");
@@ -51,7 +58,7 @@ export default function SignUpForm() {
     }
   };
   return (
-    <form className="input-form" onSubmit={handleSubmit}>
+    <form className={styles["input-form"]} onSubmit={handleSubmit}>
       <div>
         <input
           id="name"
@@ -75,7 +82,7 @@ export default function SignUpForm() {
         />
         <label htmlFor="email"></label>
       </div>
-      <div className="password">
+      <div className={styles.password}>
         <div>
           <input
             id="password"

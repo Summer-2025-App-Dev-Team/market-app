@@ -6,7 +6,6 @@ import SignUp from "./components/auth/SignUp";
 import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
-import "./App.css";
 
 import useAuthStore from './components/store/useAuthStore';
 import { Link } from "react-router-dom";
@@ -59,8 +58,8 @@ export default function App() {
     //   ) : (<></>)}
 
     //   {/* TODO: just for testing, should be removed later */}
-    //   <Link to={"/add-item"} className="demo-link">Add an item</Link>
-    //   <Link to={"/item-page"} className="demo-link">Item page</Link>
+    //   <Link to={"/add-item"} className={styles.demo-link}>Add an item</Link>
+    //   <Link to={"/item-page"} className={styles.demo-link}>Item page</Link>
 
     //   <Footer />
     // </>
