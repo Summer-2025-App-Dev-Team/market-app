@@ -58,20 +58,33 @@ main.item-page {
     cursor: grabbing;
 }
 
+.scroll-wrapper {
+    position: relative;
+}
 
-/* Somebody please fix this effect I am too dumb to solve this */
-/* .scroll-wrapper::before {
-  content: "";
-  position: absolute; 
-  top: 0;
-  right: 0;
-  width: 200px;
-  margin-right: 80px;
-  height: 100%;
-  background: linear-gradient(to left, white, rgba(255,255,255,0));
-  pointer-events: none;
-  z-index: 2;
-} */
+.scroll-container::before {
+    opacity: var(--show-before-shadow);
+    left: 0;
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+.scroll-container::after {
+    opacity: var(--show-after-shadow);
+    right: 0;
+    background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+}
+
+.scroll-container::before,
+.scroll-container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 100%;
+    transition: 0.3s;
+    pointer-events: none;
+}
 
 .scroll-container button {
     padding: 7px 20px;

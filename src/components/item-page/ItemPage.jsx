@@ -1,8 +1,34 @@
+import { useEffect } from 'react';
 import '../../assets/css/itempage.css';
 import FilterBar from "./FilterBar";
 import Service from "./Service";
 
 export default function ItemPage() {
+    useEffect(() => {
+        const handelElementOnScroll = (e) => {
+            // idk why but I have to -1 to the scrollwidth to make it work
+            const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
+            const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
+
+            if (isScrolledToRightEnd) {
+                e.target.style.setProperty("--show-after-shadow", "0");
+            } else {
+                e.target.style.setProperty("--show-after-shadow", "1");
+            }
+            if (isScrolledToLeftEnd) {
+                e.target.style.setProperty("--show-before-shadow", "0");
+            } else {
+                e.target.style.setProperty("--show-before-shadow", "1");
+            }
+        }
+
+        document.querySelector(".scroll-container").addEventListener("scroll", handelElementOnScroll);
+
+        return () => {
+            document.removeEventListener("scroll", handelElementOnScroll)
+        }
+    }, []);
+
     return (
         <>
             <main className="item-page">
