@@ -1,6 +1,6 @@
 .item-page {
     padding: 25px 50px;
-    height:auto;
+    height: auto;
 }
 
 .title>h1 {
@@ -103,9 +103,9 @@
 
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    row-gap: 20px;
-    column-gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    gap: 20px;
     margin-top: 50px;
 }
 
@@ -140,7 +140,7 @@
     align-items: center;
     justify-content: space-between;
     margin-block: 5px 10px;
-    color:black;
+    color: black;
 }
 
 .person-info {

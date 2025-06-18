@@ -7,7 +7,6 @@ export default function ItemPage() {
     useEffect(() => {
         const handelElementOnScroll = (e) => {
             // idk why but I have to -1 to the scrollwidth to make it work
-            console.log("scrolled");
             const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
             const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
 
