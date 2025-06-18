@@ -1,10 +1,9 @@
 import "../../assets/css/header.css";
-import logo from "../../assets/images/sas-logo.png"
+import logo from "../../assets/images/app-logo.png"
 import burger_button from "../../assets/svgs/burger-button.svg";
 import LogoutOrLogin from "./LogoutOrLogin";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import icon from "/public/favicon.png"
 
 export default function Header() {
     function showBurger() {
@@ -74,42 +73,40 @@ export default function Header() {
     return (
         <header>
             <nav>
-                <img src={icon} alt="logo" draggable={false} className="logo" onClick={function () { window.location.href = "/" }} />
+                <img src={logo} alt="logo" draggable={false} className="logo" onClick={function () { window.location.href = "/" }} />
                 <div className="search-wrapper">
                     <form onSubmit={handelSearchSubmit}>
                         <input type="search" placeholder="Search" name="search-box" id="search-box" onChange={handelSearchOnChange} />
                     </form>
                     <div className="search-box-border"></div>
                 </div>
-                {/* Removed the Home Link because there is already the school logo */}
-                {/* <Link to={"/"}>Home</Link> */}
                 <Link to={"#"}>About us</Link>
                 <Link to={"#"}>Contact</Link>
                 <LogoutOrLogin />
                 <img src={burger_button} alt="menu" draggable={false} className="show-mobile burger-button" onClick={showBurger} />
 
-          <div className="show-mobile burger">
-            <b>SAS Market App</b>
-            <hr />
-            <ul>
-              <li>
-                <Link to={"/"}>Home</Link>
-              </li>
-              <li>
-                <Link to={"#"}>About us</Link>
-              </li>
-              <li>
-                <Link to={"#"}>Contact</Link>
-              </li>
-              <li>
-                <Link to={"/item-page"}>Items</Link>
-              </li>
-              <li>
-                <LogoutOrLogin />
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
+                <div className="show-mobile burger">
+                    <b>SAS Market App</b>
+                    <hr />
+                    <ul>
+                        <li>
+                            <Link to={"/"}>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={"#"}>About us</Link>
+                        </li>
+                        <li>
+                            <Link to={"#"}>Contact</Link>
+                        </li>
+                        <li>
+                            <Link to={"/item-page"}>Items</Link>
+                        </li>
+                        <li>
+                            <LogoutOrLogin />
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
     );
 }
