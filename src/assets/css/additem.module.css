@@ -1,20 +1,20 @@
-main{
+.main-additem{
     height: auto !important;
 }
 
-main.add-item>h1 {
+.main-additem.add-item>h1 {
     text-align: center;
     margin-bottom: 25px;
 }
 
-main.add-item>.content {
+.main-additem.add-item>.content {
     display: flex;
     /* Changed from gap: 100px to space-evenly */
     justify-content: space-evenly;
     align-items: center;
 }
 
-main.add-item>.content>form {
+.main-additem.add-item>.content>form {
     padding: 30px;
     border-radius: 20px;
     border-radius: 5px;
@@ -23,12 +23,12 @@ main.add-item>.content>form {
 }
 
 
-main.add-item>.content form>h1 {
+.main-additem.add-item>.content form>h1 {
     font-weight: bold;
 }
 
-main.add-item>.content>form>input,
-main.add-item>.content>form>textarea {
+.main-additem.add-item>.content>form>input,
+.main-additem.add-item>.content>form>textarea {
     display: block;
     width: 100%;
     padding: 7.5px;
@@ -38,11 +38,11 @@ main.add-item>.content>form>textarea {
     margin-bottom: 20px;
 }
 
-main.add-item>.content input[type="file"] {
+.main-additem.add-item>.content input[type="file"] {
     display: none;
 }
 
-main.add-item>.content label.file-upload {
+.main-additem.add-item>.content label.file-upload {
     display: inline-block;
     padding: 10px;
     margin-bottom: 10px;
@@ -61,7 +61,7 @@ main.add-item>.content label.file-upload {
     }
 }
 
-main.add-item>.content form>div.inputs {
+.main-additem.add-item>.content form>div.inputs {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,35 +72,35 @@ main.add-item>.content form>div.inputs {
     }
 }
 
-main.add-item>.content form input:not([type="file"]),
-main.add-item>.content form textarea {
+.main-additem.add-item>.content form input:not([type="file"]),
+.main-additem.add-item>.content form textarea {
     border: 2px solid #dcdcdc;
 }
 
-main.add-item>.content form textarea {
+.main-additem.add-item>.content form textarea {
     min-height: 100px;
     overflow: auto;
 }
 
-main.add-item>.content img.preview-image {
+.main-additem.add-item>.content img.preview-image {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     user-select: none;
 }
 
-main.add-item>.content form>div {
+.main-additem.add-item>.content form>div {
     margin-top: 25px;
 }
 
-main.add-item>.content form>label {
+.main-additem.add-item>.content form>label {
     display: block;
     margin-top: 5px;
 }
 
-main.add-item>.content form div.input {
+.main-additem.add-item>.content form div.input {
     display: inline-block;
 }
 
-main.add-item>.content form>button {
+.main-additem.add-item>.content form>button {
     border: none;
     padding: 7.5px 15px;
     border-radius: 5px;

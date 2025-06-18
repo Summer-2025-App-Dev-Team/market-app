@@ -1,6 +1,6 @@
 import AddItemForm from "./AddItemForm"
 import Service from "./Service"
-import "../../assets/css/additem.css"
+import styles from "../../assets/css/additem.module.css"
 import { useState, useEffect } from "react"
 import useAuthStore from "../store/useAuthStore"
 import { useNavigate } from "react-router-dom"
@@ -28,10 +28,10 @@ export default function AddItem() {
     return (
         <>
             {/* <Header /> */}
-            <main className="add-item">
-                <h1 className="page-heading">Enter Listing Details</h1>
-                <div className="content">
-                    <div className="preview">
+            <main className={styles["add-item"]}>
+                <h1 className={styles.page-heading}>Enter Listing Details</h1>
+                <div className={styles.content}>
+                    <div className={styles.preview}>
                         <h2>Preview</h2>
                         <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
                     </div>

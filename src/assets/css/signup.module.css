@@ -1,4 +1,3 @@
-/* Some attributes are set to !important becasue they are conflict to the auth.css properties */
 .password {
     display: flex;
     flex-direction: row !important;

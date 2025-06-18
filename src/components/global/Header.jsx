@@ -1,5 +1,5 @@
-import "../../assets/css/header.css";
-import logo from "../../assets/images/app-logo.png"
+import styles from "../../assets/css/header.module.css";
+import logo from "../../assets/images/app-logo.png";
 import burger_button from "../../assets/svgs/burger-button.svg";
 import LogoutOrLogin from "./LogoutOrLogin";
 import { Link } from "react-router-dom";
@@ -7,13 +7,12 @@ import { useEffect } from "react";
 
 export default function Header() {
     function showBurger() {
-        document.querySelector(".burger").classList.add("show");
+        document.querySelector(`.${styles.burger}`).classList.add(styles.show);
 
-        // TODO: need to be improved, tbh setTimeout is not a good solution
         setTimeout(() => {
             document.addEventListener("click", function handelOnClick(e) {
-                if (e.target.classList.contains("burger")) return;
-                document.querySelector(".burger").classList.remove("show");
+                if (e.target.classList.contains(styles.burger)) return;
+                document.querySelector(`.${styles.burger}`).classList.remove(styles.show);
                 document.removeEventListener("click", handelOnClick);
             });
         }, 500);
@@ -28,10 +27,11 @@ export default function Header() {
 
     function handelSearchOnChange(e) {
         const value = e.target.value;
+        const el = document.querySelector(`.${styles['search-box-border']}`);
         if (value !== "") {
-            document.querySelector(".search-box-border").style.setProperty("--after-display", "none");
+            el.style.setProperty("--after-display", "none");
         } else {
-            document.querySelector(".search-box-border").style.setProperty("--after-display", "inline-block");
+            el.style.setProperty("--after-display", "inline-block");
         }
     }
 
@@ -49,43 +49,64 @@ export default function Header() {
                     input.focus();
                 }
             }
-        }
+        };
 
-        const handelSearchInputFocus = (e) => {
-            document.querySelector(".search-box-border").style.outline = "5px solid rgba(116, 116, 255, 0.5)";
-        }
+        const handelSearchInputFocus = () => {
+            const el = document.querySelector(`.${styles['search-box-border']}`);
+            el.style.outline = "5px solid rgba(116, 116, 255, 0.5)";
+        };
 
-        const handelSearchInputBlur = (e) => {
-            document.querySelector(".search-box-border").style.outline = "5px solid transparent";
-        }
+        const handelSearchInputBlur = () => {
+            const el = document.querySelector(`.${styles['search-box-border']}`);
+            el.style.outline = "5px solid transparent";
+        };
 
         document.addEventListener("keydown", handelKeyDown);
-        document.getElementById("search-box").addEventListener("focus", handelSearchInputFocus);
-        document.getElementById("search-box").addEventListener("blur", handelSearchInputBlur);
+        const input = document.getElementById("search-box");
+        input.addEventListener("focus", handelSearchInputFocus);
+        input.addEventListener("blur", handelSearchInputBlur);
 
         return () => {
             document.removeEventListener("keydown", handelKeyDown);
-            document.getElementById("search-box").removeEventListener("focus", handelSearchInputFocus);
-            document.getElementById("search-box").removeEventListener("blur", handelSearchInputBlur);
+            input.removeEventListener("focus", handelSearchInputFocus);
+            input.removeEventListener("blur", handelSearchInputBlur);
         };
     }, []);
 
     return (
         <header>
             <nav>
-                <img src={logo} alt="logo" draggable={false} className="logo" onClick={function () { window.location.href = "/" }} />
-                <div className="search-wrapper">
+                <img
+                    src={logo}
+                    alt="logo"
+                    draggable={false}
+                    className={styles.logo}
+                    onClick={() => { window.location.href = "/" }}
+                />
+                <div className={styles["search-wrapper"]}>
                     <form onSubmit={handelSearchSubmit}>
-                        <input type="search" placeholder="Search" name="search-box" id="search-box" onChange={handelSearchOnChange} />
+                        <input
+                            type="search"
+                            placeholder="Search"
+                            name="search-box"
+                            id="search-box"
+                            onChange={handelSearchOnChange}
+                        />
                     </form>
-                    <div className="search-box-border"></div>
+                    <div className={styles["search-box-border"]}></div>
                 </div>
                 <Link to={"#"}>About us</Link>
                 <Link to={"#"}>Contact</Link>
                 <LogoutOrLogin />
-                <img src={burger_button} alt="menu" draggable={false} className="show-mobile burger-button" onClick={showBurger} />
+                <img
+                    src={burger_button}
+                    alt="menu"
+                    draggable={false}
+                    className={`${styles["show-mobile"]} ${styles["burger-button"]}`}
+                    onClick={showBurger}
+                />
 
-                <div className="show-mobile burger">
+                <div className={`${styles["show-mobile"]} ${styles.burger}`}>
                     <b>SAS Market App</b>
                     <hr />
                     <ul>
