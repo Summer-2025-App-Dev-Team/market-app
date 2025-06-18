@@ -7,12 +7,14 @@ main.item-page {
     font-size: 48px;
     font-weight: bold;
     margin: 0;
+    color:#3A0082;
 }
 
 .title>h2 {
     font-size: 18px;
     font-weight: 400;
     margin: 0;
+    color:#3A0082;
 }
 
 .description {
@@ -140,6 +142,7 @@ main.item-page {
     align-items: center;
     justify-content: space-between;
     margin-block: 5px 10px;
+    color:#3A0082;
 }
 
 .person-info {
