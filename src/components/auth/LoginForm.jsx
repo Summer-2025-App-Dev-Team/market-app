@@ -11,12 +11,12 @@ export default function LoginForm() {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-
+  const setUser = useAuthStore((state) => state.setUser);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
 
-    const setUser = useAuthStore((state) => state.setUser);
+    
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
