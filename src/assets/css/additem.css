@@ -1,3 +1,7 @@
+main{
+    height: auto !important;
+}
+
 main.add-item>h1 {
     text-align: center;
     margin-bottom: 25px;
@@ -18,10 +22,6 @@ main.add-item>.content>form {
     width: 30%;
 }
 
-main.add-item>.content>form,
-main.add-item>.content>div {
-    /* background-color: rgba(0, 0, 0, 0.1); */
-}
 
 main.add-item>.content form>h1 {
     font-weight: bold;
