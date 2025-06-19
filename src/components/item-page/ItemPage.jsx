@@ -1,4 +1,4 @@
-import { useEffect , useState} from 'react';
+import { useEffect, useState } from 'react';
 import styles from "../../assets/css/itempage.module.css";
 import FilterBar from "./FilterBar";
 import { useSearchParams } from 'react-router-dom';
@@ -31,18 +31,21 @@ export default function ItemPage() {
     }, []);
 
     const [searchParams] = useSearchParams();
+    let query = searchParams.get('q'); // e.g. ?query=hello
 
-    const query = searchParams.get('q'); // e.g. ?query=hello
+    // there has to be some query, otherwise will return errors
+    if (query == null) {
+        query = "";
+    }
 
     var exampleObject = {
         "image": "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png",
         "title": "Title here",
         "profile": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
         "date": "2010-09-10",
-        "price":"100"
+        "price": "100"
     }
-    
-    
+
     const exampleResults = [
         exampleObject,
         exampleObject,
@@ -78,7 +81,7 @@ export default function ItemPage() {
                     <h2>or Goods</h2>
                 </div>
                 <p className={styles.description}>This platform showcases the talents and entrepreneurial spirit of SAS students, offering high-quality services across a range of fields. Whether you're seeking digital solutions, creative work, or technical support, each listing reflects dedication, skill, and a commitment to excellence.</p>
-                <SearchHeading searchParam={query} results={results} sortchange={sortchange}/>
+                <SearchHeading searchParam={query} results={results} sortchange={sortchange} />
                 <FilterBar />
                 <ItemGrid results={results} />
             </main>
