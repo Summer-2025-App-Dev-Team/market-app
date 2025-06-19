@@ -47,7 +47,15 @@ export default function ItemPage() {
         exampleObject,
         exampleObject,
         exampleObject,
-        exampleObject
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
+        exampleObject,
     ].filter(item =>
         item.title.toLowerCase().includes(query.toLowerCase())
     );

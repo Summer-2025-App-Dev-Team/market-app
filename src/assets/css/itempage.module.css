@@ -36,9 +36,9 @@
 }
 
 .sort {
-  padding: 10px;
+  padding: 7px 15px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 16px;
   margin:auto;
   margin-right:0;
   height:min-content;
@@ -102,66 +102,40 @@
 
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     justify-content: center;
     gap: 20px;
     margin-top: 50px;
 }
 
-.service-wrapper {
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    cursor: pointer;
-}
 
-.service-wrapper:hover {
-    transform: translateY(2px);
-}
+@media only screen and (max-width: 565px) {
+    .item-page{
+        padding: 10px 25px;
+    }
+    .searchContainer{
+        flex-direction: column;
+    }
+    .searchheading{
+        font-size: 20px;
+    }
 
-.service-wrapper:hover>img {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-}
+    .sort{
+        padding: 5px 10px;
+        margin: 0;
+        width: min-content;
+    }
 
-.service-wrapper>img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    aspect-ratio: 3/ 2;
-    object-fit: cover;
-    /* scale & crop to fill aspect ratio */
-    object-position: center;
-    /* center image content */
-}
+    .description{
+        margin-top: 10px;
+        font-size: 14px;
+    }
 
-.item-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-block: 5px 10px;
-    color: black;
-}
+    .title>h1{
+        font-size: 32px;
+    }
 
-.person-info {
-    display: flex;
-    align-items: center;
-}
-
-.person-info>img.profile {
-    height: 15px;
-    width: auto;
-    flex-grow: 0;
-}
-
-.person-info>img.stars {
-    height: 15px;
-    width: auto;
-}
-
-.person-info>p {
-    align-items: center;
-    justify-content: center;
-    line-height: 100%;
-    margin: auto;
-    margin-left: 5px;
+    .title>h2{
+        font-size: 16px;
+    }
 }

@@ -1,5 +1,5 @@
 import Rating from "./Rating"
-import styles from "../../assets/css/itempage.module.css"
+import styles from "../../assets/css/service.module.css"
 
 export default function Service(props) {
     return (
