@@ -13,14 +13,12 @@ export default function Login() {
     }
 
     return (
-        <>
-            <main className={styles.login}>
-                <div className={styles['auth-card']}>
-                    <AuthHeading head="Log in" sub="or Sign Up" link="/signup" />
-                    <LoginForm />
-                    <GoogleButton mode="signin" />
-                </div>
-            </main>
-        </>
+        <main className={styles.login}>
+            <div className={styles['auth-card']}>
+                <AuthHeading head="Log in" sub="or Sign Up" link="/signup" />
+                <LoginForm />
+                <GoogleButton mode="signin" />
+            </div>
+        </main>
     )
 }

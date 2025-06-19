@@ -7,8 +7,9 @@ import {
   browserSessionPersistence
 } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styles from '../../assets/css/auth.module.css';
+
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -69,7 +70,7 @@ export default function LoginForm() {
           <input id="remember-me" name="remember-me" type="checkbox" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
-        <a href="#">Forget Password?</a>
+        <Link to={"/forget-password"}>Forget Password?</Link>
       </div>
       <button type="submit">Log in</button>
       {error && <p style={{ color: "red" }}>{error}</p>}

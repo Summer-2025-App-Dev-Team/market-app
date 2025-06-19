@@ -2,7 +2,8 @@
 
 
 main.login,
-main.signup {
+main.signup,
+main.forget-password {
     background-color: #020A6E;
     background-image: url("../background.png");
     background-position: center;
@@ -10,9 +11,6 @@ main.signup {
     background-size: cover;
     display: block;
     margin: 0;
-
-    /* I feel the 150px doesn't really make sense */
-    /* padding: 150px; */
 }
 
 form.input-form {
