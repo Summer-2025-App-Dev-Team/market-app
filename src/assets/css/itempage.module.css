@@ -28,6 +28,26 @@
     overflow-x: auto;
 }
 
+.searchheading{
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.sort {
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin:auto;
+  margin-right:0;
+  height:min-content;
+}
+
+.searchContainer{
+    display: flex;
+}
+
 .scroll-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
