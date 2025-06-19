@@ -37,7 +37,7 @@ export default function SignUpForm() {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user)
+      setUser(userCredential.user, true)
 
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {

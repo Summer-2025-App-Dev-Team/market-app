@@ -15,12 +15,10 @@ export default function addItemForm(props) {
         });
 
         document.querySelector(`.${styles["file-upload-label"]}`).textContent = "Change picture";
-
     }
 
     const handelSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted!");
         const userDocRef = doc(db, "userListings", user.uid);
 
         const imageUrl = props.image?.file ? await upload(props.image.file) : null;
