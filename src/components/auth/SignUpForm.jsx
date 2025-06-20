@@ -1,5 +1,5 @@
 import { auth, db } from "../lib/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import React, { useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
@@ -37,22 +37,36 @@ export default function SignUpForm() {
 
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      setUser(userCredential.user, true)
 
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: name,
-        });
-      }
+      const user = userCredential.user;
 
-      const userDocRef = doc(db, "userListings", userCredential.user.uid);
-      await setDoc(userDocRef, { listings: [] });
+      await updateProfile(user, { displayName: name });
 
-      console.log("User signed up:", userCredential.user);
-      navigate("/")
+      setUser(user);
+
+      await sendEmailVerification(user);
+      navigate("/verify-email");
+
     } catch (err) {
-      setError(err.message);
-      console.error("Signup error:", err);
+      if (err.code === "auth/email-already-in-use") {
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+          if (user.emailVerified) {
+            setUser(user);
+            navigate("/");
+          } else {
+            await sendEmailVerification(user);
+            navigate("/verify-email");
+          }
+        } catch (signInErr) {
+          setError("Email already in use, but login failed. Check your password.");
+          console.error("Login after existing signup failed:", signInErr);
+        }
+      } else {
+        setError(err.message);
+        console.error("Signup error:", err);
+      }
     } finally {
       setLoading(false);
     }

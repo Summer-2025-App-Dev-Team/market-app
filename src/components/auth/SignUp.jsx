@@ -12,11 +12,6 @@ const styles = {
 }
 
 export default function SignUp() {
-    const user = useAuthStore((state) => state.user);
-    if (!(user == null)) {
-        return <Navigate to="/" replace />;
-    }
-
     return (
         <>
             <main className={styles["signup"]}>

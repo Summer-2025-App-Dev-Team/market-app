@@ -8,6 +8,7 @@ import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
 import "./App.css";
+import VerifyEmail from "./components/auth/VerifyEmail";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />
+      },
+      {
+        path: "/verify-email",
+        element: <VerifyEmail/>
       },
       {
         path: "/logout",
