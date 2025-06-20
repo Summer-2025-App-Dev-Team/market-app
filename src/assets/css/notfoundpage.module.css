@@ -1,0 +1,27 @@
+main.not-found-page {
+    text-align: center;
+}
+
+main.not-found-page img {
+    pointer-events: none;
+    user-select: none;
+}
+
+main.not-found-page button {
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    margin-top: 50px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+main.not-found-page button:hover {
+    opacity: 0.8;
+}
+
+main.not-found-page button:active {
+    opacity: 0.6;
+}

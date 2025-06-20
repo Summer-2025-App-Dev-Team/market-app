@@ -24,7 +24,9 @@ export default function ForgetPassword() {
                     <AuthHeading head="Email Sent!" />
                     <h2>Please check your mailbox</h2>
                     <img src={tick_symbol} alt="tick-symbol.png" />
-                    <Link to={"/login"}>Back to login page</Link>
+                    <Link to={"/login"}>
+                        <button>Go back to login page</button>
+                    </Link>
                 </div>
             </main>
         </>
