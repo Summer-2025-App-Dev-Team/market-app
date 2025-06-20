@@ -49,6 +49,9 @@ export default function SignUpForm() {
         handleCodeInApp: false
       };
 
+      const userDocRef = doc(db, "userListings", userCredential.user.uid);
+      await setDoc(userDocRef, {listings: []}); 
+
       await sendEmailVerification(user, actionCodeSettings);
       navigate("/verify-email");
 
