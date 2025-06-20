@@ -4,13 +4,19 @@ import { Link } from 'react-router-dom';
 
 export default function LogoutOrLogin() {
     const user = useAuthStore((state) => state.user);
-    if (user == null) {
+
+    // Still loading
+    if (user === undefined) {
+        return <span>Loading...</span>;
+    }
+
+    if (user === null) {
         return (
             <Link to={"/login"} className={styles["auth-button"]}>Login</Link>
         )
-    } else {
-        return (
-            <Link to={"/logout"} className={styles["auth-button"]}>Logout</Link>
-        )
     }
+
+    return (
+        <Link to={"/logout"} className={styles["auth-button"]}>Logout</Link>
+    )
 }

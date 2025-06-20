@@ -8,7 +8,7 @@ export default function AuthListener() {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+      setUser(user ?? null);
     });
 
     return () => unsubscribe();

@@ -1,4 +1,5 @@
 import MobileHeader from "./MobileHeader";
+import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
 import burger_button from "../../assets/svgs/burger-button.svg";
@@ -98,7 +99,8 @@ export default function Header() {
                 </div>
                 <Link to={"/about"}>About us</Link>
                 <Link to={"/contact"}>Contact</Link>
-                <LogoutOrLogin />
+                {/* <LogoutOrLogin /> */}
+                <UserDropdown />
                 <img
                     src={burger_button}
                     alt="menu"
