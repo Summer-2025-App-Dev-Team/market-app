@@ -1,4 +1,4 @@
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
@@ -19,11 +19,17 @@ export default function addItemForm(props) {
 
     const handelSubmit = async (e) => {
         e.preventDefault();
+
         const userDocRef = doc(db, "userListings", user.uid);
 
         const imageUrl = props.image?.file ? await upload(props.image.file) : null;
 
+        const listingId = crypto.randomUUID();
+
+        const listDocRef = doc(db, "allListings", listingId);
+
         const newListing = {
+            id: listingId,
             name: props.title,
             price: parseFloat(props.price),
             availableUntil: props.date,
@@ -35,6 +41,7 @@ export default function addItemForm(props) {
         await updateDoc(userDocRef, {
             listings: arrayUnion(newListing)
         });
+        await setDoc(listDocRef, newListing);
     }
 
     return (
