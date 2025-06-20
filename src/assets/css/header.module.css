@@ -95,7 +95,7 @@ header>nav>a:hover::before {
     width: 100%;
 }
 
-header>nav>a.auth-button {
+header>nav .auth-button {
     font-weight: bold;
 }
 

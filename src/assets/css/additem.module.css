@@ -1,7 +1,6 @@
 .add-item {
-  background-color: rgb(250, 247, 241);
+    background-color: rgb(250, 247, 241);
 }
-
 
 .page-heading {
     text-align: center;
@@ -11,12 +10,14 @@
 .content {
     display: flex;
     align-items: center;
-    justify-content: center;  /* NOT space-evenly */
-    gap: 50px;                 /* spacing between the form and the div */
+    justify-content: center;
+    /* NOT space-evenly */
+    gap: 50px;
+    /* spacing between the form and the div */
 }
 
-
-.content>form, .content>div{
+.content>form,
+.content>div {
     background-color: white;
 }
 
@@ -46,39 +47,40 @@
 }
 
 .add-image-button {
-  display: inline-flex !important;      /* Makes icon and text appear side by side */
-  align-items: center;       /* Vertically align */
-  gap: 8px;                  /* Space between icon and text */
-  padding: 18px;
-  border: 1.5px dashed #ccc;
-  border-radius: 5px;
-  font-family: sans-serif;
-  color: #333;
-  background-color: #fff;
-  cursor: pointer;
-  width:100%;
+    display: inline-flex !important;
+    /* Makes icon and text appear side by side */
+    align-items: center;
+    /* Vertically align */
+    gap: 8px;
+    /* Space between icon and text */
+    padding: 18px;
+    border: 1.5px dashed #ccc;
+    border-radius: 5px;
+    font-family: sans-serif;
+    color: #333;
+    background-color: #fff;
+    cursor: pointer;
+    width: 100%;
 }
 
-.file-upload-label{
-    margin:auto;
-    margin-left:0;
+.file-upload-label {
+    margin: auto;
+    margin-left: 0;
 }
 
 .plus-icon {
-  display: flex;              /* Needed for centering inside circle */
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  width: 20px;
-  height: 20px;
-  border: 1px solid black;
-  border-radius: 50%;
-  margin:auto;
-  margin-right:0;
+    display: flex;
+    /* Needed for centering inside circle */
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: auto;
+    margin-right: 0;
 }
-
-
-
 
 .content label.file-upload:hover {
     opacity: 0.8;
@@ -93,10 +95,10 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+}
 
-    &>div {
-        width: 50%;
-    }
+.content form>div.inputs>div {
+    width: 50%;
 }
 
 .content form input:not([type="file"]),
@@ -117,7 +119,7 @@
 }
 
 .content form>h3 {
-    font-weight:500;
+    font-weight: 500;
     font-size: 20px;
 }
 
@@ -162,7 +164,7 @@
     max-width: 300px;
 }
 
-.preview > h2 {
+.preview>h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;

@@ -7,6 +7,8 @@ import ForgetPassword from "./components/auth/ForgetPassword";
 import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
+import Contact from "./components/contact/Contact";
+import About from "./components/about/About"
 import "./App.css";
 
 const router = createBrowserRouter([
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/add-item",
         element: <AddItem />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      },
+      {
+        path: "/about",
+        element: <About />
       },
       {
         path: "*",
