@@ -8,7 +8,7 @@ import useAuthStore from '../store/useAuthStore';
 
 export default function Login() {
     const user = useAuthStore((state) => state.user);
-    if (!(user == null)) {
+    if (user != null) {
         return <Navigate to="/" replace />;
     }
 

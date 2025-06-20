@@ -1,3 +1,5 @@
+import MobileHeader from "./MobileHeader";
+import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
 import burger_button from "../../assets/svgs/burger-button.svg";
@@ -95,9 +97,10 @@ export default function Header() {
                     </form>
                     <div className={styles["search-box-border"]}></div>
                 </div>
-                <Link to={"#"}>About us</Link>
-                <Link to={"#"}>Contact</Link>
-                <LogoutOrLogin />
+                <Link to={"/about"}>About us</Link>
+                <Link to={"/contact"}>Contact</Link>
+                {/* <LogoutOrLogin /> */}
+                <UserDropdown />
                 <img
                     src={burger_button}
                     alt="menu"
@@ -106,27 +109,8 @@ export default function Header() {
                     onClick={showBurger}
                 />
 
-                <div className={`${styles["show-mobile"]} ${styles.burger}`}>
-                    <b>SAS Market App</b>
-                    <hr />
-                    <ul>
-                        <li>
-                            <Link to={"/"}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to={"#"}>About us</Link>
-                        </li>
-                        <li>
-                            <Link to={"#"}>Contact</Link>
-                        </li>
-                        <li>
-                            <Link to={"/item-page"}>Items</Link>
-                        </li>
-                        <li>
-                            <LogoutOrLogin />
-                        </li>
-                    </ul>
-                </div>
+                {/* Render the mobile header */}
+                <MobileHeader />
             </nav>
         </header>
     );
