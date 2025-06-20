@@ -44,7 +44,12 @@ export default function SignUpForm() {
 
       setUser(user);
 
-      await sendEmailVerification(user);
+      const actionCodeSettings = {
+        url: `${window.location.origin}/email-confirmed`,
+        handleCodeInApp: false
+      };
+
+      await sendEmailVerification(user, actionCodeSettings);
       navigate("/verify-email");
 
     } catch (err) {
