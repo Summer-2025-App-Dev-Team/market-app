@@ -1,28 +1,24 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth"
-import styleA from "../../assets/css/auth.module.css"
-import styleB from "../../assets/css/forgetpassword.module.css"
-
-
-const styles = {
-    ...styleA,
-    ...styleB
-}
+import styles from "../../assets/css/auth.module.css"
 
 export default function ForgetPasswordForm() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
 
+        const actionCodeSettings = {
+            url: `${window.location.origin}/success-screen?type=reset`,
+            handleCodeInApp: false
+        };
         const auth = getAuth();
         auth.useDeviceLanguage();
-        sendPasswordResetEmail(auth, email)
+        sendPasswordResetEmail(auth, email, actionCodeSettings)
             .then(() => {
-                console.log("Email sent!");
-
-                document.getElementById("forget-password").style.display = "none";
-                document.getElementById("success-screen").classList.add(styles["show"]);
+                navigate("/verify-auth/?type=reset");
             })
             .catch((err) => {
                 console.error("Error:", err);

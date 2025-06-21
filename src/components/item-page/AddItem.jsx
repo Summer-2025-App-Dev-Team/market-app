@@ -14,8 +14,8 @@ export default function AddItem() {
         if (!userIsLoggedIn) {
             navigate("/login", { replace: true });
         }
-        if (!user.emailverified){
-            navigate("/verify-email", { replace: true });
+        if (!user.emailverified) {
+            navigate("/verify-auth?type=confirm", { replace: true });
         }
     }, [userIsLoggedIn, user, navigate]);
 

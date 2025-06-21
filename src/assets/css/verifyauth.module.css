@@ -1,0 +1,47 @@
+.verify-screen {
+    background-color: #020A6E;
+    background-image: url("../background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    margin: 0;
+}
+
+.verify-card {
+    padding: 20px;
+    width: 400px;
+}
+
+.verify-card h1 {
+    line-height: 1.2;
+}
+
+.verify-card h2 {
+    text-align: center;
+}
+
+.verify-card a {
+    width: 100%;
+}
+
+.verify-card button {
+    background-color: #000a94;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    width: 100%;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.verify-card button:hover {
+    opacity: 0.8;
+}
+
+.verify-card button:active {
+    opacity: 0.6;
+}
