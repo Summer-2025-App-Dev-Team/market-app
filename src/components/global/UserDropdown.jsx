@@ -8,16 +8,6 @@ import { Link } from "react-router-dom";
 
 export default function UserDropdown() {
     const user = useAuthStore((state) => state.user);
-    useEffect(() => {
-        if (user === undefined) return;
-        try {
-            // name = user.displayName;
-            console.log(user.displayName);
-        }
-        catch (err) {
-            console.error("Error:", err);
-        };
-    }, [user])
 
     // Still loading
     if (user === undefined) {

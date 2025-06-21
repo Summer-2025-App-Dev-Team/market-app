@@ -4,14 +4,14 @@ import Login from "./components/auth/Login";
 import Logout from "./components/auth/Logout";
 import SignUp from "./components/auth/SignUp";
 import ForgetPassword from "./components/auth/ForgetPassword";
+import SuccessScreen from "./components/auth/SuccessScreen";
+import VerifyAuth from "./components/auth/VerifyAuth";
 import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
 import Contact from "./components/contact/Contact";
 import About from "./components/about/About"
 import "./App.css";
-import VerifyEmail from "./components/auth/VerifyEmail";
-import EmailConfirmed from "./components/auth/EmailConfirmed";
 
 const router = createBrowserRouter([
   {
@@ -27,12 +27,12 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        path: "/verify-email",
-        element: <VerifyEmail/>
+        path: "/verify-auth",
+        element: <VerifyAuth />
       },
       {
-        path: "/email-confirmed",
-        element: <EmailConfirmed/>
+        path: "/success-screen",
+        element: <SuccessScreen />
       },
       {
         path: "/logout",
