@@ -14,6 +14,7 @@ export default function VerifyAuth() {
       message: "Please check your inbox",
       buttonOnClick: () => {
         // TODO: implement resend email
+        alert("WIP");
       },
       buttonText: "Resend Confirmation Email"
     },
@@ -22,6 +23,7 @@ export default function VerifyAuth() {
       message: "Please check your inbox",
       buttonOnClick: () => {
         // TODO: implement resend email
+        alert("WIP");
       },
       buttonText: "Resend Verification Email"
     }

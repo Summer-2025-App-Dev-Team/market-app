@@ -8,16 +8,22 @@ import { useNavigate } from "react-router-dom";
 export default function AddItem() {
     const navigate = useNavigate();
     const user = useAuthStore((state) => state.user);
-    const userIsLoggedIn = user == null ? false : true;
-    console.log(user)
     useEffect(() => {
-        if (!userIsLoggedIn) {
-            navigate("/login", { replace: true });
+        // undefined => still loading
+        if (user === undefined) {
+            return null;
         }
-        if (!user.emailverified) {
+
+        const userIsLoggedIn = user === null ? false : true;
+        if (!userIsLoggedIn) {
+            alert("You are not logged in!");
+            navigate("/login", { replace: true });
+        } else if (!user.emailverified) {
+            // TODO: pls fix this. I have clicked on the link in my inbox, and verified my email, but it is still saying that I did not verify. 
+            alert("You haven't verified your email yet!");
             navigate("/verify-auth?type=confirm", { replace: true });
         }
-    }, [userIsLoggedIn, user, navigate]);
+    }, [user, navigate]);
 
     const [image, setImage] = useState({
         file: null,
