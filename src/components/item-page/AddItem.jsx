@@ -18,8 +18,7 @@ export default function AddItem() {
         if (!userIsLoggedIn) {
             alert("You are not logged in!");
             navigate("/login", { replace: true });
-        } else if (!user.emailverified) {
-            // TODO: pls fix this. I have clicked on the link in my inbox, and verified my email, but it is still saying that I did not verify. 
+        } else if (!user.emailVerified) {
             alert("You haven't verified your email yet!");
             navigate("/verify-auth?type=confirm", { replace: true });
         }
