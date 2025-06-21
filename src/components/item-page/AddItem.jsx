@@ -11,15 +11,15 @@ export default function AddItem() {
     useEffect(() => {
         // undefined => still loading
         if (user === undefined) {
-            return null;
+            return;
         }
 
         const userIsLoggedIn = user === null ? false : true;
         if (!userIsLoggedIn) {
-            alert("You are not logged in!");
+            console.log("You are not logged in!");
             navigate("/login", { replace: true });
         } else if (!user.emailVerified) {
-            alert("You haven't verified your email yet!");
+            console.log("You haven't verified your email yet!");
             navigate("/verify-auth?type=confirm", { replace: true });
         }
     }, [user, navigate]);
