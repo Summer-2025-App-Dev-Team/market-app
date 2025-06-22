@@ -8,16 +8,21 @@ import { useNavigate } from "react-router-dom";
 export default function AddItem() {
     const navigate = useNavigate();
     const user = useAuthStore((state) => state.user);
-    const userIsLoggedIn = user == null ? false : true;
-    console.log(user)
-    /*useEffect(() => {
+    useEffect(() => {
+        // undefined => still loading
+        if (user === undefined) {
+            return;
+        }
+
+        const userIsLoggedIn = user === null ? false : true;
         if (!userIsLoggedIn) {
+            console.log("You are not logged in!");
             navigate("/login", { replace: true });
+        } else if (!user.emailVerified) {
+            console.log("You haven't verified your email yet!");
+            navigate("/verify-auth?type=confirm", { replace: true });
         }
-        if (!user.emailverified){
-            navigate("/verify-email", { replace: true });
-        }
-    }, [userIsLoggedIn, user, navigate]); */
+    }, [user, navigate]);
 
     const [image, setImage] = useState({
         file: null,
@@ -47,7 +52,7 @@ export default function AddItem() {
                     />
                     <div className={styles.preview}>
                         <h2>Preview</h2>
-                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
+                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} preview={true} />
                     </div>
                 </div>
             </main>

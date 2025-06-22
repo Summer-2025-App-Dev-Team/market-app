@@ -42,44 +42,25 @@
     margin-block: 3px 20px;
 }
 
-.content input[type="file"] {
-    display: none;
-}
-
 .add-image-button {
-    display: inline-flex !important;
-    /* Makes icon and text appear side by side */
+    position: relative;
+    display: flex !important;
+    justify-content: center;
     align-items: center;
-    /* Vertically align */
-    gap: 8px;
-    /* Space between icon and text */
-    padding: 18px;
+    gap: 5px;
+    width: 100%;
+    padding-block: 15px;
+    margin-bottom: 10px;
     border: 1.5px dashed #ccc;
     border-radius: 5px;
     font-family: sans-serif;
     color: #333;
     background-color: #fff;
     cursor: pointer;
-    width: 100%;
 }
 
-.file-upload-label {
-    margin: auto;
-    margin-left: 0;
-}
-
-.plus-icon {
-    display: flex;
-    /* Needed for centering inside circle */
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
-    border-radius: 50%;
-    margin: auto;
-    margin-right: 0;
+.add-image-button.dragover {
+    background-color: #e0f7fa;
 }
 
 .content label.file-upload:hover {

@@ -2,12 +2,13 @@ import MobileHeader from "./MobileHeader";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import burger_button from "../../assets/svgs/burger-button.svg";
-import LogoutOrLogin from "./LogoutOrLogin";
-import { Link } from "react-router-dom";
+import burgerIcon from "../../assets/svgs/burger-icon.svg";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
+
     function showBurger() {
         document.querySelector(`.${styles.burger}`).classList.add(styles.show);
 
@@ -18,6 +19,10 @@ export default function Header() {
                 document.removeEventListener("click", handelOnClick);
             });
         }, 500);
+    }
+
+    function handelAddItemOnClick() {
+        navigate("/add-item");
     }
 
     function handelSearchSubmit(e) {
@@ -97,15 +102,18 @@ export default function Header() {
                     </form>
                     <div className={styles["search-box-border"]}></div>
                 </div>
-                <Link to={"/about"}>About us</Link>
-                <Link to={"/contact"}>Contact</Link>
-                {/* <LogoutOrLogin /> */}
+                {/* TODO: remove if not-necessary */}
+                {/* <Link to={"/about"}>About us</Link>
+                <Link to={"/contact"}>Contact</Link> */}
                 <UserDropdown />
+                <button onClick={handelAddItemOnClick}>Add item</button>
+
+                {/* Mobile menu icon */}
                 <img
-                    src={burger_button}
+                    src={burgerIcon}
                     alt="menu"
                     draggable={false}
-                    className={`${styles["show-mobile"]} ${styles["burger-button"]}`}
+                    className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}
                     onClick={showBurger}
                 />
 

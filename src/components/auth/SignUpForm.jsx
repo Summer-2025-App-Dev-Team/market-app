@@ -45,7 +45,7 @@ export default function SignUpForm() {
       setUser(user);
 
       const actionCodeSettings = {
-        url: `${window.location.origin}/email-confirmed`,
+        url: `${window.location.origin}/success-screen?type=confirm`,
         handleCodeInApp: false
       };
 
@@ -53,9 +53,9 @@ export default function SignUpForm() {
       await setDoc(userDocRef, {listings: []}); 
 
       await sendEmailVerification(user, actionCodeSettings);
-      navigate("/verify-email");
-
-    } catch (err) {
+      navigate("/verify-auth?type=confirm");
+    }
+    catch (err) {
       if (err.code === "auth/email-already-in-use") {
         try {
           const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -65,7 +65,7 @@ export default function SignUpForm() {
             navigate("/");
           } else {
             await sendEmailVerification(user);
-            navigate("/verify-email");
+            navigate("/verify-auth");
           }
         } catch (signInErr) {
           setError("Email already in use, but login failed. Check your password.");

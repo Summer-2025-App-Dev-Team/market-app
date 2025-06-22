@@ -13,7 +13,7 @@ export default function GoogleLoginButton(props) {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      
+
       console.log("Signed in user:", user);
 
       // Automatically remember the user when signed in with Google
@@ -21,13 +21,13 @@ export default function GoogleLoginButton(props) {
 
       if (result._tokenResponse?.isNewUser) {
         console.log("New user signed up!");
-        
+
         userDocRef = doc(db, "userListings", user.uid);
         const userListings = [];
         userDoc = setDoc(userDocRef, {listings: []}); 
       }
 
-      
+
 
     } catch (error) {
       console.error("Login error:", error);
@@ -40,7 +40,7 @@ export default function GoogleLoginButton(props) {
         src={google_logo}
         alt="Google logo"
       />
-      {props.mode=="signin" ? "Sign in" : "Sign up"} with Google
+      {props.mode == "signin" ? "Sign in" : "Sign up"} with Google
     </button>
   );
 }

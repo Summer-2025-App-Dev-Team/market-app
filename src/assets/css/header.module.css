@@ -110,6 +110,25 @@ header>nav .user-dropdown:hover ul {
     animation: fadeIn 0.3s forwards ease-out;
 }
 
+header>nav button {
+    background-color: rgb(63, 177, 247);
+    border: none;
+    border-radius: 5px;
+    padding: 7.5px 10px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+header>nav button:hover {
+    opacity: 0.8;
+}
+
+header>nav button:active {
+    opacity: 0.6;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -272,7 +291,7 @@ header>nav .user-dropdown li:last-child a {
         height: 50px;
     }
 
-    header>nav>img.burger-button {
+    header>nav>img.burger-icon {
         width: 40px;
         height: 40px;
     }

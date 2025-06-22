@@ -28,7 +28,7 @@
     overflow-x: auto;
 }
 
-.searchheading{
+.searchheading {
     font-size: 24px;
     font-weight: 500;
     margin-top: 20px;
@@ -36,20 +36,21 @@
 }
 
 .sort {
-  padding: 7px 15px;
-  border-radius: 6px;
-  font-size: 16px;
-  margin:auto;
-  margin-right:0;
-  height:min-content;
+    padding: 7px 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    margin: auto;
+    margin-right: 0;
+    height: min-content;
 }
 
-.searchContainer{
+.searchContainer {
     display: flex;
 }
 
 .scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .scroll-wrapper {
@@ -102,40 +103,42 @@
 
 .service-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-content: center;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    gap: 15px;
     margin-top: 50px;
 }
 
 
 @media only screen and (max-width: 565px) {
-    .item-page{
+    .item-page {
         padding: 10px 25px;
     }
-    .searchContainer{
+
+    .searchContainer {
         flex-direction: column;
     }
-    .searchheading{
+
+    .searchheading {
         font-size: 20px;
     }
 
-    .sort{
+    .sort {
         padding: 5px 10px;
         margin: 0;
         width: min-content;
     }
 
-    .description{
+    .description {
         margin-top: 10px;
         font-size: 14px;
     }
 
-    .title>h1{
+    .title>h1 {
         font-size: 32px;
     }
 
-    .title>h2{
+    .title>h2 {
         font-size: 16px;
     }
 }

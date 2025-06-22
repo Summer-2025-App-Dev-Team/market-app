@@ -1,26 +1,27 @@
 .success-screen {
-    display: none !important;
     background-color: #020A6E;
     background-image: url("../background.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: block;
+    text-align: center;
     margin: 0;
-}
-
-.success-screen.show {
-    display: inline-block !important;
 }
 
 .success-card {
     padding: 10px;
 }
 
+.success-card h2 {
+    text-align: center;
+}
+
 .success-card img {
     max-width: 250px;
     height: auto;
     margin-block: 15px;
+    pointer-events: none;
+    user-select: none;
 }
 
 .success-card a {
