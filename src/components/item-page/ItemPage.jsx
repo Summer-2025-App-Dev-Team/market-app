@@ -49,7 +49,7 @@ export default function ItemPage() {
     if (query == null) {
         query = "";
     }
-    const exampleResults = [].
+    const exampleResults = [];
 
     const [results, setResults] = useState(exampleResults);
     const [sortBy, setSortBy] = useState("rating");
@@ -58,10 +58,16 @@ export default function ItemPage() {
     useEffect(() => {
         async function loadListings() {
             const listings = await fetchAllListings();
-            setResults(listings.length ? listings.filter(item => item.title.toLowerCase().includes(query.toLowerCase())) : exampleResults);
+            const filtered = listings.filter(listing => {
+                return query==""|listing.name?.toLowerCase().includes( query.toLowerCase());
+            });
+            console.log(filtered);
+            setResults(listings.length ? filtered : exampleResults);
         }
         loadListings();
     }, []);
+
+
 
     function sortchange(newSort) {
         setSortBy(newSort);
