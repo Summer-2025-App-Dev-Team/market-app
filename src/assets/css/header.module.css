@@ -34,6 +34,7 @@ header .search-wrapper input:focus {
     border: 1px solid rgb(32, 169, 255);
 }
 
+/* Hide the search bar 'x' icon */
 header .search-wrapper input::-webkit-search-cancel-button {
     -webkit-appearance: none;
     appearance: none;
@@ -53,6 +54,7 @@ header .search-wrapper div.search-box-border {
     transition: outline 0.3s ease-out;
 }
 
+/* The '/' icon */
 header .search-wrapper div.search-box-border::after {
     content: "/";
     display: var(--after-display);
@@ -105,11 +107,6 @@ header>nav .user-dropdown {
     flex-direction: column;
 }
 
-header>nav .user-dropdown:hover ul {
-    display: flex;
-    animation: fadeIn 0.3s forwards ease-out;
-}
-
 header>nav button {
     background-color: rgb(63, 177, 247);
     border: none;
@@ -127,16 +124,6 @@ header>nav button:hover {
 
 header>nav button:active {
     opacity: 0.6;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
 }
 
 header>nav .user-dropdown .user {
@@ -169,6 +156,11 @@ header>nav .user-dropdown ul {
     background-color: rgb(255, 254, 253);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+}
+
+
+header>nav .user-dropdown ul.active {
+    display: flex;
 }
 
 header>nav .user-dropdown ul li {

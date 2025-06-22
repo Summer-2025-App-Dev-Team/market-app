@@ -3,6 +3,8 @@
     flex-direction: column;
     width: 300px;
     border-radius: 10px;
+    padding: 10px;
+    transition: 0.3s;
 }
 
 .service-wrapper:not(:has(.preview)) {
@@ -10,11 +12,7 @@
 }
 
 .service-wrapper:hover:not(:has(.preview)) {
-    transform: translateY(2px);
-}
-
-.service-wrapper:hover>img:not(.preview) {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .service-wrapper>img {

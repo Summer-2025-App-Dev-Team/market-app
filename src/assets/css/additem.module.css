@@ -11,9 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* NOT space-evenly */
-    gap: 50px;
-    /* spacing between the form and the div */
+    gap: 75px;
 }
 
 .content>form,

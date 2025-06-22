@@ -7,7 +7,10 @@
 
 html,
 body,
-#root,
+#root {
+    height: 100%;
+}
+
 main {
     height: 100%;
 }
@@ -18,6 +21,6 @@ main {
 }
 
 main {
-    /* To give enough gap between the main content and the footer */
+    /* To give enough space between the main content and the footer */
     padding-bottom: 25px;
 }
