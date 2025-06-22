@@ -1,4 +1,4 @@
-import { arrayUnion, doc, setDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useEffect, useRef } from "react";
 import useAuthStore from "../store/useAuthStore";
@@ -29,6 +29,11 @@ export default function addItemForm(props) {
         e.preventDefault();
 
         const userDocRef = doc(db, "userListings", user.uid);
+
+        const docSnap = await getDoc(userDocRef);
+        if(!docSnap.exists()){
+            await setDoc(userDocRef, {listings: []});
+        }
 
         const imageUrl = props.image?.file ? await upload(props.image.file) : null;
 
