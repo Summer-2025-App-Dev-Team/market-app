@@ -2,7 +2,7 @@ import MobileHeader from "./MobileHeader";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import burger_button from "../../assets/svgs/burger-button.svg";
+import burgerIcon from "../../assets/svgs/burger-icon.svg";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -110,10 +110,10 @@ export default function Header() {
 
                 {/* Mobile menu icon */}
                 <img
-                    src={burger_button}
+                    src={burgerIcon}
                     alt="menu"
                     draggable={false}
-                    className={`${styles["show-mobile"]} ${styles["burger-button"]}`}
+                    className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}
                     onClick={showBurger}
                 />
 

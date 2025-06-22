@@ -52,7 +52,7 @@ export default function AddItem() {
                     />
                     <div className={styles.preview}>
                         <h2>Preview</h2>
-                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} />
+                        <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} preview={true} />
                     </div>
                 </div>
             </main>
