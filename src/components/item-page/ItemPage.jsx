@@ -49,31 +49,7 @@ export default function ItemPage() {
     if (query == null) {
         query = "";
     }
-
-    var exampleObject = {
-        "image": "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png",
-        "title": "Title here",
-        "profile": "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",
-        "date": "2010-09-10",
-        "price": "100"
-    }
-
-    const exampleResults = [
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-        exampleObject,
-    ].filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-    );
+    const exampleResults = [].
 
     const [results, setResults] = useState(exampleResults);
     const [sortBy, setSortBy] = useState("rating");
@@ -82,7 +58,7 @@ export default function ItemPage() {
     useEffect(() => {
         async function loadListings() {
             const listings = await fetchAllListings();
-            setResults(listings.length ? listings : exampleResults);
+            setResults(listings.length ? listings.filter(item => item.title.toLowerCase().includes(query.toLowerCase())) : exampleResults);
         }
         loadListings();
     }, []);
