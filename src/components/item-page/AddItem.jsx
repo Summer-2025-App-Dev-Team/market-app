@@ -10,14 +10,14 @@ export default function AddItem() {
     const user = useAuthStore((state) => state.user);
     const userIsLoggedIn = user == null ? false : true;
     console.log(user)
-    useEffect(() => {
+    /*useEffect(() => {
         if (!userIsLoggedIn) {
             navigate("/login", { replace: true });
         }
         if (!user.emailverified){
             navigate("/verify-email", { replace: true });
         }
-    }, [userIsLoggedIn, user, navigate]);
+    }, [userIsLoggedIn, user, navigate]); */
 
     const [image, setImage] = useState({
         file: null,

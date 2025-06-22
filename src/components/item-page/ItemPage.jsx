@@ -4,7 +4,19 @@ import FilterBar from "./FilterBar";
 import { useSearchParams } from 'react-router-dom';
 import SearchHeading from './SearchHeading';
 import ItemGrid from './ItemGrid';
-
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+async function fetchAllListings() {
+    try {
+      const querySnapshot = await getDocs(collection(db, "allListings"));
+      const listings = querySnapshot.docs.map(doc => doc.data());
+      console.log(listings);
+      return listings;
+    } catch (err) {
+      console.error("Error fetching listings:", err);
+      return [];
+    }
+}
 export default function ItemPage() {
     useEffect(() => {
         const handelElementOnScroll = (e) => {
@@ -65,6 +77,15 @@ export default function ItemPage() {
 
     const [results, setResults] = useState(exampleResults);
     const [sortBy, setSortBy] = useState("rating");
+
+
+    useEffect(() => {
+        async function loadListings() {
+            const listings = await fetchAllListings();
+            setResults(listings.length ? listings : exampleResults);
+        }
+        loadListings();
+    }, []);
 
     function sortchange(newSort) {
         setSortBy(newSort);
