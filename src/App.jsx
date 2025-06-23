@@ -9,11 +9,10 @@ import VerifyAuth from "./components/auth/VerifyAuth";
 import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
+import Itemdetail from "./components/item-page/Itemdetail";
 import Contact from "./components/contact/Contact";
 import About from "./components/about/About"
 import "./App.css";
-import VerifyEmail from "./components/auth/VerifyEmail";
-import EmailConfirmed from "./components/auth/EmailConfirmed";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ItemPage />
+      },
+      {
+        path: "/item/:id",
+        element: <Itemdetail />
       },
       {
         path: "/login",
@@ -63,10 +66,6 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <NotFoundPage />
-      },
-      {
-        path: "/item/:id",
-        element: <Itemdetail/>
       }
     ]
   }

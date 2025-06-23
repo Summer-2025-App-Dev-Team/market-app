@@ -6,17 +6,19 @@ import SearchHeading from './SearchHeading';
 import ItemGrid from './ItemGrid';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+
 async function fetchAllListings() {
     try {
-      const querySnapshot = await getDocs(collection(db, "allListings"));
-      const listings = querySnapshot.docs.map(doc => doc.data());
-      console.log(listings);
-      return listings;
+        const querySnapshot = await getDocs(collection(db, "allListings"));
+        const listings = querySnapshot.docs.map(doc => doc.data());
+        console.log(listings);
+        return listings;
     } catch (err) {
-      console.error("Error fetching listings:", err);
-      return [];
+        console.error("Error fetching listings:", err);
+        return [];
     }
 }
+
 export default function ItemPage() {
     useEffect(() => {
         const handelElementOnScroll = (e) => {
@@ -59,14 +61,13 @@ export default function ItemPage() {
         async function loadListings() {
             const listings = await fetchAllListings();
             const filtered = listings.filter(listing => {
-                return query==""|listing.name?.toLowerCase().includes( query.toLowerCase());
+                return query == "" | listing.name?.toLowerCase().includes(query.toLowerCase());
             });
             console.log(filtered);
             setResults(listings.length ? filtered : exampleResults);
         }
         loadListings();
     }, []);
-
 
 
     function sortchange(newSort) {
