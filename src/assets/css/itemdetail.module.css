@@ -1,0 +1,83 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+  margin: 2rem auto;
+  box-sizing: border-box;
+  max-width: 1200px;
+}
+
+.mainImageWrapper {
+  flex: 1;
+  padding-right: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemImage {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.itemImage:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+}
+
+.infoColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  justify-content: flex-start;
+}
+
+.productName {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.availability {
+  font-size: 1rem;
+  color: #2ecc71;
+  padding: 0.5rem;
+  background: #ecfdf5;
+  border: 1px solid #2ecc71;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.priceHighlight {
+  font-size: 1.8rem;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+.createdAt {
+  font-size: 0.9rem;
+  color: #999;
+  text-align: right;
+  margin-top: auto;
+}
