@@ -9,7 +9,7 @@ import VerifyAuth from "./components/auth/VerifyAuth";
 import NotFoundPage from "./components/NotFoundPage";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
-import Itemdetail from "./components/item-page/Itemdetail";
+import ItemDetail from "./components/item-page/ItemDetail";
 import Contact from "./components/contact/Contact";
 import About from "./components/about/About"
 import "./App.css";
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/item/:id",
-        element: <Itemdetail />
+        element: <ItemDetail />
       },
       {
         path: "/login",
