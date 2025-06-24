@@ -50,7 +50,7 @@ export default function SignUpForm() {
       };
 
       const userDocRef = doc(db, "userListings", userCredential.user.uid);
-      await setDoc(userDocRef, {listings: []}); 
+      await setDoc(userDocRef, { listings: [] });
 
       await sendEmailVerification(user, actionCodeSettings);
       navigate("/verify-auth?type=confirm");

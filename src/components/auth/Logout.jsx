@@ -28,14 +28,14 @@ export default function Logout() {
 
   return (
     <>
-        <main className={styles.login}>
-            <div className={styles["auth-background"]}>
-                <div className={styles["auth-card"]}>
-                    <AuthHeading head="Log out" sub="or Back" link="/"/>
-                    <button className={styles["log-out-button"]} onClick={handleLogout}>Log out</button>
-                </div>
-            </div>
-        </main>
+      <main className={styles.login}>
+        <div className={styles["auth-background"]}>
+          <div className={styles["auth-card"]}>
+            <AuthHeading head="Log out" sub="or Back" link="/" />
+            <button className={styles["log-out-button"]} onClick={handleLogout}>Log out</button>
+          </div>
+        </div>
+      </main>
     </>
   );
 }

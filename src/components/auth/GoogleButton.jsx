@@ -24,7 +24,7 @@ export default function GoogleLoginButton(props) {
 
         userDocRef = doc(db, "userListings", user.uid);
         const userListings = [];
-        userDoc = setDoc(userDocRef, {listings: []}); 
+        userDoc = setDoc(userDocRef, { listings: [] });
       }
 
 

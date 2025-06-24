@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export default function AuthHeading(props){
+export default function AuthHeading(props) {
     return (
         <>
             <h1>{props.head}</h1>

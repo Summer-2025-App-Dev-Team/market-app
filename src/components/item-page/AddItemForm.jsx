@@ -8,58 +8,30 @@ import styles from "../../assets/css/additem.module.css";
 
 export default function addItemForm(props) {
     const user = useAuthStore((state) => state.user);
-    function handleFileInput(e) {
-        handleFile(e.target.files);
-    }
-
+    const dateInputRef = useRef(null);
     const fileInputText = useRef(null);
-    function handleFile(file) {
-        file = file[0];
-
-        const imageUrl = URL.createObjectURL(file);
-        props.setImage({
-            file: file,
-            url: imageUrl
-        });
-
-        fileInputText.current.textContent = "Change image";
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const userDocRef = doc(db, "userListings", user.uid);
-
-        const docSnap = await getDoc(userDocRef);
-        if(!docSnap.exists()){
-            await setDoc(userDocRef, {listings: []});
-        }
-
-        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
-
-        const listingId = crypto.randomUUID();
-
-        const listDocRef = doc(db, "allListings", listingId);
-
-        const newListing = {
-            id: listingId,
-            name: props.title,
-            price: parseFloat(props.price),
-            availableUntil: props.date,
-            description: props.description,
-            createdAt: new Date(),
-            image: imageUrl || null
-        };
-
-        await updateDoc(userDocRef, {
-            listings: arrayUnion(newListing)
-        });
-        await setDoc(listDocRef, newListing);
-    }
-
     const fileInputRef = useRef(null);
     const dropZoneRef = useRef(null);
+
     useEffect(() => {
+        // Get today's date in YYYY-MM-DD format
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+
+        // Get the date 14 days (2 weeks) from today
+        const futureDate = new Date(today);
+        futureDate.setDate(today.getDate() + 14);
+        const fyyyy = futureDate.getFullYear();
+        const fmm = String(futureDate.getMonth() + 1).padStart(2, '0');
+        const fdd = String(futureDate.getDate()).padStart(2, '0');
+        const futureDateStr = `${fyyyy}-${fmm}-${fdd}`;
+
+        dateInputRef.current.min = todayStr; // Set minimum date to today
+        dateInputRef.current.max = futureDateStr; // Set maximum date to 14 days
+
         const fileInput = fileInputRef.current;
         const dropZone = dropZoneRef.current;
 
@@ -107,6 +79,54 @@ export default function addItemForm(props) {
         };
     }, []);
 
+    function handleFileInput(e) {
+        handleFile(e.target.files);
+    }
+
+    function handleFile(file) {
+        file = file[0];
+
+        const imageUrl = URL.createObjectURL(file);
+        props.setImage({
+            file: file,
+            url: imageUrl
+        });
+
+        fileInputText.current.textContent = "Change image";
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const userDocRef = doc(db, "userListings", user.uid);
+
+        const docSnap = await getDoc(userDocRef);
+        if (!docSnap.exists()) {
+            await setDoc(userDocRef, { listings: [] });
+        }
+
+        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
+
+        const listingId = crypto.randomUUID();
+
+        const listDocRef = doc(db, "allListings", listingId);
+
+        const newListing = {
+            id: listingId,
+            name: props.title,
+            price: parseFloat(props.price),
+            availableUntil: props.date,
+            description: props.description,
+            createdAt: new Date(),
+            image: imageUrl || null
+        };
+
+        await updateDoc(userDocRef, {
+            listings: arrayUnion(newListing)
+        });
+        await setDoc(listDocRef, newListing);
+    }
+
     return (
         <form onSubmit={handleSubmit}>
             <h3>Basic Info</h3>
@@ -115,7 +135,7 @@ export default function addItemForm(props) {
             <label htmlFor="price">Item price</label>
             <input type="number" name="price" id="price" placeholder="Price (SGD)" min={0} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(e.target.value) }} required />
             <label htmlFor="date">Available until</label>
-            <input type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
+            <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
             <label ref={dropZoneRef} className={styles["add-image-button"]}>
                 <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden />
                 <img src={plusIcon} alt="plus-icon" />

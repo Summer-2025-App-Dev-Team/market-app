@@ -3,7 +3,6 @@ import styles from "../../assets/css/service.module.css"
 import imagePlaceholder from "../../assets/images/image-placeholder.jpg";
 
 export default function Service(props) {
-    //no profile image data
     return (
         <div className={styles["service-wrapper"]} onClick={() => { window.location.href = `/item/${props.id}` }}>
             <img src={props.image ? props.image : imagePlaceholder} className={props.preview ? styles.preview : ""} draggable={false} />
