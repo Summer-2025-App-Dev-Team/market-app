@@ -62,7 +62,7 @@ export default function UserDropdown() {
             <ul ref={dropdown}>
                 <li>
                     <img src={accountIcon} alt="account" draggable={false} />
-                    <Link to={"#"}>View profile</Link>
+                    <Link to={`/profile/${user.uid}`}>View profile</Link>
                 </li>
                 <li>
                     <img src={settingsIcon} alt="settings" draggable={false} />

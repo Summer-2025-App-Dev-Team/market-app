@@ -8,26 +8,30 @@ export default function ItemDetail() {
   const ID = useParams().id;
   const [item, setItem] = useState(null);
 
-  // Can just put async here instead of creating another function ig
-  useEffect(async () => {
-    const docRef = doc(db, "allListings", ID);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      if (
-        data.createdAt &&
-        typeof data.createdAt === "object" &&
-        "seconds" in data.createdAt &&
-        "nanoseconds" in data.createdAt
-      ) {
-        data.createdAt = new Date(
-          data.createdAt.seconds * 1000 + data.createdAt.nanoseconds / 1e6
-        ).toLocaleString();
+  useEffect(() => {
+    async function fetchItemData() {
+      const docRef = doc(db, "allListings", ID);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (
+          data.createdAt &&
+          typeof data.createdAt === "object" &&
+          "seconds" in data.createdAt &&
+          "nanoseconds" in data.createdAt
+        ) {
+          data.createdAt = new Date(
+            data.createdAt.seconds * 1000 + data.createdAt.nanoseconds / 1e6
+          ).toLocaleString();
+        }
+
+        setItem(data);
       }
-      setItem(data);
     }
+    fetchItemData();
   }, [ID]);
-  /*item?.name && means that the code will return the rightside component if the item is not null or undefined
+
+  /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
 
   return (
