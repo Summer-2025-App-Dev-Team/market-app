@@ -7,6 +7,12 @@
     transition: 0.3s;
 }
 
+.service-wrapper:has(.preview) {
+    /* disable the onClick redirect event */
+    pointer-events: none !important;
+    cursor: default;
+}
+
 .service-wrapper:not(:has(.preview)) {
     cursor: pointer;
 }
