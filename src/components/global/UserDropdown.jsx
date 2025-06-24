@@ -1,5 +1,5 @@
 import LogoutOrLogin from "./LogoutOrLogin"
-import Username from "./Username"
+import UserTextData from "./UserTextData"
 import useAuthStore from "../store/useAuthStore";
 import dropdownIcon from "../../assets/svgs/dropdown-icon.svg";
 import accountIcon from "../../assets/svgs/account-icon.svg";
@@ -56,7 +56,7 @@ export default function UserDropdown() {
     return (
         <div className={styles["user-dropdown"]} onClick={handleOnClick}>
             <div className={styles["user"]}>
-                <Username />
+                <UserTextData type="displayName" />
                 <img src={dropdownIcon} alt="dropdown" draggable={false} />
             </div>
             <ul ref={dropdown}>

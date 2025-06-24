@@ -2,6 +2,9 @@ import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Service from "../item-page/Service";
+import UserTextData from "../global/UserTextData";
+import UserPhoto from "../global/UserPhoto";
 import styles from "../../assets/css/profile.module.css"
 
 export default function Profile() {
@@ -35,13 +38,44 @@ export default function Profile() {
             }
         }
         fetchUserListings();
+
+        function handleOnClick(e) {
+            if (e.target.classList.contains(styles.active) || e.target.classList.contains(styles.user || e.target.tagName !== "LI")) return;
+
+            try {
+                document.querySelector(`li.${styles.active}`).classList.remove(styles.active);
+            }
+            catch { };
+            e.target.classList.add(styles.active);
+        }
+
+        document.querySelectorAll("li").forEach(li => {
+            li.addEventListener("click", handleOnClick);
+        });
+
+        return () => {
+            document.querySelectorAll("li").forEach(li => {
+                li.removeEventListener("click", handleOnClick);
+            });
+        }
     }, [uid]);
 
     return (
         <main className={styles.profile}>
-            <h1 className={styles.h1}>Profile Page</h1>
+            <ul className={styles.sidebar}>
+                <li className={styles.user}>
+                    <UserPhoto />
+                    <div>
+                        <UserTextData type="displayName" />
+                        <UserTextData type="email" />
+                    </div>
+                </li>
+                <li>My Items</li>
+                <li>Bought Items</li>
+                <li>Settings</li>
+            </ul>
             <ul>
-                {
+                {/* {
                     userListings ?
                         userListings.map((listing) => {
                             return (
@@ -65,7 +99,7 @@ export default function Profile() {
                             <p>1. Your profile does not have any listings</p>
                             <p>2. The web-page is still loading</p>
                         </div>
-                }
+                } */}
             </ul>
         </main>
     )
