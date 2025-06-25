@@ -143,38 +143,6 @@ export default function addItemForm(props) {
         fileInputText.current.textContent = "Change image";
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const userDocRef = doc(db, "userListings", user.uid);
-
-        const docSnap = await getDoc(userDocRef);
-        if (!docSnap.exists()) {
-            await setDoc(userDocRef, { listings: [] });
-        }
-
-        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
-
-        const listingId = crypto.randomUUID();
-
-        const listDocRef = doc(db, "allListings", listingId);
-
-        const newListing = {
-            id: listingId,
-            name: props.title,
-            price: parseFloat(props.price),
-            availableUntil: props.date,
-            description: props.description,
-            createdAt: new Date(),
-            image: imageUrl || null
-        };
-
-        await updateDoc(userDocRef, {
-            listings: arrayUnion(newListing)
-        });
-        await setDoc(listDocRef, newListing);
-    }
-
     return (
         <>
          {uploading && <LoadingModal />}
