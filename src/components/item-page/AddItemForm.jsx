@@ -48,6 +48,8 @@ export default function addItemForm(props) {
             availableUntil: props.date,
             description: props.description,
             createdAt: new Date(),
+            status: "available",
+            user: user.uid,
             image: imageUrl || null
         };
 
