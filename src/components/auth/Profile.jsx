@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom"
-import { useEffect, useState, Fragment } from "react";
+import { useParams, Link } from "react-router-dom"
+import { useEffect, useState } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import Service from "../item-page/Service";
 import UserTextData from "../global/UserTextData";
 import UserPhoto from "../global/UserPhoto";
 import styles from "../../assets/css/profile.module.css"
@@ -82,23 +83,20 @@ export default function Profile() {
                     <span>Settings</span>
                 </li>
             </ul>
-            <ul>
-                {/* {
+
+            <div className={styles["my-items"]}>
+                {
                     userListings ?
                         userListings.map((listing) => {
                             return (
-                                <li>
-                                    <h2>{listing.name}</h2>
-                                    <ul>
-                                        <li>Price: {listing.price}</li>
-                                        <li>Description: {listing.description}</li>
-                                        <li>Price: {listing.price}</li>
-                                        <li>Created at: {listing.createdAt}</li>
-                                        <li>Available until: {listing.availableUntil}</li>
-                                        <li><Link to={`/item/${listing.id}`}>Link to item</Link></li>
-                                    </ul>
-                                    <br />
-                                </li>
+                                <Service
+                                    name={listing.name}
+                                    price={listing.price}
+                                    image={listing.image}
+                                    description={listing.description}
+                                    availableUntil={listing.availableUntil}
+                                    id={listing.id}
+                                />
                             )
                         })
                         :
@@ -107,8 +105,8 @@ export default function Profile() {
                             <p>1. Your profile does not have any listings</p>
                             <p>2. The web-page is still loading</p>
                         </div>
-                } */}
-            </ul>
+                }
+            </div>
         </div>
     )
 }
