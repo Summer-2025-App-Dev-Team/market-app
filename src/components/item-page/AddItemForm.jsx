@@ -1,14 +1,63 @@
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState} from "react";
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
 import styles from "../../assets/css/additem.module.css";
+import { toast } from 'react-toastify';
+import LoadingModal from "./LoadingModal";
 
 export default function addItemForm(props) {
+
+    const [uploading, setUploading] = useState(false);
+
     const user = useAuthStore((state) => state.user);
     const dateInputRef = useRef(null);
     const fileInputText = useRef(null);
+    function handleFile(file) {
+        file = file[0];
+
+        const imageUrl = URL.createObjectURL(file);
+        props.setImage({
+            file: file,
+            url: imageUrl
+        });
+
+        fileInputText.current.textContent = "Change image";
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const userDocRef = doc(db, "userListings", user.uid);
+
+        const docSnap = await getDoc(userDocRef);
+        if(!docSnap.exists()){
+            await setDoc(userDocRef, {listings: []});
+        }
+
+        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
+
+        const listingId = crypto.randomUUID();
+
+        const listDocRef = doc(db, "allListings", listingId);
+
+        const newListing = {
+            id: listingId,
+            name: props.title,
+            price: parseFloat(props.price),
+            availableUntil: props.date,
+            description: props.description,
+            createdAt: new Date(),
+            image: imageUrl || null
+        };
+
+        await updateDoc(userDocRef, {
+            listings: arrayUnion(newListing)
+        });
+        await setDoc(listDocRef, newListing);
+    }
+
     const fileInputRef = useRef(null);
     const dropZoneRef = useRef(null);
 
@@ -127,6 +176,8 @@ export default function addItemForm(props) {
     }
 
     return (
+        <>
+         {uploading && <LoadingModal />}
         <form onSubmit={handleSubmit}>
             <h3>Basic Info</h3>
             <label htmlFor="name">Item name</label>
@@ -143,7 +194,8 @@ export default function addItemForm(props) {
             <label htmlFor="description">Listing Info</label>
             <textarea name="description" id="description" aria-label="description" maxLength={500} placeholder="Description (max 500 characters)" onChange={(e) => { props.setDescription(e.target.value) }} />
 
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={uploading}>Submit</button>
         </form>
+        </>
     )
 }
