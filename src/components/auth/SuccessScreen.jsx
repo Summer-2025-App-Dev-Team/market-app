@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { Fragment } from "react";
 import AuthHeading from "./AuthCardHeading";
 import tick_symbol from "../../assets/images/tick-symbol.png";
 import styleA from "../../assets/css/successscreen.module.css";
@@ -35,13 +36,13 @@ export default function SuccessScreen() {
     }
 
     return (
-        <main className={styles["success-screen"]} id="success-screen">
+        <div className={styles["success-screen"]} id="success-screen">
             <div className={`${styles["auth-card"]} ${styles["success-card"]}`}>
                 <AuthHeading head={message[type].title} />
                 <h2>{message[type].message}</h2>
                 <img src={tick_symbol} alt="tick-symbol.png" draggable={false} />
                 <button onClick={message[type].buttonOnClick}>{message[type].buttonText}</button>
             </div>
-        </main>
+        </div>
     )
 }

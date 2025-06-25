@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import UserTextData from "../global/UserTextData";
@@ -60,7 +60,7 @@ export default function Profile() {
     }, [uid]);
 
     return (
-        <main className={styles.profile}>
+        <div className={styles.profile}>
             <ul className={styles.sidebar}>
                 <li className={styles.user}>
                     <UserPhoto />
@@ -109,6 +109,6 @@ export default function Profile() {
                         </div>
                 } */}
             </ul>
-        </main>
+        </div>
     )
 }

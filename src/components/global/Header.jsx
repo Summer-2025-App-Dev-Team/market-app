@@ -2,10 +2,11 @@ import MobileHeader from "./MobileHeader";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ scrollTargetRef }) {
+    const headerRef = useRef(null);
     const navigate = useNavigate();
 
     function showBurger() {
@@ -67,10 +68,29 @@ export default function Header() {
             el.style.outline = "5px solid transparent";
         };
 
-        document.addEventListener("keydown", handelKeyDown);
+        const handleScroll = (e) => {
+            if (el.scrollTop >= 50) {
+                headerRef.current.classList.add(styles.scrolled);
+            } else {
+                headerRef.current.classList.remove(styles.scrolled);
+            }
+        }
+
+        const handleResize = () => {
+            const paddingTop = headerRef.current.offsetHeight;
+            el.style.paddingTop = paddingTop + "px";
+        }
+
+        const el = scrollTargetRef?.current;
+        if (!el) return;
+
         const input = document.getElementById("search-box");
+        document.addEventListener("keydown", handelKeyDown);
+        window.addEventListener("resize", handleResize);
         input.addEventListener("focus", handelSearchInputFocus);
         input.addEventListener("blur", handelSearchInputBlur);
+        el.addEventListener("scroll", handleScroll);
+        handleResize();
 
         return () => {
             document.removeEventListener("keydown", handelKeyDown);
@@ -80,7 +100,7 @@ export default function Header() {
     }, []);
 
     return (
-        <header>
+        <header ref={headerRef}>
             <nav>
                 <img
                     src={logo}

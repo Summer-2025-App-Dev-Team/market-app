@@ -1,7 +1,18 @@
 header {
+    position: absolute;
+    width: 100%;
     background-color: white;
     padding: 10px 25px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 1;
+    transition: 0.3s;
+}
+
+header.scrolled {
+    background-color: rgba(240, 240, 240, 0.6);
+    padding: 7.5px 25px;
 }
 
 header>nav {
