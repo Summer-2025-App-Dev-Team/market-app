@@ -12,6 +12,8 @@ import AddItem from "./components/item-page/AddItem";
 import Contact from "./components/contact/Contact";
 import About from "./components/about/About"
 import "./App.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -70,6 +72,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
+      <ToastContainer/>
     </>
   );
 }

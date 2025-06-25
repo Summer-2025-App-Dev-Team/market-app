@@ -17,7 +17,7 @@
 }
 
 .content>form,
-.content>div {
+.content>div.preview {
     background-color: white;
 }
 
