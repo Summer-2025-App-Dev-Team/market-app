@@ -23,6 +23,10 @@
 
 .profile .sidebar>li {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     padding-block: 10px;
     width: 90%;
     font-size: 1.2rem;
@@ -30,10 +34,14 @@
     transition: 0.3s;
 }
 
+.profile .sidebar>li i {
+    font-size: 24px;
+}
+
 .profile .sidebar>li:not(:last-child)::after {
     content: "";
     position: absolute;
-    width: 90%;
+    width: 95%;
     height: 1px;
     background-color: rgb(211, 211, 211);
     left: 50%;
@@ -48,7 +56,7 @@
 .profile .sidebar>li:not(:first-child):hover,
 .profile .sidebar>li.active {
     color: white;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .profile .sidebar>li:last-child {

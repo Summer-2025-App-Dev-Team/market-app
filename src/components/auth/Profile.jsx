@@ -1,8 +1,7 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import Service from "../item-page/Service";
 import UserTextData from "../global/UserTextData";
 import UserPhoto from "../global/UserPhoto";
 import styles from "../../assets/css/profile.module.css"
@@ -70,9 +69,18 @@ export default function Profile() {
                         <UserTextData type="email" />
                     </div>
                 </li>
-                <li>My Items</li>
-                <li>Bought Items</li>
-                <li>Settings</li>
+                <li>
+                    <i class='bx bx-price-tag'></i>
+                    <span>My Items</span>
+                </li>
+                <li>
+                    <i class='bx bx-cart'></i>
+                    <span>Bought Items</span>
+                </li>
+                <li>
+                    <i class='bx bx-gear'></i>
+                    <span>Settings</span>
+                </li>
             </ul>
             <ul>
                 {/* {

@@ -2,7 +2,6 @@ import MobileHeader from "./MobileHeader";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import burgerIcon from "../../assets/svgs/burger-icon.svg";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -109,13 +108,7 @@ export default function Header() {
                 <button onClick={handelAddItemOnClick}>Add item</button>
 
                 {/* Mobile menu icon */}
-                <img
-                    src={burgerIcon}
-                    alt="menu"
-                    draggable={false}
-                    className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}
-                    onClick={showBurger}
-                />
+                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24" onClick={showBurger} className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}>{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M4 5H20V7H4z"></path><path d="M4 11H20V13H4z"></path><path d="M4 17H20V19H4z"></path></svg>
 
                 {/* Render the mobile header */}
                 <MobileHeader />

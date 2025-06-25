@@ -3,7 +3,6 @@ import { db } from "../lib/firebase";
 import { useEffect, useRef } from "react";
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
-import plusIcon from "../../assets/svgs/plus-icon.svg";
 import styles from "../../assets/css/additem.module.css";
 
 export default function addItemForm(props) {
@@ -138,7 +137,7 @@ export default function addItemForm(props) {
             <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
             <label ref={dropZoneRef} className={styles["add-image-button"]}>
                 <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden />
-                <img src={plusIcon} alt="plus-icon" />
+                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"></path></svg>
                 <span ref={fileInputText} className={styles["file-upload-label"]}>Add image</span>
             </label>
             <label htmlFor="description">Listing Info</label>

@@ -137,12 +137,6 @@ header>nav .user-dropdown .user {
     cursor: pointer;
 }
 
-header>nav .user-dropdown .user>img {
-    width: 30px;
-    height: 30px;
-    user-select: none;
-}
-
 header>nav .user-dropdown ul {
     display: none;
     flex-direction: column;
@@ -165,6 +159,10 @@ header>nav .user-dropdown ul.active {
 
 header>nav .user-dropdown ul li {
     position: relative;
+}
+
+header>nav .user-dropdown ul li svg {
+    color: blue;
 }
 
 header>nav .user-dropdown li:not(:first-child, :last-child)::before,
@@ -289,7 +287,7 @@ header>nav .user-dropdown li:last-child a {
         height: 50px;
     }
 
-    header>nav>img.burger-icon {
+    header>nav>.burger-icon {
         width: 40px;
         height: 40px;
     }

@@ -18,10 +18,10 @@ export default function UserPhoto() {
 
     // If the user does not have a photo
     if (!user.photoURL) {
-        <img src={imagePlaceHolder} alt="user-photo" />
+        <img src={imagePlaceHolder} alt="user" draggable={false} />
     }
 
     return (
-        <img src={photoURL} alt="user-photo" />
+        <img src={photoURL} alt="user" draggable={false} />
     )
 }
