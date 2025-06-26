@@ -88,10 +88,9 @@ export default function ItemPage() {
     return (
         <div className={styles["item-page"]}>
             <div className={styles.title}>
-                <h1>Services</h1>
-                <h2>or Goods</h2>
+                <h1>Items</h1>
             </div>
-            <p className={styles.description}>This platform showcases the talents and entrepreneurial spirit of SAS students, offering high-quality services across a range of fields. Whether you're seeking digital solutions, creative work, or technical support, each listing reflects dedication, skill, and a commitment to excellence.</p>
+            <p className={styles.description}></p>
             <SearchHeading searchParam={query} results={results} sortchange={sortchange} />
             <FilterBar />
             <ItemGrid results={results} />
