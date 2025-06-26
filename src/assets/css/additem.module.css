@@ -92,11 +92,6 @@
     overflow: auto;
 }
 
-.content img.preview-image {
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    user-select: none;
-}
-
 .content form>h3 {
     font-weight: 500;
     font-size: 20px;

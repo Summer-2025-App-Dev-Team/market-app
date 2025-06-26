@@ -21,8 +21,8 @@ async function fetchAllListings() {
 
 export default function ItemPage() {
     useEffect(() => {
-        const handelElementOnScroll = (e) => {
-            // idk why but I have to -1 to the scrollwidth to make it work
+        const handleElementOnScroll = (e) => {
+            // idk why but I have to -1 to the scrollWidth to make it work
             const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
             const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
 
@@ -37,10 +37,10 @@ export default function ItemPage() {
                 e.target.style.setProperty("--show-before-shadow", "1");
             }
         }
-        document.getElementById("scroll-container").addEventListener("scroll", handelElementOnScroll);
+        document.getElementById("scroll-container").addEventListener("scroll", handleElementOnScroll);
 
         return () => {
-            document.removeEventListener("scroll", handelElementOnScroll);
+            document.removeEventListener("scroll", handleElementOnScroll);
         }
     }, []);
 

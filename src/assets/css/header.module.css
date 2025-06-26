@@ -21,10 +21,17 @@ header>nav {
     gap: 20px;
 }
 
-header>nav>img.logo {
+header>nav>.logo-link {
     height: 100px;
     width: auto;
     margin-right: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+header>nav>.logo-link>img {
+    height: 100%;
+    width: auto;
     user-select: none;
     cursor: pointer;
 }
@@ -81,7 +88,7 @@ header .search-wrapper div.search-box-border::after {
     border-radius: 5px;
 }
 
-header>nav>a {
+header>nav>a:not(.logo-link) {
     position: relative;
     color: darkred;
     text-decoration: none;
@@ -89,11 +96,11 @@ header>nav>a {
     text-transform: uppercase;
 }
 
-header>nav>a:active {
+header>nav>a:not(.logo-link):active {
     opacity: 0.8;
 }
 
-header>nav>a::before {
+header>nav>a:not(.logo-link)::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -104,7 +111,7 @@ header>nav>a::before {
     transition: width 0.3s ease;
 }
 
-header>nav>a:hover::before {
+header>nav>a:not(.logo-link):hover::before {
     width: 100%;
 }
 
@@ -119,22 +126,28 @@ header>nav .user-dropdown {
 }
 
 header>nav button {
-    background-color: rgb(63, 177, 247);
+    position: relative;
+    background-color: darkred;
     border: none;
     border-radius: 5px;
     padding: 7.5px 10px;
     color: white;
     font-size: 1rem;
     cursor: pointer;
+    overflow: hidden;
     transition: 0.3s;
+}
+
+header>nav button>div {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 5px;
+    animation: ripple 0.5s ease-out infinite;
 }
 
 header>nav button:hover {
     opacity: 0.8;
-}
-
-header>nav button:active {
-    opacity: 0.6;
 }
 
 header>nav .user-dropdown .user {
@@ -307,5 +320,19 @@ header>nav .user-dropdown li:last-child a {
         display: none;
         /* font-size: 0.8rem;
         text-align: center; */
+    }
+}
+
+@keyframes ripple {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+
+    to {
+        width: 250px;
+        height: 250px;
+        opacity: 0;
     }
 }
