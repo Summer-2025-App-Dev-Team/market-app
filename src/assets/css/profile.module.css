@@ -35,6 +35,11 @@
     transition: 0.3s;
 }
 
+/* Prevent the user from clicking the span and svg element */
+.profile .sidebar>li>* {
+    pointer-events: none;
+}
+
 .profile .sidebar>li i {
     font-size: 24px;
 }
@@ -102,8 +107,12 @@
     object-fit: cover;
 }
 
-.profile>div {
+.profile>article {
     overflow: auto;
+}
+
+.profile>article.hide {
+    display: none !important;
 }
 
 .profile .my-items {
@@ -112,5 +121,9 @@
     justify-items: center;
     gap: 10px;
     width: 100%;
-    margin-top: 20px;
+    padding-block: 20px;
 }
+
+.profile .bought-items {}
+
+.profile .settings {}
