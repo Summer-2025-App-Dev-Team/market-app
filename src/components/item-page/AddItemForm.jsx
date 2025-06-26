@@ -3,6 +3,7 @@ import { db } from "../lib/firebase";
 import { useEffect, useRef, useState} from "react";
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
+import plusIcon from "../../assets/svgs/plus-icon.svg";
 import styles from "../../assets/css/additem.module.css";
 import { toast } from 'react-toastify';
 import LoadingModal from "./LoadingModal";
@@ -12,7 +13,10 @@ export default function addItemForm(props) {
     const [uploading, setUploading] = useState(false);
 
     const user = useAuthStore((state) => state.user);
-    const dateInputRef = useRef(null);
+    function handleFileInput(e) {
+        handleFile(e.target.files);
+    }
+
     const fileInputText = useRef(null);
     function handleFile(file) {
         file = file[0];
@@ -28,6 +32,8 @@ export default function addItemForm(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setUploading(true);
+        console.log("Submit clicked");
 
         const userDocRef = doc(db, "userListings", user.uid);
 
@@ -35,9 +41,10 @@ export default function addItemForm(props) {
         if(!docSnap.exists()){
             await setDoc(userDocRef, {listings: []});
         }
+        console.log("Starting upload...");
 
         const imageUrl = props.image?.file ? await upload(props.image.file) : null;
-
+        console.log("Finished upload")
         const listingId = crypto.randomUUID();
 
         const listDocRef = doc(db, "allListings", listingId);
@@ -49,6 +56,8 @@ export default function addItemForm(props) {
             availableUntil: props.date,
             description: props.description,
             createdAt: new Date(),
+            status: "available",
+            user: user.uid,
             image: imageUrl || null
         };
 
@@ -56,30 +65,14 @@ export default function addItemForm(props) {
             listings: arrayUnion(newListing)
         });
         await setDoc(listDocRef, newListing);
+        toast.success("Added Item");
+        console.log("Hello", uploading)
+        setUploading(false);
     }
 
     const fileInputRef = useRef(null);
     const dropZoneRef = useRef(null);
-
     useEffect(() => {
-        // Get today's date in YYYY-MM-DD format
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-        const dd = String(today.getDate()).padStart(2, '0');
-        const todayStr = `${yyyy}-${mm}-${dd}`;
-
-        // Get the date 14 days (2 weeks) from today
-        const futureDate = new Date(today);
-        futureDate.setDate(today.getDate() + 14);
-        const fyyyy = futureDate.getFullYear();
-        const fmm = String(futureDate.getMonth() + 1).padStart(2, '0');
-        const fdd = String(futureDate.getDate()).padStart(2, '0');
-        const futureDateStr = `${fyyyy}-${fmm}-${fdd}`;
-
-        dateInputRef.current.min = todayStr; // Set minimum date to today
-        dateInputRef.current.max = futureDateStr; // Set maximum date to 14 days
-
         const fileInput = fileInputRef.current;
         const dropZone = dropZoneRef.current;
 
@@ -127,22 +120,6 @@ export default function addItemForm(props) {
         };
     }, []);
 
-    function handleFileInput(e) {
-        handleFile(e.target.files);
-    }
-
-    function handleFile(file) {
-        file = file[0];
-
-        const imageUrl = URL.createObjectURL(file);
-        props.setImage({
-            file: file,
-            url: imageUrl
-        });
-
-        fileInputText.current.textContent = "Change image";
-    }
-
     return (
         <>
          {uploading && <LoadingModal />}
@@ -153,10 +130,10 @@ export default function addItemForm(props) {
             <label htmlFor="price">Item price</label>
             <input type="number" name="price" id="price" placeholder="Price (SGD)" min={0} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(e.target.value) }} required />
             <label htmlFor="date">Available until</label>
-            <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
+            <input type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
             <label ref={dropZoneRef} className={styles["add-image-button"]}>
                 <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden />
-                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"></path></svg>
+                <img src={plusIcon} alt="plus-icon" />
                 <span ref={fileInputText} className={styles["file-upload-label"]}>Add image</span>
             </label>
             <label htmlFor="description">Listing Info</label>
