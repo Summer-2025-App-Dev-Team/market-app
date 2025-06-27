@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 export default function UserDropdown() {
-    const [dropdownActived, setDropdownActived] = useState(false);
+    const [dropdownIsActive, setDropdownIsActive] = useState(false);
     const dropdown = useRef(null);
     const user = useAuthStore((state) => state.user);
 
@@ -18,7 +18,7 @@ export default function UserDropdown() {
                 !e.target.closest(`.${styles["user-dropdown"]}`)
             ) {
                 dropdown.current.classList.remove(styles.active);
-                setDropdownActived(false);
+                setDropdownIsActive(false);
             }
         }
 
@@ -40,17 +40,17 @@ export default function UserDropdown() {
     }
 
     function handleOnClick() {
-        if (dropdownActived) {
+        if (dropdownIsActive) {
             dropdown.current.classList.remove(styles.active);
         } else {
             dropdown.current.classList.add(styles.active);
         }
-        setDropdownActived(!dropdownActived);
+        setDropdownIsActive(!dropdownIsActive);
     }
 
     // If the user is logged in
     return (
-        <div className={styles["user-dropdown"]} onClick={handleOnClick}>
+        <div className={`${styles["user-dropdown"]} ${styles["hide-mobile"]}`} onClick={handleOnClick}>
             <div className={styles["user"]}>
                 <UserTextData type="displayName" />
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M17.35 8H6.65c-.64 0-.99.76-.56 1.24l5.35 6.11c.3.34.83.34 1.13 0l5.35-6.11C18.34 8.76 18 8 17.36 8Z"></path></svg>

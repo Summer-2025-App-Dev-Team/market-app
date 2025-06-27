@@ -1,24 +1,21 @@
-import MobileHeader from "./MobileHeader";
+import MobileNavbar from "./MobileNavbar";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import { useEffect, useRef } from "react";
+import UserPhoto from "./UserPhoto";
+import useAuthStore from "../store/useAuthStore";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Header({ scrollTargetRef }) {
+    const user = useAuthStore((state) => state.user);
     const headerRef = useRef(null);
+    const [showBurger, setShowBurger] = useState(false);
     const navigate = useNavigate();
 
-    function showBurger() {
-        document.querySelector(`.${styles.burger}`).classList.add(styles.show);
-
-        setTimeout(() => {
-            document.addEventListener("click", function handleOnClick(e) {
-                if (e.target.classList.contains(styles.burger)) return;
-                document.querySelector(`.${styles.burger}`).classList.remove(styles.show);
-                document.removeEventListener("click", handleOnClick);
-            });
-        }, 500);
+    function handleBurgerIconOnClick(e) {
+        e.stopPropagation();
+        setShowBurger((prev) => !prev);
     }
 
     function handleAddItemOnClick(e) {
@@ -116,7 +113,10 @@ export default function Header({ scrollTargetRef }) {
     return (
         <header ref={headerRef}>
             <nav>
-                <Link to={"/"} className={styles["logo-link"]}>
+                {/* Mobile menu icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill={"currentColor"} viewBox="0 0 24 24" onClick={handleBurgerIconOnClick} className={styles["show-mobile"]}>{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M4 5H20V7H4z"></path><path d="M4 11H20V13H4z"></path><path d="M4 17H20V19H4z"></path></svg>
+
+                <Link to={"/"} className={`${styles["logo-link"]} ${styles["hide-mobile"]}`}>
                     <img
                         src={logo}
                         alt="logo"
@@ -136,17 +136,18 @@ export default function Header({ scrollTargetRef }) {
                     </form>
                     <div className={styles["search-box-border"]}></div>
                 </div>
-                {/* TODO: remove if not-necessary */}
-                {/* <Link to={"/about"}>About us</Link>
-                <Link to={"/contact"}>Contact</Link> */}
-                <UserDropdown />
-                <button onClick={handleAddItemOnClick}>Add item</button>
 
-                {/* Mobile menu icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24" onClick={showBurger} className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}>{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M4 5H20V7H4z"></path><path d="M4 11H20V13H4z"></path><path d="M4 17H20V19H4z"></path></svg>
+                {/* For mobile */}
+                <Link to={`/profile/${user?.uid}`} className={`${styles["avatar-link"]} ${styles["show-mobile"]}`}>
+                    <UserPhoto />
+                </Link>
+
+                {/* For laptop */}
+                <UserDropdown />
+                <button onClick={handleAddItemOnClick} className={styles["hide-mobile"]}>Add item</button>
 
                 {/* Render the mobile header */}
-                <MobileHeader />
+                <MobileNavbar showBurger={showBurger} />
             </nav>
         </header>
     );
