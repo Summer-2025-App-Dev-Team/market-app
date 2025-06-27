@@ -1,12 +1,14 @@
 import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
 import plusIcon from "../../assets/svgs/plus-icon.svg";
 import styles from "../../assets/css/additem.module.css";
 
 export default function addItemForm(props) {
+    const [isloading, setLoading] = useState(false);
+
     const user = useAuthStore((state) => state.user);
     function handleFileInput(e) {
         handleFile(e.target.files);
@@ -27,7 +29,7 @@ export default function addItemForm(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         const userDocRef = doc(db, "userListings", user.uid);
 
         const docSnap = await getDoc(userDocRef);
@@ -55,6 +57,7 @@ export default function addItemForm(props) {
             listings: arrayUnion(newListing)
         });
         await setDoc(listDocRef, newListing);
+        setLoading(false);
     }
 
     const fileInputRef = useRef(null);
@@ -124,7 +127,7 @@ export default function addItemForm(props) {
             <label htmlFor="description">Listing Info</label>
             <textarea name="description" id="description" aria-label="description" maxLength={500} placeholder="Description (max 500 characters)" onChange={(e) => { props.setDescription(e.target.value) }} />
 
-            <button type="submit">Submit</button>
+            <button type="submit" disabled={isloading}>{isloading ? "Loading" : "Submit"}</button >
         </form>
     )
 }
