@@ -6,12 +6,16 @@ import SignUp from "./components/auth/SignUp";
 import ForgetPassword from "./components/auth/ForgetPassword";
 import SuccessScreen from "./components/auth/SuccessScreen";
 import VerifyAuth from "./components/auth/VerifyAuth";
-import NotFoundPage from "./components/NotFoundPage";
+import Profile from "./components/auth/Profile";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
+import ItemDetail from "./components/item-page/ItemDetail";
 import Contact from "./components/contact/Contact";
 import About from "./components/about/About"
+import NotFoundPage from "./components/NotFoundPage";
 import "./App.css";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ItemPage />
+      },
+      {
+        path: "/item/:id",
+        element: <ItemDetail />
       },
       {
         path: "/login",
@@ -47,6 +55,10 @@ const router = createBrowserRouter([
         element: <ForgetPassword />
       },
       {
+        path: "/profile/:uid",
+        element: <Profile />
+      },
+      {
         path: "/add-item",
         element: <AddItem />
       },
@@ -70,6 +82,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
+      <ToastContainer/>
     </>
   );
 }

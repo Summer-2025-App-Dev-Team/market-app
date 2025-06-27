@@ -1,0 +1,129 @@
+.profile {
+    display: flex;
+    gap: 25px;
+    padding: 0;
+}
+
+.profile h1 {
+    margin-bottom: 10px;
+}
+
+.profile .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: max-content;
+    height: 100%;
+    background-color: rgba(211, 211, 211, 0.5);
+    list-style: none;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    padding-block: 10px;
+}
+
+.profile .sidebar>li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-block: 10px;
+    width: 90%;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+/* Prevent the user from clicking the span and svg element */
+.profile .sidebar>li>* {
+    pointer-events: none;
+}
+
+.profile .sidebar>li i {
+    font-size: 24px;
+}
+
+.profile .sidebar>li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    width: 95%;
+    height: 1px;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    background-color: rgb(169, 169, 169);
+}
+
+.profile .sidebar>li:last-child::before {
+    content: "";
+    position: absolute;
+    width: 95%;
+    height: 1px;
+    left: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+    background-color: rgb(169, 169, 169);
+}
+
+.profile .sidebar>li:not(:first-child) {
+    cursor: pointer;
+}
+
+.profile .sidebar>li:not(:first-child):hover,
+.profile .sidebar>li.active {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.profile .sidebar>li:last-child {
+    margin-top: auto;
+}
+
+.profile .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 10px;
+}
+
+.profile .user>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-size: 0.9rem;
+}
+
+.profile .user>div>span:first-child {
+    font-weight: bold;
+}
+
+.profile .user img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile>article {
+    overflow: auto;
+}
+
+.profile>article.hide {
+    display: none !important;
+}
+
+.profile .my-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    gap: 10px;
+    width: 100%;
+    padding-block: 20px;
+}
+
+.profile .bought-items {}
+
+.profile .settings {}

@@ -1,7 +1,18 @@
 header {
+    position: absolute;
+    width: 100%;
     background-color: white;
     padding: 10px 25px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 1;
+    transition: 0.3s;
+}
+
+header.scrolled {
+    background-color: rgba(240, 240, 240, 0.6);
+    padding: 7.5px 25px;
 }
 
 header>nav {
@@ -10,10 +21,17 @@ header>nav {
     gap: 20px;
 }
 
-header>nav>img.logo {
+header>nav>.logo-link {
     height: 100px;
     width: auto;
     margin-right: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+header>nav>.logo-link>img {
+    height: 100%;
+    width: auto;
     user-select: none;
     cursor: pointer;
 }
@@ -70,7 +88,7 @@ header .search-wrapper div.search-box-border::after {
     border-radius: 5px;
 }
 
-header>nav>a {
+header>nav>a:not(.logo-link) {
     position: relative;
     color: darkred;
     text-decoration: none;
@@ -78,11 +96,11 @@ header>nav>a {
     text-transform: uppercase;
 }
 
-header>nav>a:active {
+header>nav>a:not(.logo-link):active {
     opacity: 0.8;
 }
 
-header>nav>a::before {
+header>nav>a:not(.logo-link)::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -93,7 +111,7 @@ header>nav>a::before {
     transition: width 0.3s ease;
 }
 
-header>nav>a:hover::before {
+header>nav>a:not(.logo-link):hover::before {
     width: 100%;
 }
 
@@ -108,22 +126,28 @@ header>nav .user-dropdown {
 }
 
 header>nav button {
-    background-color: rgb(63, 177, 247);
+    position: relative;
+    background-color: darkred;
     border: none;
     border-radius: 5px;
     padding: 7.5px 10px;
     color: white;
     font-size: 1rem;
     cursor: pointer;
+    overflow: hidden;
     transition: 0.3s;
+}
+
+header>nav button>div {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 5px;
+    animation: ripple 0.5s ease-out infinite;
 }
 
 header>nav button:hover {
     opacity: 0.8;
-}
-
-header>nav button:active {
-    opacity: 0.6;
 }
 
 header>nav .user-dropdown .user {
@@ -135,12 +159,6 @@ header>nav .user-dropdown .user {
     font-weight: bold;
     color: darkred;
     cursor: pointer;
-}
-
-header>nav .user-dropdown .user>img {
-    width: 30px;
-    height: 30px;
-    user-select: none;
 }
 
 header>nav .user-dropdown ul {
@@ -167,6 +185,10 @@ header>nav .user-dropdown ul li {
     position: relative;
 }
 
+header>nav .user-dropdown ul li svg {
+    color: blue;
+}
+
 header>nav .user-dropdown li:not(:first-child, :last-child)::before,
 header>nav .user-dropdown li:not(:first-child, :last-child)::after {
     content: "";
@@ -186,20 +208,26 @@ header>nav .user-dropdown li:not(:first-child, :last-child)::after {
 }
 
 header>nav .user-dropdown ul a {
-    display: inline-block;
-    text-decoration: none;
-    width: 100%;
-    padding: 7.5px 12.5px;
     font-size: 1.1rem;
-    transition: 0.3s;
+    color: blue;
+    text-decoration: none;
 }
 
-header>nav .user-dropdown ul a:hover {
+header>nav .user-dropdown li:hover {
     background-color: rgba(211, 211, 211, 0.6);
 }
 
-header>nav .user-dropdown ul a:active {
+header>nav .user-dropdown li:active {
     background-color: rgba(211, 211, 211, 0.8);
+}
+
+header>nav .user-dropdown li {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    padding: 8.5px 7.5px;
+    transition: 0.3s;
 }
 
 header>nav .user-dropdown li:first-child a {
@@ -283,7 +311,7 @@ header>nav .user-dropdown li:last-child a {
         height: 50px;
     }
 
-    header>nav>img.burger-icon {
+    header>nav>.burger-icon {
         width: 40px;
         height: 40px;
     }
@@ -292,5 +320,19 @@ header>nav .user-dropdown li:last-child a {
         display: none;
         /* font-size: 0.8rem;
         text-align: center; */
+    }
+}
+
+@keyframes ripple {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 0.5;
+    }
+
+    to {
+        width: 250px;
+        height: 250px;
+        opacity: 0;
     }
 }
