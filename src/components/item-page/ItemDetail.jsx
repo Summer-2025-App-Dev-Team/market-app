@@ -1,15 +1,25 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import useAuthStore from "../store/useAuthStore";
 import styles from "../../assets/css/itemdetail.module.css";
 
 export default function ItemDetail() {
   const ID = useParams().id;
   const [item, setItem] = useState(null);
+  const user = useAuthStore((state) => state.user);
   const largeImageRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if (user === null) {
+      // If the user is not logged in, redirect to the login page
+      alert("You must be logged in to view this page.");
+      navigate("/login");
+      return;
+    }
+
     async function fetchItemData() {
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
@@ -53,11 +63,23 @@ export default function ItemDetail() {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("click", handleClick);
     }
-  }, [ID]);
+  }, [ID, user]);
 
   function handleImgOnClick(e) {
     e.stopPropagation(); // Prevent event bubbling
     largeImageRef.current.classList.add(styles.show);
+  }
+
+  function handleContactSeller() {
+    // Functionality to contact the seller can be implemented here
+    const target = item?.user;
+    console.log(`Contacting seller: ${target}`);
+
+    if (target) {
+      navigate(`/chat/${target}`);
+    } else {
+      alert("Seller information is not available.");
+    }
   }
 
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
@@ -75,8 +97,11 @@ export default function ItemDetail() {
         )}
         {item?.price && <p className={styles.priceHighlight}>${item.price}</p>}
         {item?.description && <p className={styles.description}>{item.description}</p>}
+        <button className={styles.contact} onClick={handleContactSeller}>Contact Seller</button>
         {item?.createdAt && <p className={styles.createdAt}>Created at: {item.createdAt}</p>}
       </div>
+
+      {/* For the larger image */}
       <div ref={largeImageRef} className={styles.largeImageContainer}>
         {item?.image && (
           <img src={item.image} alt={item.name} draggable={false} />
