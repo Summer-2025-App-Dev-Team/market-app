@@ -21,8 +21,8 @@ async function fetchAllListings() {
 
 export default function ItemPage() {
     useEffect(() => {
-        const handelElementOnScroll = (e) => {
-            // idk why but I have to -1 to the scrollwidth to make it work
+        const handleElementOnScroll = (e) => {
+            // idk why but I have to -1 to the scrollWidth to make it work
             const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
             const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
 
@@ -37,10 +37,10 @@ export default function ItemPage() {
                 e.target.style.setProperty("--show-before-shadow", "1");
             }
         }
-        document.getElementById("scroll-container").addEventListener("scroll", handelElementOnScroll);
+        document.getElementById("scroll-container").addEventListener("scroll", handleElementOnScroll);
 
         return () => {
-            document.removeEventListener("scroll", handelElementOnScroll);
+            document.removeEventListener("scroll", handleElementOnScroll);
         }
     }, []);
 
@@ -88,10 +88,9 @@ export default function ItemPage() {
     return (
         <div className={styles["item-page"]}>
             <div className={styles.title}>
-                <h1>Services</h1>
-                <h2>or Goods</h2>
+                <h1>Items</h1>
             </div>
-            <p className={styles.description}>This platform showcases the talents and entrepreneurial spirit of SAS students, offering high-quality services across a range of fields. Whether you're seeking digital solutions, creative work, or technical support, each listing reflects dedication, skill, and a commitment to excellence.</p>
+            <p className={styles.description}></p>
             <SearchHeading searchParam={query} results={results} sortchange={sortchange} />
             <FilterBar />
             <ItemGrid results={results} />

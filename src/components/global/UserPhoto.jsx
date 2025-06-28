@@ -1,7 +1,7 @@
 import useAuthStore from '../store/useAuthStore';
 import imagePlaceHolder from "../../assets/images/image-placeholder.jpg";
 
-export default function UserPhoto() {
+export default function UserPhoto(props) {
     const user = useAuthStore((state) => state.user);
     let photoURL = "";
     try {
@@ -18,10 +18,10 @@ export default function UserPhoto() {
 
     // If the user does not have a photo
     if (!user.photoURL) {
-        <img src={imagePlaceHolder} alt="user" draggable={false} />
+        <img src={imagePlaceHolder} alt="user" draggable={false} className={props.classes} />
     }
 
     return (
-        <img src={photoURL} alt="user" draggable={false} />
+        <img src={photoURL} alt="user" draggable={false} className={props.classes} />
     )
 }

@@ -1,38 +1,49 @@
-import MobileHeader from "./MobileHeader";
+import MobileNavbar from "./MobileNavbar";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/images/app-logo.png";
-import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import UserPhoto from "./UserPhoto";
+import useAuthStore from "../store/useAuthStore";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Header({ scrollTargetRef }) {
+    const user = useAuthStore((state) => state.user);
     const headerRef = useRef(null);
+    const [showBurger, setShowBurger] = useState(false);
     const navigate = useNavigate();
 
-    function showBurger() {
-        document.querySelector(`.${styles.burger}`).classList.add(styles.show);
-
-        setTimeout(() => {
-            document.addEventListener("click", function handelOnClick(e) {
-                if (e.target.classList.contains(styles.burger)) return;
-                document.querySelector(`.${styles.burger}`).classList.remove(styles.show);
-                document.removeEventListener("click", handelOnClick);
-            });
-        }, 500);
+    function handleBurgerIconOnClick(e) {
+        e.stopPropagation();
+        setShowBurger((prev) => !prev);
     }
 
-    function handelAddItemOnClick() {
+    function handleAddItemOnClick(e) {
+        const button = e.target;
+        const ripple = document.createElement("div");
+        const x = e.pageX - button.offsetLeft;
+        const y = e.pageY - button.offsetTop;
+
+        ripple.style.left = x + "px";
+        ripple.style.top = y + "px";
+        button.appendChild(ripple);
+
+        const removeRipple = setTimeout(() => {
+            ripple.remove();
+            clearTimeout(removeRipple);
+        }, 300);
+
         navigate("/add-item");
     }
 
-    function handelSearchSubmit(e) {
+    function handleSearchSubmit(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const value = formData.get("search-box");
         window.location.href = `/?q=${value}`;
     }
 
-    function handelSearchOnChange(e) {
+    function handleSearchOnChange(e) {
         const value = e.target.value;
         const el = document.querySelector(`.${styles['search-box-border']}`);
         if (value !== "") {
@@ -43,7 +54,7 @@ export default function Header({ scrollTargetRef }) {
     }
 
     useEffect(() => {
-        const handelKeyDown = (e) => {
+        const handleKeyDown = (e) => {
             if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
                 return;
             }
@@ -58,12 +69,12 @@ export default function Header({ scrollTargetRef }) {
             }
         };
 
-        const handelSearchInputFocus = () => {
+        const handleSearchInputFocus = () => {
             const el = document.querySelector(`.${styles['search-box-border']}`);
             el.style.outline = "5px solid rgba(116, 116, 255, 0.5)";
         };
 
-        const handelSearchInputBlur = () => {
+        const handleSearchInputBlur = () => {
             const el = document.querySelector(`.${styles['search-box-border']}`);
             el.style.outline = "5px solid transparent";
         };
@@ -85,53 +96,58 @@ export default function Header({ scrollTargetRef }) {
         if (!el) return;
 
         const input = document.getElementById("search-box");
-        document.addEventListener("keydown", handelKeyDown);
+        document.addEventListener("keydown", handleKeyDown);
         window.addEventListener("resize", handleResize);
-        input.addEventListener("focus", handelSearchInputFocus);
-        input.addEventListener("blur", handelSearchInputBlur);
+        input.addEventListener("focus", handleSearchInputFocus);
+        input.addEventListener("blur", handleSearchInputBlur);
         el.addEventListener("scroll", handleScroll);
         handleResize();
 
         return () => {
-            document.removeEventListener("keydown", handelKeyDown);
-            input.removeEventListener("focus", handelSearchInputFocus);
-            input.removeEventListener("blur", handelSearchInputBlur);
+            document.removeEventListener("keydown", handleKeyDown);
+            input.removeEventListener("focus", handleSearchInputFocus);
+            input.removeEventListener("blur", handleSearchInputBlur);
         };
     }, []);
 
     return (
         <header ref={headerRef}>
             <nav>
-                <img
-                    src={logo}
-                    alt="logo"
-                    draggable={false}
-                    className={styles.logo}
-                    onClick={() => { window.location.href = "/" }}
-                />
+                {/* Mobile menu icon */}
+                <svg xmlns="http://www.w3.org/2000/svg" width={32} height={32} fill={"currentColor"} viewBox="0 0 24 24" onClick={handleBurgerIconOnClick} className={styles["show-mobile"]}>{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M4 5H20V7H4z"></path><path d="M4 11H20V13H4z"></path><path d="M4 17H20V19H4z"></path></svg>
+
+                <Link to={"/"} className={`${styles["logo-link"]} ${styles["hide-mobile"]}`}>
+                    <img
+                        src={logo}
+                        alt="logo"
+                        draggable={false}
+                        className={styles.logo}
+                    />
+                </Link>
                 <div className={styles["search-wrapper"]}>
-                    <form onSubmit={handelSearchSubmit}>
+                    <form onSubmit={handleSearchSubmit}>
                         <input
                             type="search"
                             placeholder="Search"
                             name="search-box"
                             id="search-box"
-                            onChange={handelSearchOnChange}
+                            onChange={handleSearchOnChange}
                         />
                     </form>
                     <div className={styles["search-box-border"]}></div>
                 </div>
-                {/* TODO: remove if not-necessary */}
-                {/* <Link to={"/about"}>About us</Link>
-                <Link to={"/contact"}>Contact</Link> */}
-                <UserDropdown />
-                <button onClick={handelAddItemOnClick}>Add item</button>
 
-                {/* Mobile menu icon */}
-                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24" onClick={showBurger} className={`${styles["show-mobile"]} ${styles["burger-icon"]}`}>{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M4 5H20V7H4z"></path><path d="M4 11H20V13H4z"></path><path d="M4 17H20V19H4z"></path></svg>
+                {/* For mobile */}
+                <Link to={`/profile/${user?.uid}`} className={`${styles["avatar-link"]} ${styles["show-mobile"]}`}>
+                    <UserPhoto />
+                </Link>
+
+                {/* For laptop */}
+                <UserDropdown />
+                <button onClick={handleAddItemOnClick} className={styles["hide-mobile"]}>Add item</button>
 
                 {/* Render the mobile header */}
-                <MobileHeader />
+                <MobileNavbar showBurger={showBurger} />
             </nav>
         </header>
     );

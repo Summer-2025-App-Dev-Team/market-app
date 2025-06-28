@@ -28,6 +28,7 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
+    user-select: none;
 }
 
 .item-info {
