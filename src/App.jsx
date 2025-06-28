@@ -7,6 +7,7 @@ import ForgetPassword from "./components/auth/ForgetPassword";
 import SuccessScreen from "./components/auth/SuccessScreen";
 import VerifyAuth from "./components/auth/VerifyAuth";
 import Profile from "./components/auth/Profile";
+import Chat from "./components/chat/Chat";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
 import ItemDetail from "./components/item-page/ItemDetail";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
         element: <Profile />
       },
       {
+        path: "/chat/:uid",
+        element: <Chat />
+      },
+      {
         path: "/add-item",
         element: <AddItem />
       },
@@ -82,7 +87,7 @@ export default function App() {
   return (
     <>
       <RouterProvider router={router}></RouterProvider>
-      <ToastContainer/>
+      <ToastContainer />
     </>
   );
 }

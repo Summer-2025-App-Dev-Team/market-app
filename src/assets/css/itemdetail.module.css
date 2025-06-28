@@ -79,8 +79,26 @@
 .createdAt {
   font-size: 0.9rem;
   color: #999;
-  text-align: right;
+  align-self: end;
+}
+
+button.contact {
+  align-self: end;
   margin-top: auto;
+  margin-bottom: 10px;
+  width: fit-content;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.contact:hover {
+  opacity: 0.8;
 }
 
 .largeImageContainer {
@@ -107,8 +125,9 @@
 .largeImageContainer>img {
   position: relative;
   width: auto;
+  height: auto;
   max-width: 100vw;
-  height: 90vh;
+  max-height: 100vh;
   object-fit: cover;
   left: 50%;
   top: 50%;
