@@ -7,6 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import stylesA from "../../assets/css/auth.module.css";
 import stylesB from "../../assets/css/signup.module.css";
 
+
 const styles = {
   ...stylesA,
   ...stylesB
@@ -50,7 +51,11 @@ export default function SignUpForm() {
       };
 
       const userDocRef = doc(db, "userListings", userCredential.user.uid);
-      await setDoc(userDocRef, { listings: [] });
+      await setDoc(userDocRef, {
+        name: name,
+        photoURL: user.photoURL || null,
+        listings: []
+      });
 
       await sendEmailVerification(user, actionCodeSettings);
       navigate("/verify-auth?type=confirm");

@@ -16,15 +16,15 @@ export default function GoogleLoginButton(props) {
 
       console.log("Signed in user:", user);
 
-      // Automatically remember the user when signed in with Google
       setUser(user, true);
 
       if (result._tokenResponse?.isNewUser) {
-        console.log("New user signed up!");
-
-        userDocRef = doc(db, "userListings", user.uid);
-        const userListings = [];
-        userDoc = setDoc(userDocRef, { listings: [] });
+        const userDocRef = doc(db, "userListings", user.uid);
+        await setDoc(userDocRef, {
+          name: user.displayName,
+          photoURL: user.photoURL || null,
+          listings: []
+        });
       }
 
 
