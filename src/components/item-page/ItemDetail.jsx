@@ -1,28 +1,39 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { Navigate, Route, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { db } from "../lib/firebase";
-import { doc, getDoc } from "firebase/firestore";
-import useAuthStore from "../store/useAuthStore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import styles from "../../assets/css/itemdetail.module.css";
+import { list } from "firebase/storage";
+import { getAuth } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export default function ItemDetail() {
   const ID = useParams().id;
   const [item, setItem] = useState(null);
-  const user = useAuthStore((state) => state.user);
   const largeImageRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    if (user === null) {
-      // If the user is not logged in, redirect to the login page
-      alert("You must be logged in to view this page.");
-      navigate("/login");
-      return;
-    }
+   
 
     async function fetchItemData() {
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
+
+      const defaultRef = collection(db, "userListings");
+      const collecSnap = await getDocs(defaultRef);
+
+      //not running code, but returning objects // Return an object explicitly : () => ({ key: value }) //Run a block of code : () => { let x = 1; return x; }
+      collecSnap.docs.map((doc) => {
+        //looping inside each user
+        const listing = doc.data().listings;
+        listing.map((lists) => {
+          if (ID == lists["id"]) {
+            console.log(doc.id);
+            console.log(listing);
+          }
+        });
+      });
+
       if (docSnap.exists()) {
         const data = docSnap.data();
         if (
@@ -42,13 +53,19 @@ export default function ItemDetail() {
     fetchItemData();
 
     function handleKeyDown(e) {
-      if (e.key === "Escape" && largeImageRef.current.classList.contains(styles.show)) {
+      if (
+        e.key === "Escape" &&
+        largeImageRef.current.classList.contains(styles.show)
+      ) {
         largeImageRef.current.classList.remove(styles.show);
       }
     }
 
     function handleClick(e) {
-      if (largeImageRef.current && largeImageRef.current.classList.contains(styles.show)) {
+      if (
+        largeImageRef.current &&
+        largeImageRef.current.classList.contains(styles.show)
+      ) {
         // Check if the click is outside the large image (not on the image itself)
         if (e.target === largeImageRef.current) {
           largeImageRef.current.classList.remove(styles.show);
@@ -62,8 +79,8 @@ export default function ItemDetail() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("click", handleClick);
-    }
-  }, [ID, user]);
+    };
+  }, [ID]);
 
   function handleImgOnClick(e) {
     e.stopPropagation(); // Prevent event bubbling
@@ -84,21 +101,44 @@ export default function ItemDetail() {
 
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
-
+  function handleSeller() {}
   return (
     <div className={styles.container}>
       <div className={styles.mainImageWrapper}>
-        {item?.image && <img className={styles.itemImage} src={item.image} alt={item.name} draggable={false} onClick={handleImgOnClick} />}
+        {item?.image && (
+          <img
+            className={styles.itemImage}
+            src={item.image}
+            alt={item.name}
+            draggable={false}
+            onClick={handleImgOnClick}
+          />
+        )}
       </div>
       <div className={styles.infoColumn}>
         {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
         {item?.availableUntil && (
-          <p className={styles.availability}>Available until: {item.availableUntil}</p>
+          <p className={styles.availability}>
+            Available until: {item.availableUntil}
+          </p>
         )}
         {item?.price && <p className={styles.priceHighlight}>${item.price}</p>}
-        {item?.description && <p className={styles.description}>{item.description}</p>}
-        <button className={styles.contact} onClick={handleContactSeller}>Contact Seller</button>
-        {item?.createdAt && <p className={styles.createdAt}>Created at: {item.createdAt}</p>}
+
+        {item?.description && (
+          <p className={styles.description}>{item.description}</p>
+        )}
+
+        <div className={styles.chatButtonWrapper}>
+          <button className={styles.buyButton}>
+            <Link to={"/chat/1"} onClick={handleSeller}>
+              <img className={styles.chatButton} src="/public/chacon.png"></img>
+            </Link>
+          </button>
+        </div>
+
+        {item?.createdAt && (
+          <p className={styles.createdAt}>Created at: {item.createdAt}</p>
+        )}
       </div>
 
       {/* For the larger image */}

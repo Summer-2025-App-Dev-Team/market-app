@@ -122,7 +122,7 @@ button.contact:hover {
   pointer-events: auto;
 }
 
-.largeImageContainer>img {
+.largeImageContainer > img {
   position: relative;
   width: auto;
   height: auto;
@@ -133,4 +133,42 @@ button.contact:hover {
   top: 50%;
   transform: translate(-50%, -50%);
   user-select: none;
+}
+
+.buyButton {
+  max-width: 500px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  background-color: rgb(1000, 2000, 1000);
+  color: blue;
+
+  font-size: 1rem;
+  color: #454bec;
+  padding: 0.5rem;
+  background: #ecf2fd;
+  border: 1px solid #2e82cc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  width: fit-content;
+  display: block;
+  align-self: flex-end;
+  
+  
+}
+.chatButton{
+  width: 100px;
+}
+
+.buyButton:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+.chatButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
 }
