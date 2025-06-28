@@ -166,72 +166,79 @@ header>nav .user-dropdown .user {
     cursor: pointer;
 }
 
+header>nav .user-dropdown .user:hover {
+    text-decoration: underline;
+}
+
 header>nav .user-dropdown ul {
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     position: absolute;
     right: 0;
     bottom: 0;
-    transform: translateY(calc(100%));
+    transform-origin: top right;
+    transform: translateY(calc(100%)) scale(0);
     width: max-content;
     list-style: none;
     background-color: rgb(255, 254, 253);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+    z-index: 10;
 }
 
 header>nav .user-dropdown ul.active {
-    display: flex;
+    transform: translateY(calc(100%)) scale(1);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 header>nav .user-dropdown ul li {
     position: relative;
 }
 
-header>nav .user-dropdown ul li svg {
-    color: blue;
-}
-
-header>nav .user-dropdown li:not(:first-child, :last-child)::before,
-header>nav .user-dropdown li:not(:first-child, :last-child)::after {
+header>nav .user-dropdown li:not(:last-child)::after {
     content: "";
     position: absolute;
     width: 100%;
     height: 1px;
     left: 0;
+    bottom: 0;
     background-color: rgb(211, 211, 211);
 }
 
-header>nav .user-dropdown li:not(:first-child, :last-child)::before {
-    top: 0;
-}
-
-header>nav .user-dropdown li:not(:first-child, :last-child)::after {
-    bottom: 0;
+header>nav .user-dropdown ul li svg {
+    color: black;
 }
 
 header>nav .user-dropdown ul a {
     font-size: 1.1rem;
-    color: blue;
+    color: black;
     text-decoration: none;
 }
 
 header>nav .user-dropdown li:hover {
-    background-color: rgba(211, 211, 211, 0.6);
-}
-
-header>nav .user-dropdown li:active {
     background-color: rgba(211, 211, 211, 0.8);
 }
 
-header>nav .user-dropdown li {
+header>nav .user-dropdown li:active {
+    background-color: rgba(211, 211, 211, 0.6);
+}
+
+header>nav .user-dropdown li a {
+    position: relative;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 10px;
     padding: 8.5px 7.5px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 header>nav .user-dropdown li:first-child a {
@@ -242,25 +249,6 @@ header>nav .user-dropdown li:first-child a {
 header>nav .user-dropdown li:last-child a {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
-
-header>nav .avatar-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-}
-
-header>nav .avatar-link>img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: pointer;
-    user-select: none;
 }
 
 /* Mobile displays */
@@ -350,6 +338,25 @@ header>nav .avatar-link>img {
 
 .burger a:active {
     opacity: 0.8;
+}
+
+header>nav .avatar-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+header>nav .avatar-link>img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    user-select: none;
 }
 
 
