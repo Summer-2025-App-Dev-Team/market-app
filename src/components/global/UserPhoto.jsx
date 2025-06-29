@@ -1,5 +1,5 @@
 import useAuthStore from '../store/useAuthStore';
-import imagePlaceHolder from "../../assets/images/image-placeholder.jpg";
+import imagePlaceHolder from "/image-placeholder.jpg";
 
 export default function UserPhoto(props) {
     const user = useAuthStore((state) => state.user);

@@ -1,7 +1,7 @@
 import MobileNavbar from "./MobileNavbar";
 import UserDropdown from "./UserDropdown";
 import styles from "../../assets/css/header.module.css";
-import logo from "../../assets/images/app-logo.png";
+import logo from "/app-logo.png";
 import UserPhoto from "./UserPhoto";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState, useRef } from "react";

@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Fragment } from "react";
 import AuthHeading from "./AuthCardHeading";
-import tick_symbol from "../../assets/images/tick-symbol.png";
+import tick_symbol from "/tick-symbol.png";
 import styleA from "../../assets/css/successscreen.module.css";
 import styleB from "../../assets/css/auth.module.css";
 

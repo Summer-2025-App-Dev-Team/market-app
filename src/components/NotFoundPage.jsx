@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { Fragment } from "react"
 import styles from "../assets/css/notfoundpage.module.css"
-import page_not_found from "../assets/images/page-not-found.png"
+import page_not_found from "/page-not-found.png"
 
 export default function NotFoundPage() {
     return (

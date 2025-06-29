@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import userPlaceholder from "../../assets/images/avatar-placeholder.png";
+import userPlaceholder from "/avatar-placeholder.png";
 import styles from "../../assets/css/chatroompreview.module.css";
 
 export default function ChatRoomPreview() {

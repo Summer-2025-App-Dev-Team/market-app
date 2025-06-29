@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import logo from "../../assets/images/app-logo.png"
+import logo from "/app-logo.png"
 import useAuthStore from "../store/useAuthStore"
 import styles from "../../assets/css/header.module.css"
 import LogoutOrLogin from "./LogoutOrLogin"

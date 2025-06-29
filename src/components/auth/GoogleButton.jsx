@@ -1,7 +1,7 @@
 import { auth, db } from "../lib/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
-import google_logo from "../../assets/images/google-logo.png";
+import google_logo from "/google-logo.png";
 import { doc, setDoc } from "firebase/firestore";
 import styles from "../../assets/css/auth.module.css"
 

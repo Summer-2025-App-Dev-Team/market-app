@@ -1,10 +1,9 @@
-import { Navigate, Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { db } from "../lib/firebase";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import chatIcon from "/chat-icon.png";
 import styles from "../../assets/css/itemdetail.module.css";
-import { list } from "firebase/storage";
-import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 export default function ItemDetail() {
@@ -13,8 +12,6 @@ export default function ItemDetail() {
   const largeImageRef = useRef(null);
 
   useEffect(() => {
-   
-
     async function fetchItemData() {
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
@@ -87,21 +84,9 @@ export default function ItemDetail() {
     largeImageRef.current.classList.add(styles.show);
   }
 
-  function handleContactSeller() {
-    // Functionality to contact the seller can be implemented here
-    const target = item?.user;
-    console.log(`Contacting seller: ${target}`);
-
-    if (target) {
-      navigate(`/chat/${target}`);
-    } else {
-      alert("Seller information is not available.");
-    }
-  }
-
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
-  function handleSeller() {}
+  function handleSeller() { }
   return (
     <div className={styles.container}>
       <div className={styles.mainImageWrapper}>
@@ -130,8 +115,8 @@ export default function ItemDetail() {
 
         <div className={styles.chatButtonWrapper}>
           <button className={styles.buyButton}>
-            <Link to={"/chat/1"} onClick={handleSeller}>
-              <img className={styles.chatButton} src="/public/chacon.png"></img>
+            <Link to={"/chat"} onClick={handleSeller}>
+              <img className={styles.chatButton} src={chatIcon}></img>
             </Link>
           </button>
         </div>
