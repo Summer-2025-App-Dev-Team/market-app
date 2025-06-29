@@ -3,9 +3,7 @@ import useAuthStore from "../store/useAuthStore"
 import { useNavigate, useParams } from "react-router-dom";
 import { realtimedb } from "../lib/firebase";
 import { ref, set, onValue, off } from "firebase/database";
-import ChatBubble from "./ChatBubble";
-import styles from "../../assets/css/chat.module.css";
-
+import MessageContainer from "./MessageContainer"
 
 export default function Chat() {
     const user = useAuthStore((state) => state.user);
@@ -75,7 +73,7 @@ export default function Chat() {
     return (
         <div>
             <h1>Chat</h1>
-            <p>This is the chat component.</p>
+            <MessageContainer messages={messages}/>
             <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
             <button onClick={handleSubmit}>Send</button>
         </div>
