@@ -4,7 +4,7 @@ import FilterBar from "./FilterBar";
 import { useSearchParams } from 'react-router-dom';
 import SearchHeading from './SearchHeading';
 import ItemGrid from './ItemGrid';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 async function fetchAllListings() {
@@ -18,8 +18,47 @@ async function fetchAllListings() {
         return [];
     }
 }
+async function updateAllListingsToNewFormat() {
+    const querySnapshot = await getDocs(collection(db, "userListings"));
+    for(const userDoc of querySnapshot.docs){
+        const data = userDoc.data();
+        const listings = data.listings;
+        
+        const now = Date.now();
+        
+        
+        const updatedListings = await Promise.all(listings.map(async (listing) => {
+            let currentStatus = "Unknown";
+            const endTime = listing.availableUntil;
+            const normalizedEndTime = endTime.replace(" at ", " ");
+            const endTimeObj = new Date(normalizedEndTime);
 
+            if (!isNaN(endTimeObj.getTime())) {
+                if (endTimeObj.getTime() < Date.now()) {
+                    currentStatus = "unavailable";
+                } else {
+                    currentStatus = "available";
+                }
+            }
+
+            const updatedListing = {
+                ...listing,
+                status: currentStatus,
+                user: listing.user || userDoc.id,
+            };
+
+            const allDocRef = doc(db, "allListings", updatedListing.id);
+            await setDoc (allDocRef, updatedListing);
+
+            return updatedListing;
+        }));
+
+        const docRef = doc(db, "userListings", userDoc.id);
+        await updateDoc(docRef, {listings: updatedListings});
+    };
+}
 export default function ItemPage() {
+    updateAllListingsToNewFormat();
     useEffect(() => {
         const handleElementOnScroll = (e) => {
             // idk why but I have to -1 to the scrollWidth to make it work
