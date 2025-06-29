@@ -113,13 +113,13 @@ export default function ItemDetail() {
           <p className={styles.description}>{item.description}</p>
         )}
 
-        <div className={styles.chatButtonWrapper}>
-          <button className={styles.buyButton}>
-            <Link to={"/chat"} onClick={handleSeller}>
-              <img className={styles.chatButton} src={chatIcon}></img>
-            </Link>
-          </button>
-        </div>
+        {/* <div className={styles.chatButtonWrapper}> */}
+        {/* <button className={styles.buyButton}> */}
+        <Link to={"/chat"} onClick={handleSeller} className={styles.chatLink}>
+          <img className={styles.chatIcon} src={chatIcon}></img>
+        </Link>
+        {/* </button> */}
+        {/* </div> */}
 
         {item?.createdAt && (
           <p className={styles.createdAt}>Created at: {item.createdAt}</p>
