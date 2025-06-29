@@ -23,6 +23,7 @@ export default function GoogleLoginButton(props) {
         await setDoc(userDocRef, {
           name: user.displayName,
           photoURL: user.photoURL || null,
+          chats:[],
           listings: []
         });
       }

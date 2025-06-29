@@ -54,6 +54,7 @@ export default function SignUpForm() {
       await setDoc(userDocRef, {
         name: name,
         photoURL: user.photoURL || null,
+        chats:[],
         listings: []
       });
 
