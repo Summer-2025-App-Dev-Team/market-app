@@ -1,0 +1,36 @@
+.chatPreview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+    user-select: none;
+    cursor: pointer;
+}
+
+.chatPreview:hover {
+    background-color: rgba(211, 211, 211, 0.8);
+}
+
+.chatPreview:active {
+    background-color: rgba(211, 211, 211, 0.6);
+}
+
+.chatPreview img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.chatPreview h2 {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.chatPreview p {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
