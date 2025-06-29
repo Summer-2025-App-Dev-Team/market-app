@@ -1,15 +1,20 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { db } from "../lib/firebase";
-import { doc, getDoc, getDocs, collection } from "firebase/firestore";
+import { db , realtimedb} from "../lib/firebase";
+import { doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from "firebase/firestore";
+import { ref, update } from "firebase/database";
 import chatIcon from "/chat-icon.png";
-import styles from "../../assets/css/itemdetail.module.css";
-import { Link } from "react-router-dom";
+import styles from "../../assets/css/chat.module.css";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/useAuthStore";
+
 
 export default function ItemDetail() {
   const ID = useParams().id;
   const [item, setItem] = useState(null);
   const largeImageRef = useRef(null);
+  const user = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchItemData() {
@@ -86,7 +91,44 @@ export default function ItemDetail() {
 
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
-  function handleSeller() { }
+  async function handleSeller() {
+    console.log("user",user);
+    const buyUserDocRef = doc(db, "userListings", user.uid);
+    const buyUserSnap = await getDoc(buyUserDocRef);
+
+    const sellUserDocRef = doc(db, "userListings", item.user);
+    const sellUserSnap = await getDoc(sellUserDocRef);
+
+    const buyerChats = buyUserSnap.data()?.chats || [];
+    const sellerChats = sellUserSnap.data()?.chats || [];
+
+    const existingChatId = buyerChats.find((id) => sellerChats.includes(id));
+
+    var chatId;
+    if (existingChatId) {
+      chatId = existingChatId;
+    } else {
+      chatId = crypto.randomUUID()
+
+      await updateDoc(buyUserDocRef, {
+        chats: arrayUnion(chatId),
+      });
+
+      await updateDoc(sellUserDocRef, {
+        chats: arrayUnion(chatId),
+      });
+
+      const chatRef = ref(realtimedb, `chats/${chatId}`);
+
+      await update(chatRef, {
+        user1: user.uid,
+        user2: item.user,
+        chats: {},
+      });
+    }
+    
+    navigate("/chat/"+chatId);
+   }
   return (
     <div className={styles.container}>
       <div className={styles.mainImageWrapper}>
@@ -115,9 +157,9 @@ export default function ItemDetail() {
 
         {/* <div className={styles.chatButtonWrapper}> */}
         {/* <button className={styles.buyButton}> */}
-        <Link to={"/chat"} onClick={handleSeller} className={styles.chatLink}>
+        <button onClick={handleSeller} className={styles.chatLink}>
           <img className={styles.chatIcon} src={chatIcon}></img>
-        </Link>
+        </button>
         {/* </button> */}
         {/* </div> */}
 

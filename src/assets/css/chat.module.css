@@ -1,0 +1,48 @@
+.messagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  height: 400px; /* or 100% if your layout allows */
+  overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.own {
+  align-items: flex-end;
+}
+
+.other {
+  align-items: flex-start;
+}
+
+.bubble {
+  max-width: 60%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  color: #000;
+}
+
+.bubbleOwn {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+}
+
+.bubbleOther {
+  background-color: #f1f0f0;
+  align-self: flex-start;
+}
+
+.timestamp {
+  font-size: 10px;
+  color: #888;
+  margin-top: 2px;
+}
