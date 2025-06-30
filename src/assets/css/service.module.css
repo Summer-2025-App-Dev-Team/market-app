@@ -57,7 +57,9 @@
 
 .person-info>img.profile {
     height: 15px;
-    width: auto;
+    width: 15px;
+    object-fit: cover;
+    border-radius: 50%;
     flex-grow: 0;
 }
 

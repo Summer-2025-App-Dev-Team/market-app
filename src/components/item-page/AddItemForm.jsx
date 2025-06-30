@@ -181,7 +181,7 @@ export default function addItemForm(props) {
                     <label htmlFor="free-item">Free</label>
                 </div>
                 <label htmlFor="date">Available until</label>
-                <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
+                <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} required />
                 <label ref={dropZoneRef} className={styles["add-image-button"]}>
                     <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden />
                     {/* Changed from img to svg */}
