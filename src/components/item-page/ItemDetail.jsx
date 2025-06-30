@@ -33,7 +33,7 @@ export default function ItemDetail() {
             console.log(doc.id);
             console.log(listing);
           }
-        });f
+        });
       });
 
       if (docSnap.exists()) {
