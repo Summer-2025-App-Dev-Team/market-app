@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { db , realtimedb} from "../lib/firebase";
+import { db, realtimedb } from "../lib/firebase";
 import { doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from "firebase/firestore";
 import { ref, update } from "firebase/database";
 import chatIcon from "/chat-icon.png";
@@ -92,7 +92,7 @@ export default function ItemDetail() {
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
   async function handleSeller() {
-    console.log("user",user);
+    console.log("user", user);
     const buyUserDocRef = doc(db, "userListings", user.uid);
     const buyUserSnap = await getDoc(buyUserDocRef);
 
@@ -119,7 +119,7 @@ export default function ItemDetail() {
       });
 
       const chatRef = ref(realtimedb, `chats/${chatId}`);
-      
+
       if (user.uid != item.user) {
         await update(chatRef, {
           user1: user.uid,
@@ -129,13 +129,13 @@ export default function ItemDetail() {
 
       }
 
-      
-      
-      
+
+
+
     }
-    
-    navigate("/chat/"+chatId);
-   }
+
+    navigate("/chat/" + chatId);
+  }
   return (
     <div className={styles.container}>
       <div className={styles.mainImageWrapper}>
@@ -156,7 +156,7 @@ export default function ItemDetail() {
             Available until: {item.availableUntil}
           </p>
         )}
-        {item?.price && <p className={styles.priceHighlight}>${item.price}</p>}
+        {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
 
         {item?.description && (
           <p className={styles.description}>{item.description}</p>

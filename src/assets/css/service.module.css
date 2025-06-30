@@ -38,7 +38,7 @@
     color: black;
 }
 
-.item-info>.title {
+.item-info>.name {
     font-size: 18px;
     font-weight: 500;
 }

@@ -6,7 +6,13 @@ import { db } from "../lib/firebase";
 import { useState, useEffect } from "react";
 
 export default function Service(props) {
-
+  // TODO: someone can probably improves the logic here
+  let price;
+  if (props.price) {
+    price = typeof props.price == "number" ? "$" + props.price : props.price;
+  } else {
+    price = "No price set yet";
+  }
   const [username, setUsername] = useState("User");
   const [profilePicture, setProfilePicture] = useState("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
 
@@ -29,19 +35,20 @@ export default function Service(props) {
 
     fetchUsername();
   }, [props.user]);
+
   return (
     <div className={styles["service-wrapper"]} onClick={() => { window.location.href = `/item/${props.id}` }}>
       <img src={props.image ? props.image : imagePlaceholder} className={props.preview ? styles.preview : ""} draggable={false} />
       <div className={styles["item-info"]}>
-        <span className={styles.title}>{props.name ? props.name : "Title here"}</span>
-        <span className={styles.date}>{props.availableUntil ? props.availableUntil : "2025-09-10"}</span>
+        <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>
+        <span className={styles.date}>{props.availableUntil ? props.availableUntil : "No date yet"}</span>
       </div>
       <div className={styles["person-info"]}>
         <img className={styles.profile} src={profilePicture} />
         <p>{username}</p>
         {props.noStars ? "" : <Rating />}
       </div>
-      <span className={styles.price}>${props.price ? props.price : 0}</span>
+      <span className={styles.price}>{price}</span>
     </div>
   )
 }

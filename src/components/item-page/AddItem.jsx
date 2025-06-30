@@ -28,9 +28,9 @@ export default function AddItem() {
         file: null,
         url: ""
     });
-    const [title, setTitle] = useState("Title here");
-    const [description, setDescription] = useState("Description here");
-    const [date, setDate] = useState("2010-01-01");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [date, setDate] = useState("");
     const [price, setPrice] = useState(0);
 
     return (
@@ -38,20 +38,20 @@ export default function AddItem() {
             <h1 className={styles["page-heading"]}>Enter Listing Details</h1>
             <div className={styles.content}>
                 <AddItemForm
-                    title={title}
+                    name={name}
                     price={price}
                     description={description}
                     date={date}
                     image={image}
                     setImage={setImage}
-                    setTitle={setTitle}
+                    setName={setName}
                     setDescription={setDescription}
                     setDate={setDate}
                     setPrice={setPrice}
                 />
                 <div className={styles.preview}>
                     <h2>Preview</h2>
-                    <Service image={image.url} title={title} description={description} date={date} price={price} noStars={true} preview={true} />
+                    <Service image={image.url} name={name} description={description} date={date} price={price} noStars={true} preview={true} />
                 </div>
             </div>
         </div>

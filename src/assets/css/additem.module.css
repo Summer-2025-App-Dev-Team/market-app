@@ -1,3 +1,7 @@
+::placeholder {
+    user-select: none;
+}
+
 .add-item {
     background-color: rgb(250, 247, 241);
 }
@@ -37,7 +41,33 @@
     padding: 7.5px;
     font-size: 0.9rem;
     border-radius: 5px;
-    margin-block: 3px 20px;
+    margin-block: 2px 20px;
+}
+
+.content>form>input:disabled {
+    cursor: not-allowed;
+}
+
+.content>form>input[type="number"] {
+    margin-block: 2px 3px;
+}
+
+.toggle-free {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.toggle-free>input,
+.toggle-free>label {
+    user-select: none;
+    cursor: pointer;
+}
+
+.toggle-free::checkmark {
+    width: 50px;
+    height: 50px;
 }
 
 .add-image-button {
@@ -54,19 +84,20 @@
     font-family: sans-serif;
     color: #333;
     background-color: #fff;
+    transition: background-color 0.3s;
     cursor: pointer;
+}
+
+.add-image-button:hover {
+    background-color: #f0f0f0;
+}
+
+.add-image-button:active {
+    background-color: #e0e0e0;
 }
 
 .add-image-button.dragover {
     background-color: #e0f7fa;
-}
-
-.content label.file-upload:hover {
-    opacity: 0.8;
-}
-
-.content label.file-upload:active {
-    opacity: 0.6;
 }
 
 .content form>div.inputs {

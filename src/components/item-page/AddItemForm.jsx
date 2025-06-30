@@ -9,30 +9,15 @@ import LoadingModal from "./LoadingModal";
 
 export default function addItemForm(props) {
     const [isLoading, setIsLoading] = useState(false);
-
-    const user = useAuthStore((state) => state.user);
-    function handleFileInput(e) {
-        handleFile(e.target.files);
-    }
-
-    const fileInputText = useRef(null);
-    function handleFile(file) {
-        file = file[0];
-
-        const imageUrl = URL.createObjectURL(file);
-        props.setImage({
-            file: file,
-            url: imageUrl
-        });
-
-        fileInputText.current.textContent = "Change image";
-    }
-
+    const [itemIsFree, setItemIsFree] = useState(false);
     const fileInputRef = useRef(null);
     const fileInputTextRef = useRef(null);
     const dateInputRef = useRef(null);
     const dropZoneRef = useRef(null);
+    const priceInputRef = useRef(null);
+    const user = useAuthStore((state) => state.user);
 
+    // Locate useEffect at the top (before any return)
     useEffect(() => {
         const fileInput = fileInputRef.current;
         const dropZone = dropZoneRef.current;
@@ -115,6 +100,35 @@ export default function addItemForm(props) {
         fileInputTextRef.current.textContent = "Change image";
     }
 
+    function handleFileInput(e) {
+        handleFile(e.target.files);
+    }
+
+    function handleFile(file) {
+        file = file[0];
+
+        const imageUrl = URL.createObjectURL(file);
+        props.setImage({
+            file: file,
+            url: imageUrl
+        });
+
+        fileInputTextRef.current.textContent = "Change image";
+    }
+
+    function handleToggleItemFree(e) {
+        const checked = e.target.checked;
+        priceInputRef.current.disabled = checked;
+        setItemIsFree(checked);
+
+        if (checked) {
+            props.setPrice("Free");
+        }
+        else {
+            props.setPrice(priceInputRef.current.value);
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -135,8 +149,8 @@ export default function addItemForm(props) {
 
         const newListing = {
             id: listingId,
-            name: props.title,
-            price: parseFloat(props.price),
+            name: props.name,
+            price: typeof props.price == "number" ? props.price : "Free",
             availableUntil: props.date,
             description: props.description,
             createdAt: new Date(),
@@ -159,9 +173,13 @@ export default function addItemForm(props) {
             <form onSubmit={handleSubmit}>
                 <h3>Basic Info</h3>
                 <label htmlFor="name">Item name</label>
-                <input type="text" name="name" id="name" aria-label="name" placeholder="Name" maxLength={50} onChange={(e) => { props.setTitle(e.target.value) }} autoFocus required />
+                <input type="text" name="name" id="name" aria-label="name" placeholder="Name" maxLength={50} onChange={(e) => { props.setName(e.target.value) }} autoFocus required />
                 <label htmlFor="price">Item price</label>
-                <input type="number" name="price" id="price" placeholder="Price (SGD)" min={0} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(e.target.value) }} required />
+                <input ref={priceInputRef} type="number" name="price" id="price" placeholder="Price (SGD)" min={0.01} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(parseFloat(e.target.value)) }} required />
+                <div className={styles["toggle-free"]}>
+                    <input type="checkbox" id="free-item" onChange={handleToggleItemFree} />
+                    <label htmlFor="free-item">Free</label>
+                </div>
                 <label htmlFor="date">Available until</label>
                 <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} />
                 <label ref={dropZoneRef} className={styles["add-image-button"]}>
