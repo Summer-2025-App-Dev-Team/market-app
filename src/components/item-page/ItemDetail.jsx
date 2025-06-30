@@ -119,12 +119,19 @@ export default function ItemDetail() {
       });
 
       const chatRef = ref(realtimedb, `chats/${chatId}`);
+      
+      if (user.uid != item.user) {
+        await update(chatRef, {
+          user1: user.uid,
+          user2: item.user,
+          chats: {},
+        });
 
-      await update(chatRef, {
-        user1: user.uid,
-        user2: item.user,
-        chats: {},
-      });
+      }
+
+      
+      
+      
     }
     
     navigate("/chat/"+chatId);
