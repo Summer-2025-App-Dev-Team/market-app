@@ -4,7 +4,7 @@ import { db , realtimedb} from "../lib/firebase";
 import { doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from "firebase/firestore";
 import { ref, update } from "firebase/database";
 import chatIcon from "/chat-icon.png";
-import styles from "../../assets/css/chat.module.css";
+import styles from "../../assets/css/itemdetail.module.css";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 
@@ -33,7 +33,7 @@ export default function ItemDetail() {
             console.log(doc.id);
             console.log(listing);
           }
-        });
+        });f
       });
 
       if (docSnap.exists()) {
