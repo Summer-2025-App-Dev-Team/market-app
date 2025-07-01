@@ -176,10 +176,11 @@ export default function addItemForm(props) {
                 <input type="text" name="name" id="name" aria-label="name" placeholder="Name" maxLength={50} onChange={(e) => { props.setName(e.target.value) }} autoFocus required />
                 <label htmlFor="price">Item price</label>
                 <input ref={priceInputRef} type="number" name="price" id="price" placeholder="Price (SGD)" min={0.01} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(parseFloat(e.target.value)) }} required />
-                <div className={styles["toggle-free"]}>
-                    <input type="checkbox" id="free-item" onChange={handleToggleItemFree} />
-                    <label htmlFor="free-item">Free</label>
-                </div>
+                <label className={styles["toggle-free"]}>
+                    Free
+                    <input type="checkbox" id="free-item" className={styles["free-checkbox"]} onChange={handleToggleItemFree} />
+                    <span></span>
+                </label>
                 <label htmlFor="date">Available until</label>
                 <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} required />
                 <label ref={dropZoneRef} className={styles["add-image-button"]}>

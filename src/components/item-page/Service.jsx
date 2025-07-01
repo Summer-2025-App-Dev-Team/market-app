@@ -48,7 +48,7 @@ export default function Service(props) {
         <p>{username}</p>
         {props.noStars ? "" : <Rating />}
       </div>
-      <span className={styles.price}>{price}</span>
+      <span className={`${styles.price} ${price.toLowerCase() == "free" ? styles.free : ""}`}>{price}</span>
     </div>
   )
 }

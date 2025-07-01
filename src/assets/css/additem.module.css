@@ -53,21 +53,65 @@
 }
 
 .toggle-free {
-    display: flex;
+    position: relative;
+    display: inline-block;
     align-items: center;
     gap: 5px;
     margin-bottom: 10px;
+    padding-left: 23px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.toggle-free>input,
-.toggle-free>label {
-    user-select: none;
+.toggle-free:hover>span {
+    background-color: rgb(211, 211, 211);
+}
+
+.toggle-free>input {
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
     cursor: pointer;
 }
 
-.toggle-free::checkmark {
-    width: 50px;
-    height: 50px;
+.toggle-free>input:checked+span {
+    background-color: lightskyblue;
+}
+
+.toggle-free>input:checked+span::after {
+    display: inline-block !important;
+}
+
+.toggle-free>span {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: rgb(225, 225, 225);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.toggle-free>span::after {
+    content: "";
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    translate: -50% -50%;
 }
 
 .add-image-button {
