@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { db, realtimedb } from "../lib/firebase";
+import { db , realtimedb} from "../lib/firebase";
 import { doc, getDoc, getDocs, collection, updateDoc, arrayUnion } from "firebase/firestore";
 import { ref, update } from "firebase/database";
 import chatIcon from "/chat-icon.png";
-import styles from "../../assets/css/itemdetail.module.css";
+import styles from "../../assets/css/chat.module.css";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 
@@ -15,7 +15,6 @@ export default function ItemDetail() {
   const largeImageRef = useRef(null);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
-  console.log(styles);
   useEffect(() => {
     async function fetchItemData() {
       const docRef = doc(db, "allListings", ID);
@@ -92,13 +91,8 @@ export default function ItemDetail() {
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
   async function handleSeller() {
-<<<<<<< HEAD
-    console.log("user", user);
-    const buyUserDocRef = doc(db, "userListings", user.uid);
-=======
     console.log("user",user);
     const buyUserDocRef = doc(db, "userStuff", user.uid);
->>>>>>> bcff157 (changed var names)
     const buyUserSnap = await getDoc(buyUserDocRef);
 
     const sellUserDocRef = doc(db, "userStuff", item.user);
