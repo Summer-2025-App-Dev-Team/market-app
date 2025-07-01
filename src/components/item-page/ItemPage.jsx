@@ -18,15 +18,16 @@ async function fetchAllListings() {
         return [];
     }
 }
+
 async function updateAllListingsToNewFormat() {
     const querySnapshot = await getDocs(collection(db, "userListings"));
-    for(const userDoc of querySnapshot.docs){
+    for (const userDoc of querySnapshot.docs) {
         const data = userDoc.data();
         const listings = data.listings;
-        
+
         const now = Date.now();
-        
-        
+
+
         const updatedListings = await Promise.all(listings.map(async (listing) => {
             let currentStatus = "Unknown";
             const endTime = listing.availableUntil;
@@ -48,15 +49,16 @@ async function updateAllListingsToNewFormat() {
             };
 
             const allDocRef = doc(db, "allListings", updatedListing.id);
-            await setDoc (allDocRef, updatedListing);
+            await setDoc(allDocRef, updatedListing);
 
             return updatedListing;
         }));
 
         const docRef = doc(db, "userListings", userDoc.id);
-        await updateDoc(docRef, {listings: updatedListings});
+        await updateDoc(docRef, { listings: updatedListings });
     };
 }
+
 export default function ItemPage() {
     updateAllListingsToNewFormat();
     useEffect(() => {
@@ -90,11 +92,10 @@ export default function ItemPage() {
     if (query == null) {
         query = "";
     }
-    const exampleResults = [];
 
+    const exampleResults = [];
     const [results, setResults] = useState(exampleResults);
     const [sortBy, setSortBy] = useState("rating");
-
 
     useEffect(() => {
         async function loadListings() {
@@ -102,12 +103,11 @@ export default function ItemPage() {
             const filtered = listings.filter(listing => {
                 return query == "" | listing.name?.toLowerCase().includes(query.toLowerCase());
             });
-            console.log(filtered);
+            console.log("Filtered:", filtered);
             setResults(listings.length ? filtered : exampleResults);
         }
         loadListings();
-    }, []);
-
+    }, [query]);
 
     function sortchange(newSort) {
         setSortBy(newSort);
@@ -122,7 +122,6 @@ export default function ItemPage() {
 
         setResults(sorted);
     }
-
 
     return (
         <div className={styles["item-page"]}>

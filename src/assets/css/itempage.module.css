@@ -16,6 +16,8 @@
 }
 
 .description {
+    /* set display to none since we are not using it */
+    display: none;
     margin-top: 30px;
     font-size: 16px;
 }
@@ -130,6 +132,7 @@
     }
 
     .description {
+        display: none;
         margin-top: 10px;
         font-size: 14px;
     }

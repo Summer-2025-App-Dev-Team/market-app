@@ -40,7 +40,7 @@ export default function Header({ scrollTargetRef }) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const value = formData.get("search-box");
-        window.location.href = `/?q=${value}`;
+        navigate(`/?q=${value}`);
     }
 
     function handleSearchOnChange(e) {
