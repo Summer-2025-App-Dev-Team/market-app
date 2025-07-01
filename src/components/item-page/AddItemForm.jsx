@@ -133,7 +133,7 @@ export default function addItemForm(props) {
         e.preventDefault();
         setIsLoading(true);
 
-        const userDocRef = doc(db, "userListings", user.uid);
+        const userDocRef = doc(db, "userStuff", user.uid);
 
         const docSnap = await getDoc(userDocRef);
         if (!docSnap.exists()) {

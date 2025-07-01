@@ -20,14 +20,13 @@ async function fetchAllListings() {
 }
 
 async function updateAllListingsToNewFormat() {
-    const querySnapshot = await getDocs(collection(db, "userListings"));
-    for (const userDoc of querySnapshot.docs) {
+    const querySnapshot = await getDocs(collection(db, "userStuff"));
+    for(const userDoc of querySnapshot.docs){
         const data = userDoc.data();
         const listings = data.listings;
 
         const now = Date.now();
-
-
+        
         const updatedListings = await Promise.all(listings.map(async (listing) => {
             let currentStatus = "Unknown";
             const endTime = listing.availableUntil;
@@ -54,13 +53,13 @@ async function updateAllListingsToNewFormat() {
             return updatedListing;
         }));
 
-        const docRef = doc(db, "userListings", userDoc.id);
-        await updateDoc(docRef, { listings: updatedListings });
+        const docRef = doc(db, "userStuff", userDoc.id);
+        await updateDoc(docRef, {listings: updatedListings});
     };
 }
 
 export default function ItemPage() {
-    updateAllListingsToNewFormat();
+    //updateAllListingsToNewFormat();
     useEffect(() => {
         const handleElementOnScroll = (e) => {
             // idk why but I have to -1 to the scrollWidth to make it work

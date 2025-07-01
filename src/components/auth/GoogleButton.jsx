@@ -19,7 +19,7 @@ export default function GoogleLoginButton(props) {
       setUser(user, true);
 
       if (result._tokenResponse?.isNewUser) {
-        const userDocRef = doc(db, "userListings", user.uid);
+        const userDocRef = doc(db, "userStuff", user.uid);
         await setDoc(userDocRef, {
           name: user.displayName,
           photoURL: user.photoURL || null,

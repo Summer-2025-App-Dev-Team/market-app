@@ -14,7 +14,7 @@ export default function Profile() {
 
     useEffect(() => {
         async function fetchUserListings() {
-            const docRef = doc(db, "userListings", uid);
+            const docRef = doc(db, "userStuff", uid);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {

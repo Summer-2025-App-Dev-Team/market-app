@@ -15,13 +15,13 @@ export default function ItemDetail() {
   const largeImageRef = useRef(null);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
-
+  console.log(styles);
   useEffect(() => {
     async function fetchItemData() {
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
 
-      const defaultRef = collection(db, "userListings");
+      const defaultRef = collection(db, "userStuff");
       const collecSnap = await getDocs(defaultRef);
 
       //not running code, but returning objects // Return an object explicitly : () => ({ key: value }) //Run a block of code : () => { let x = 1; return x; }
@@ -92,11 +92,16 @@ export default function ItemDetail() {
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
   async function handleSeller() {
+<<<<<<< HEAD
     console.log("user", user);
     const buyUserDocRef = doc(db, "userListings", user.uid);
+=======
+    console.log("user",user);
+    const buyUserDocRef = doc(db, "userStuff", user.uid);
+>>>>>>> bcff157 (changed var names)
     const buyUserSnap = await getDoc(buyUserDocRef);
 
-    const sellUserDocRef = doc(db, "userListings", item.user);
+    const sellUserDocRef = doc(db, "userStuff", item.user);
     const sellUserSnap = await getDoc(sellUserDocRef);
 
     const buyerChats = buyUserSnap.data()?.chats || [];

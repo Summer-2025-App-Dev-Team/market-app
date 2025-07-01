@@ -20,7 +20,7 @@ export default function Service(props) {
     const fetchUsername = async () => {
       if (props.user) {
         try {
-          const userDocRef = doc(db, "userListings", props.user);
+          const userDocRef = doc(db, "userStuff", props.user);
           const userSnap = await getDoc(userDocRef);
           if (userSnap.exists()) {
             setUsername(userSnap.data().name || "User");

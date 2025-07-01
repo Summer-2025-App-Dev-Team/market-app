@@ -44,7 +44,7 @@ export default function ChatRoomPreview({chatId}) {
 
             const fetchUser = async () => {
             try {
-                const userDocRef = doc(db, "userListings", userId);
+                const userDocRef = doc(db, "userStuff", userId);
                 const userSnap = await getDoc(userDocRef);
                 if (userSnap.exists()) {
                 setOtherUser(userSnap.data().name);

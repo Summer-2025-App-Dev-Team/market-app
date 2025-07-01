@@ -50,7 +50,7 @@ export default function SignUpForm() {
         handleCodeInApp: false
       };
 
-      const userDocRef = doc(db, "userListings", userCredential.user.uid);
+      const userDocRef = doc(db, "userStuff", userCredential.user.uid);
       await setDoc(userDocRef, {
         name: name,
         photoURL: user.photoURL || null,

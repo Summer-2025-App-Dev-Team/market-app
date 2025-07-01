@@ -14,7 +14,7 @@ export default function ChatHome() {
     useEffect(() => {
         const fetchChats = async () => {
             if (!user) return;
-            const userDocRef = doc(db, "userListings", user.uid);
+            const userDocRef = doc(db, "userStuff", user.uid);
             const userSnap = await getDoc(userDocRef);
             const chats = userSnap.data()?.chats ?? [];
             setChats(chats);
