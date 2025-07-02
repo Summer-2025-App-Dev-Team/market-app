@@ -163,11 +163,17 @@ header>nav .user-dropdown .user {
     font-size: 1.2rem;
     font-weight: bold;
     color: darkred;
+    transition: 0.3s;
+    user-select: none;
     cursor: pointer;
 }
 
 header>nav .user-dropdown .user:hover {
     text-decoration: underline;
+}
+
+header>nav .user-dropdown .user:active {
+    opacity: 0.6;
 }
 
 header>nav .user-dropdown ul {

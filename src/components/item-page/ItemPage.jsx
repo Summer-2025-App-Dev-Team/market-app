@@ -21,12 +21,12 @@ async function fetchAllListings() {
 
 async function updateAllListingsToNewFormat() {
     const querySnapshot = await getDocs(collection(db, "userStuff"));
-    for(const userDoc of querySnapshot.docs){
+    for (const userDoc of querySnapshot.docs) {
         const data = userDoc.data();
         const listings = data.listings;
 
         const now = Date.now();
-        
+
         const updatedListings = await Promise.all(listings.map(async (listing) => {
             let currentStatus = "Unknown";
             const endTime = listing.availableUntil;
@@ -54,7 +54,7 @@ async function updateAllListingsToNewFormat() {
         }));
 
         const docRef = doc(db, "userStuff", userDoc.id);
-        await updateDoc(docRef, {listings: updatedListings});
+        await updateDoc(docRef, { listings: updatedListings });
     };
 }
 
@@ -108,14 +108,39 @@ export default function ItemPage() {
         loadListings();
     }, [query]);
 
-    function sortchange(newSort) {
+    function sortChange(newSort) {
         setSortBy(newSort);
 
         // Create a shallow copy of results and sort
         const sorted = [...results].sort((a, b) => {
-            if (newSort === "price") return a.price - b.price;
-            if (newSort === "rating") return b.rating - a.rating;
-            if (newSort === "newest") return new Date(b.date) - new Date(a.date);
+            if (newSort === "price") {
+                if (typeof a.price == "string" && typeof b.price == "number") {
+                    // if a is string and b is number, then a is less than b
+                    return 1;
+                } else if (typeof a.price == "number" && typeof b.price == "string") {
+                    // if a is number and b is string, then a is greater than b
+                    return -1;
+                } else if (typeof a.price == "string" && typeof b.price == "string") {
+                    // if both are strings, then keep the original order
+                    return 0;
+                }
+                // if both are numbers, then sort by price
+                return a.price - b.price;
+            }
+            else if (newSort === "rating") {
+                return b.rating - a.rating;
+            }
+            else if (newSort === "newest") {
+                if (b.availableUntil > a.availableUntil) {
+                    return 1; // b is newer than a
+                }
+                else if (a.availableUntil > b.availableUntil) {
+                    return -1; // a is newer than b
+                }
+                else {
+                    return 0; // both dates are equal
+                }
+            }
             return 0;
         });
 
@@ -128,7 +153,7 @@ export default function ItemPage() {
                 <h1>Items</h1>
             </div>
             <p className={styles.description}></p>
-            <SearchHeading searchParam={query} results={results} sortchange={sortchange} />
+            <SearchHeading searchParam={query} results={results} sortchange={sortChange} />
             <FilterBar />
             <ItemGrid results={results} />
         </div>

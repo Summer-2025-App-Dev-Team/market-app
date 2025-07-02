@@ -30,29 +30,34 @@
     overflow-x: auto;
 }
 
-.searchheading {
+.search-heading {
     font-size: 24px;
     font-weight: 500;
     margin-top: 20px;
     margin-bottom: 15px;
 }
 
-.sort {
-    padding: 7px 15px;
-    border-radius: 6px;
-    font-size: 16px;
-    margin: auto;
-    margin-right: 0;
-    height: min-content;
+.search-container {
+    display: flex;
+    align-items: center;
 }
 
-.searchContainer {
-    display: flex;
+.sort {
+    padding: 5px 10px;
+    padding-right: 0;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-left: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+.sort:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .scroll-container::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Opera */
 }
 
 .scroll-wrapper {
