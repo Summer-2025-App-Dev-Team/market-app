@@ -5,12 +5,15 @@ import logo from "/app-logo.png";
 import UserPhoto from "./UserPhoto";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 
 export default function Header({ scrollTargetRef }) {
     const user = useAuthStore((state) => state.user);
-    const headerRef = useRef(null);
     const [showBurger, setShowBurger] = useState(false);
+    const headerRef = useRef(null);
+    const searchBoxRef = useRef(null);
+    const [searchParams] = useSearchParams();
+    const searchQuery = searchParams.get("q") || "";
     const navigate = useNavigate();
 
     function handleBurgerIconOnClick(e) {
@@ -54,6 +57,11 @@ export default function Header({ scrollTargetRef }) {
     }
 
     useEffect(() => {
+        // Update the searchbox when the query param changes
+        searchBoxRef.current.value = searchQuery;
+    }, [searchQuery]);
+
+    useEffect(() => {
         const handleKeyDown = (e) => {
             if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
                 return;
@@ -79,7 +87,7 @@ export default function Header({ scrollTargetRef }) {
             el.style.outline = "5px solid transparent";
         };
 
-        const handleScroll = (e) => {
+        const handleScroll = () => {
             if (el.scrollTop >= 50) {
                 headerRef.current.classList.add(styles.scrolled);
             } else {
@@ -127,6 +135,7 @@ export default function Header({ scrollTargetRef }) {
                 <div className={styles["search-wrapper"]}>
                     <form onSubmit={handleSearchSubmit}>
                         <input
+                            ref={searchBoxRef}
                             type="search"
                             placeholder="Search"
                             name="search-box"

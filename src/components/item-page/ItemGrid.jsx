@@ -3,6 +3,7 @@ import Service from "./Service"
 
 export default function ItemGrid(props) {
     const buttons = props.results.map((result) => {
+        console.log(result);
         return <Service {...result} />
     })
 

@@ -85,12 +85,9 @@ export default function ItemPage() {
     }, []);
 
     const [searchParams] = useSearchParams();
-    let query = searchParams.get('q'); // e.g. ?query=hello
-
-    // there has to be some query, otherwise will return errors
-    if (query == null) {
-        query = "";
-    }
+    // e.g. ?query=hello
+    // When there is no query, automatically sets it to empty
+    const query = searchParams.get('q') || "";
 
     const exampleResults = [];
     const [results, setResults] = useState(exampleResults);
@@ -102,7 +99,6 @@ export default function ItemPage() {
             const filtered = listings.filter(listing => {
                 return query == "" | listing.name?.toLowerCase().includes(query.toLowerCase());
             });
-            console.log("Filtered:", filtered);
             setResults(listings.length ? filtered : exampleResults);
         }
         loadListings();

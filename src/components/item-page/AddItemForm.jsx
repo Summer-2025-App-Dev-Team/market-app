@@ -85,33 +85,25 @@ export default function addItemForm(props) {
     }, []);
 
     function handleFileInput(e) {
+        // Maximum 5 images
+        if (e.target.files.length > 5) {
+            alert("You may only upload a maximum of 5 files!");
+            e.preventDefault();
+            return;
+        }
         handleFile(e.target.files);
     }
 
-    function handleFile(file) {
-        file = file[0];
-
-        const imageUrl = URL.createObjectURL(file);
-        props.setImage({
-            file: file,
-            url: imageUrl
-        });
-
-        fileInputTextRef.current.textContent = "Change image";
-    }
-
-    function handleFileInput(e) {
-        handleFile(e.target.files);
-    }
-
-    function handleFile(file) {
-        file = file[0];
-
-        const imageUrl = URL.createObjectURL(file);
-        props.setImage({
-            file: file,
-            url: imageUrl
-        });
+    function handleFile(files) {
+        const imageURLs = [];
+        for (const file of files) {
+            const imageURL = URL.createObjectURL(file);
+            imageURLs.push({
+                file: file,
+                url: imageURL
+            });
+        }
+        props.setImage(imageURLs);
 
         fileInputTextRef.current.textContent = "Change image";
     }
@@ -139,10 +131,11 @@ export default function addItemForm(props) {
         if (!docSnap.exists()) {
             await setDoc(userDocRef, { listings: [] });
         }
-        console.log("Starting upload...");
 
-        const imageUrl = props.image?.file ? await upload(props.image.file) : null;
-        console.log("Finished upload")
+        console.log("Starting upload...");
+        const imageURLs = props.image ? await upload(props.image) : null;
+        console.log("Finished upload!")
+
         const listingId = crypto.randomUUID();
 
         const listDocRef = doc(db, "allListings", listingId);
@@ -150,13 +143,13 @@ export default function addItemForm(props) {
         const newListing = {
             id: listingId,
             name: props.name,
-            price: typeof props.price == "number" ? props.price : "Free",
+            price: itemIsFree ? "Free" : props.price,
             availableUntil: props.date,
             description: props.description,
             createdAt: new Date(),
             status: "available",
             user: user.uid,
-            image: imageUrl || null
+            image: imageURLs || null
         };
 
         await updateDoc(userDocRef, {
@@ -184,7 +177,7 @@ export default function addItemForm(props) {
                 <label htmlFor="date">Available until</label>
                 <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} required />
                 <label ref={dropZoneRef} className={styles["add-image-button"]}>
-                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden />
+                    <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden multiple />
                     {/* Changed from img to svg */}
                     <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"></path></svg>
                     <span ref={fileInputTextRef} className={styles["file-upload-label"]}>Add image</span>
