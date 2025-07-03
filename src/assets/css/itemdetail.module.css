@@ -141,6 +141,7 @@ button.contact:hover {
   margin-bottom: 5px;
   margin-top: auto;
   transition: 0.3s;
+  border: 0cap;
 }
 
 .chatLink:hover {

@@ -23,12 +23,8 @@ export default function Chat() {
             return;
         }
 
-        // // Check if the user is trying to access their own chat
-        // if (targetUID === user.uid) {
-        //     alert("You cannot chat with yourself.");
-        //     navigate("/");
-        //     return;
-        // }
+        // Check if the user is trying to access their own chat
+        
 
         // console.log(`User ${user.uid} is trying to chat with user ${targetUID}`);
     }, [user, navigate]);
@@ -59,14 +55,17 @@ export default function Chat() {
     async function handleSubmit(e){
         e.preventDefault()
         const messageId = crypto.randomUUID();
-
+        const time = Date.now()
         const messageRef = ref(realtimedb, `chats/${chatId}/chats/${messageId}`);
-
+        
         await set(messageRef, {
         sender: user.uid,
         text: input,
-        timestamp: Date.now()
-        });
+            timestamp: time,
+        
+        }
+        );
+        console.log("Message sent:", time);
 
     }
 
