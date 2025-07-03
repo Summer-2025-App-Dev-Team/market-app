@@ -15,7 +15,27 @@
   flex-direction: column;
   margin: 4px 0;
 }
+.status{
+  font-size: 25px;
+  color:#000000;
+  max-width: 200px;
+  align-items: center;
+  text-align: center;
+  .available{
+    background-color: #2cb506;
+    border-radius: 10px;
+  }
+  .unavailable{
+    background-color: #a22e00;
+    border-radius: 10px;
+  }
+  .reserved{
+    background-color: #cda30c;
+    border-radius: 10px;
+  }
+  
 
+}
 .own {
   align-items: flex-end;
 }

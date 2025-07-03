@@ -47,7 +47,23 @@ export default function ItemDetail() {
             data.createdAt.seconds * 1000 + data.createdAt.nanoseconds / 1e6
           ).toLocaleString();
         }
+        if(data.status === "available"){
+          let currentStatus = "n/a"
+          const endTime = data.availableUntil;
+          const normalizedEndTime = endTime.replace(" at ", " ");
+          const endTimeObj = new Date(normalizedEndTime);
 
+          if (!isNaN(endTimeObj.getTime())) {
+              if (endTimeObj.getTime() < Date.now()) {
+                currentStatus = "unavailable";
+              } else {
+                currentStatus = "available";
+              }
+          }
+          data.status = currentStatus;
+        }
+        
+        console.log(data.status);
         setItem(data);
       }
     }
@@ -151,9 +167,13 @@ export default function ItemDetail() {
       <div className={styles.infoColumn}>
         {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
         {item?.availableUntil && (
-          <p className={styles.availability}>
-            Available until: {item.availableUntil}
-          </p>
+          <div className={styles.status}>
+            { item.status === "available"
+              ? <div className={styles.available}>Available until: {item.availableUntil}</div> 
+              : item.status === "reserved"
+              ?<div className={styles.reserved}>Reserved</div>
+              :<div className={styles.unavailable}>Unavailable</div> }
+          </div>
         )}
         {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
 
