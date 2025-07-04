@@ -113,6 +113,7 @@ export default function ItemDetail() {
 
   // handles the chat system
   async function handleSeller() {
+    setLoading(true);
     console.log("user", user);
     const buyUserDocRef = doc(db, "userStuff", user.uid);
     const buyUserSnap = await getDoc(buyUserDocRef);
@@ -156,7 +157,7 @@ export default function ItemDetail() {
         });
       }
     }
-
+    setLoading(false);
     navigate("/chat/" + chatId);
   }
 
