@@ -18,6 +18,7 @@ import useAuthStore from "../store/useAuthStore";
 export default function ItemDetail() {
   const ID = useParams().id; //item id
   const [item, setItem] = useState(null); //the item variable which is set variable with setItem function
+  const [loading, setLoading] = useState(true);
   const zoomImageBgRef = useRef(null);
   const zoomImageRef = useRef(null);
   const [selectedImg, setSelectedImg] = useState(null);
@@ -26,6 +27,7 @@ export default function ItemDetail() {
 
   useEffect(() => {
     async function fetchItemData() {
+      setLoading(true);
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
 
@@ -73,6 +75,7 @@ export default function ItemDetail() {
 
         console.log(data.status);
         setItem(data);
+        setLoading(false);
       }
     }
     fetchItemData();
@@ -158,43 +161,44 @@ export default function ItemDetail() {
   }
 
   return (
-    <div className={styles.container}>
-      {item?.image && <Slideshow image={item.image} setSelectedImg={setSelectedImg} />}
-      <div className={styles.infoColumn}>
-        {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
-        {item?.availableUntil && (
-          <div className={styles.status}>
-            {item.status === "available"
-              ? <div className={styles.available}>Available until: {item.availableUntil}</div>
-              : item.status === "reserved"
-                ? <div className={styles.reserved}>Reserved</div>
-                : <div className={styles.unavailable}>Unavailable</div>}
-          </div>
-        )}
-        {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
+    loading ? <div className={styles.loadingWrapper}><div className={styles.loadingText}>Loading</div></div> :
+      <div className={styles.container}>
+        {item?.image && <Slideshow image={item.image} setSelectedImg={setSelectedImg} />}
+        <div className={styles.infoColumn}>
+          {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
+          {item?.availableUntil && (
+            <div className={styles.status}>
+              {item.status === "available"
+                ? <div className={styles.available}>Available until: {item.availableUntil}</div>
+                : item.status === "reserved"
+                  ? <div className={styles.reserved}>Reserved</div>
+                  : <div className={styles.unavailable}>Unavailable</div>}
+            </div>
+          )}
+          {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
 
-        {item?.description && (
-          <p className={styles.description}>{item.description}</p>
-        )}
+          {item?.description && (
+            <p className={styles.description}>{item.description}</p>
+          )}
 
-        {/* <div className={styles.chatButtonWrapper}> */}
-        {/* <button className={styles.buyButton}> */}
-        {/* when the buyers clicks the contact button*/}
-        {/* conditional rendering to check if the user is not the seller */}
-        {user?.uid && item?.user && user?.uid !== item.user && (
-          <button onClick={handleSeller} className={styles.chatLink}>
-            <img className={styles.chatIcon} src={chatIcon}></img>
-          </button>
-        )}
+          {/* <div className={styles.chatButtonWrapper}> */}
+          {/* <button className={styles.buyButton}> */}
+          {/* when the buyers clicks the contact button*/}
+          {/* conditional rendering to check if the user is not the seller */}
+          {user?.uid && item?.user && user?.uid !== item.user && (
+            <button onClick={handleSeller} className={styles.chatLink}>
+              <img className={styles.chatIcon} src={chatIcon}></img>
+            </button>
+          )}
 
-        {item?.createdAt && (
-          <p className={styles.createdAt}>Created at: {item.createdAt}</p>
-        )}
+          {item?.createdAt && (
+            <p className={styles.createdAt}>Created at: {item.createdAt}</p>
+          )}
+        </div>
+
+        <div ref={zoomImageBgRef} className={styles.zoomImage}>
+          <img ref={zoomImageRef} src={null} alt="zoom-in picture" draggable={false} />
+        </div>
       </div>
-
-      <div ref={zoomImageBgRef} className={styles.zoomImage}>
-        <img ref={zoomImageRef} src={null} alt="zoom-in picture" draggable={false} />
-      </div>
-    </div>
   );
 }
