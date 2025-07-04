@@ -25,24 +25,25 @@ export default function Header({ scrollTargetRef }) {
     //gets all necessary user datas
     userRef = doc(db, "userStuff", user.uid);
     userSnap = await getDoc(userRef);
-    userData = userSnap.data();
+    if (userSnap.exists()) {
+      userData = userSnap.data();
+    }
+    
   }
 
-  useEffect(() => {
-    if (user) {
-      getUser().then(() => {
-        userchat = userData.chat; //getting all the chat ids
-        console.log(userchat);
+  if (user) {
+    getUser().then(() => {
+      userchat = userData.chats; //getting all the chat ids 
 
-        if (userchat) {
-          messages = userchat.map((id, data) => {
-            console.log(id);
-            console.log(data);
-          });
-        }
-      });
-    }
-  }, [user]);
+      if (userchat) {
+        const messages = userchat.map((id, data) => {
+          console.log(userchat)
+          console.log("id:", id);
+          console.log("data:", data);
+        });
+      }
+    });
+  }
 
   const headerRef = useRef(null);
   const [showBurger, setShowBurger] = useState(false);

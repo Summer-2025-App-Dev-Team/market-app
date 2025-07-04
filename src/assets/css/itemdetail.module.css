@@ -122,7 +122,7 @@ button.contact:hover {
   pointer-events: auto;
 }
 
-.largeImageContainer>img {
+.largeImageContainer > img {
   position: relative;
   width: auto;
   height: auto;
@@ -161,28 +161,44 @@ button.contact:hover {
   transition: 0.3s;
 }
 
-.chatLink:hover>.chatIcon {
+.chatLink:hover > .chatIcon {
   background: #e0ebff;
 }
 
-.status{
+.status {
   font-size: 25px;
-  color:#000000;
+  color: #000000;
   max-width: 200px;
   align-items: center;
   text-align: center;
-  .available{
-    background-color: #2cb506;
-    border-radius: 10px;
+  .available {
+    font-size: 1rem;
+    color: #2ecc71;
+    padding: 0.5rem;
+    background: #ecfdf5;
+    border: 1px solid #2ecc71;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: fit-content;
   }
-  .unavailable{
-    background-color: #a22e00;
-    border-radius: 10px;
+  .unavailable {
+    font-size: 1rem;
+    color: #000000;
+    padding: 0.5rem;
+    background: #fdecec;
+    border: 1px solid #ff0000;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: fit-content;
   }
-  .reserved{
-    background-color: #cda30c;
-    border-radius: 10px;
+  .reserved {
+    font-size: 1rem;
+    color: #000000;
+    padding: 0.5rem;
+    background: #fdfbec;
+    border: 1px solid #ffbb00;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    width: fit-content;
   }
-  
-
 }
