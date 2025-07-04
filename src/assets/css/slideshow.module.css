@@ -1,0 +1,88 @@
+.image-slideshow {
+    position: relative;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.image-slideshow img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    animation: fade 0.5s;
+}
+
+.image-slideshow .dots {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.image-slideshow .dots>span {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: rgba(128, 128, 128, 0.2);
+    user-select: none;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.image-slideshow .dots>span:hover,
+.image-slideshow .dots>span.active {
+    background-color: rgba(128, 128, 128, 0.8) !important;
+}
+
+.image-slideshow:hover>svg,
+.image-slideshow:hover .dots>span {
+    background-color: rgba(128, 128, 128, 0.4);
+}
+
+.image-slideshow>svg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-block: 5px;
+    width: 2.5rem;
+    color: white;
+    background-color: rgba(128, 128, 128, 0.2);
+    transition: 0.3s;
+    pointer-events: auto;
+    cursor: pointer;
+    user-select: none;
+}
+
+.image-slideshow>svg:hover {
+    background-color: rgba(128, 128, 128, 0.8);
+}
+
+.image-slideshow>svg.prev {
+    left: 0;
+    padding-right: 5px;
+    border-radius: 0 3px 3px 0;
+}
+
+.image-slideshow>svg.next {
+    right: 0;
+    padding-left: 5px;
+    border-radius: 3px 0 0 3px;
+}
+
+
+@keyframes fade {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

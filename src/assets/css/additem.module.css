@@ -207,10 +207,6 @@
     border-radius: 5px;
 }
 
-.preview img {
-    max-width: 300px;
-}
-
 .preview>h2 {
     text-align: center;
     margin-bottom: 20px;

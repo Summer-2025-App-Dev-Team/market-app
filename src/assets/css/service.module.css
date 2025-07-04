@@ -7,88 +7,12 @@
     transition: 0.3s;
 }
 
-.service-wrapper:not(:has(.preview)) {
+.service-wrapper:not(.preview) {
     cursor: pointer;
 }
 
-.service-wrapper:hover:not(:has(.preview)) {
+.service-wrapper:not(.preview):hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
-
-.service-wrapper .image-slideshow img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    object-position: center;
-    user-select: none;
-    animation: fade 0.5s;
-}
-
-.service-wrapper .image-slideshow {
-    position: relative;
-    max-height: 150px;
-    overflow: hidden;
-}
-
-.service-wrapper .image-slideshow .dots {
-    position: absolute;
-    bottom: 5px;
-    width: 100%;
-    height: max-content;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.service-wrapper .image-slideshow .dots>span {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    background-color: rgba(128, 128, 128, 0.4);
-    user-select: none;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.service-wrapper .image-slideshow .dots>span:hover,
-.service-wrapper .image-slideshow .dots>span.active {
-    background-color: rgba(128, 128, 128, 0.8);
-}
-
-.service-wrapper .image-slideshow:hover>svg {
-    background-color: rgba(128, 128, 128, 0.4);
-}
-
-.service-wrapper .image-slideshow>svg {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    padding-block: 5px;
-    width: 2.5rem;
-    color: white;
-    transition: 0.3s;
-    pointer-events: auto;
-    cursor: pointer;
-    user-select: none;
-}
-
-.service-wrapper .image-slideshow>svg:hover {
-    background-color: rgba(128, 128, 128, 0.8);
-}
-
-.service-wrapper .image-slideshow>svg.prev {
-    left: 0;
-    padding-right: 5px;
-    border-radius: 0 3px 3px 0;
-}
-
-.service-wrapper .image-slideshow>svg.next {
-    right: 0;
-    padding-left: 5px;
-    border-radius: 3px 0 0 3px;
 }
 
 .item-info {
@@ -153,15 +77,5 @@
 @media only screen and (max-width: 565px) {
     .service-wrapper {
         padding: 10px;
-    }
-}
-
-@keyframes fade {
-    from {
-        opacity: 0.4;
-    }
-
-    to {
-        opacity: 1;
     }
 }
