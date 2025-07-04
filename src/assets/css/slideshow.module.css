@@ -15,6 +15,12 @@
     animation: fade 0.5s;
 }
 
+/* If the image is just a placeholder */
+.image-slideshow img.default {
+    cursor: default;
+    pointer-events: none;
+}
+
 .image-slideshow .dots {
     position: absolute;
     bottom: 5px;

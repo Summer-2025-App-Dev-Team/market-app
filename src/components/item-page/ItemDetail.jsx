@@ -18,6 +18,9 @@ import useAuthStore from "../store/useAuthStore";
 export default function ItemDetail() {
   const ID = useParams().id; //item id
   const [item, setItem] = useState(null); //the item variable which is set variable with setItem function
+  const zoomImageBgRef = useRef(null);
+  const zoomImageRef = useRef(null);
+  const [selectedImg, setSelectedImg] = useState(null);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
@@ -75,6 +78,33 @@ export default function ItemDetail() {
     fetchItemData();
   }, [ID]);
 
+  useEffect(() => {
+    try {
+      selectedImg.src;
+    }
+    catch {
+      return;
+    }
+
+    selectedImg?.src ? zoomImageRef.current.src = selectedImg.src : "";
+    zoomImageBgRef.current.classList.add(styles.show);
+
+    function handleClick(e) {
+      if (e.target !== zoomImageRef.current) {
+        zoomImageBgRef.current.classList.remove(styles.show);
+        document.removeEventListener("click", handleClick);
+        zoomImageRef.current.src = "";
+        setSelectedImg(null);
+      }
+    }
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    }
+  }, [selectedImg]);
+
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
   item?.name: “If item is not null or undefined, then give me item.name. Otherwise, give undefined.”*/
 
@@ -129,7 +159,7 @@ export default function ItemDetail() {
 
   return (
     <div className={styles.container}>
-      {item?.image && <Slideshow image={item.image} />}
+      {item?.image && <Slideshow image={item.image} setSelectedImg={setSelectedImg} />}
       <div className={styles.infoColumn}>
         {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
         {item?.availableUntil && (
@@ -160,6 +190,10 @@ export default function ItemDetail() {
         {item?.createdAt && (
           <p className={styles.createdAt}>Created at: {item.createdAt}</p>
         )}
+      </div>
+
+      <div ref={zoomImageBgRef} className={styles.zoomImage}>
+        <img ref={zoomImageRef} src={null} alt="zoom-in picture" draggable={false} />
       </div>
     </div>
   );

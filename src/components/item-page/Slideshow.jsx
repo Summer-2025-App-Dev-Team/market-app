@@ -34,9 +34,9 @@ export default function Slideshow(props) {
     return (
         <div ref={imgSlideshowRef} className={styles["image-slideshow"]}>
             {
-                props.image.length <= 0 ? <img src={imagePlaceholder} className={props.preview ? styles.preview : ""} draggable={false} /> : props.image.map((img) => {
+                props.image.length <= 0 ? <img src={imagePlaceholder} className={styles.default} draggable={false} /> : props.image.map((img) => {
                     return (
-                        <img src={img.url ? img.url : imagePlaceholder} className="slideshow-img" draggable={false} />
+                        <img src={img.url ? img.url : imagePlaceholder} onClick={(e) => { props.setSelectedImg ? props.setSelectedImg(e.target) & e.stopPropagation() : "" }} draggable={false} />
                     )
                 })
             }
