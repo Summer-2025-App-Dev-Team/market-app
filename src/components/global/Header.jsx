@@ -5,49 +5,47 @@ import logo from "/app-logo.png";
 import UserPhoto from "./UserPhoto";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, Link, data } from "react-router-dom";
-import useChatStore from "./chatStore";
-import { get, onValue, ref } from "firebase/database";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 
-//state: built-in object that store value that change over time in a component
+// state: built-in object that store value that change over time in a component
 
 export default function Header({ scrollTargetRef }) {
-  let user = useAuthStore((state) => state.user);
+  const user = useAuthStore((state) => state.user);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [showBurger, setShowBurger] = useState(false);
+  const headerRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const navigate = useNavigate();
+  const query = searchParams.get("q") || "";
   let userRef = null;
   let userSnap;
   let userData;
-  let userchat;
+  let userChat;
 
   async function getUser() {
-    //gets all necessary user datas
+    // gets all necessary user datas
     userRef = doc(db, "userStuff", user.uid);
     userSnap = await getDoc(userRef);
     if (userSnap.exists()) {
       userData = userSnap.data();
     }
-    
   }
 
   if (user) {
     getUser().then(() => {
-      userchat = userData.chats; //getting all the chat ids 
+      userChat = userData.chats; // getting all the chat ids 
 
-      if (userchat) {
-        const messages = userchat.map((id, data) => {
-          console.log(userchat)
+      if (userChat) {
+        const messages = userChat.map((id, data) => {
+          console.log(userChat)
           console.log("id:", id);
           console.log("data:", data);
         });
       }
     });
   }
-
-  const headerRef = useRef(null);
-  const [showBurger, setShowBurger] = useState(false);
-  const navigate = useNavigate();
 
   function handleBurgerIconOnClick(e) {
     e.stopPropagation();
@@ -149,7 +147,9 @@ export default function Header({ scrollTargetRef }) {
     };
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    searchInputRef.current.value = query;
+  }, [query]);
 
   return (
     <header ref={headerRef}>
@@ -184,6 +184,7 @@ export default function Header({ scrollTargetRef }) {
         <div className={styles["search-wrapper"]}>
           <form onSubmit={handleSearchSubmit}>
             <input
+              ref={searchInputRef}
               type="search"
               placeholder="Search"
               name="search-box"

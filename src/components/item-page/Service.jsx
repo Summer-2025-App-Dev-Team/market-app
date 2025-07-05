@@ -4,10 +4,12 @@ import Slideshow from "./Slideshow";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Service(props) {
   const [username, setUsername] = useState("User");
   const [profilePicture, setProfilePicture] = useState("https://cdn-icons-png.flaticon.com/512/3135/3135715.png");
+  const navigate = useNavigate();
 
   // TODO: someone can probably improves the logic here
   let price;
@@ -37,8 +39,12 @@ export default function Service(props) {
     fetchUsername();
   }, [props.user]);
 
+  function redirect(id) {
+    navigate(`/item/${id}`);
+  }
+
   return (
-    <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""}`} onClick={() => { !props.preview ? window.location.href = `/item/${props.id}` : ""; }}>
+    <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""}`} onClick={() => { !props.preview ? redirect(props.id) : ""; }}>
       <Slideshow image={props.image} preview={true} />
       <div className={styles["item-info"]}>
         <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>

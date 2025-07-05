@@ -179,9 +179,9 @@ export default function ItemDetail() {
           )}
           {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
 
-          {item?.description && (
+          {item?.description ? (
             <p className={styles.description}>{item.description}</p>
-          )}
+          ) : <p className={styles.description}>No description added yet</p>}
 
           {/* <div className={styles.chatButtonWrapper}> */}
           {/* <button className={styles.buyButton}> */}

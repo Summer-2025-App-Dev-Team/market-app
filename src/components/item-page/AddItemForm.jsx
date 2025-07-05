@@ -25,10 +25,12 @@ export default function addItemForm(props) {
 
         const handleDragOver = (e) => {
             e.preventDefault();
+            fileInputTextRef.current.textContent = "Drop images(s)";
             dropZone.classList.add(styles.dragover);
         };
 
         const handleDragLeave = () => {
+            fileInputTextRef.current.textContent = "Add images(s)";
             dropZone.classList.remove(styles.dragover);
         };
 
@@ -37,22 +39,24 @@ export default function addItemForm(props) {
             dropZone.classList.remove(styles.dragover);
             const files = e.dataTransfer.files;
 
-            if (files.length > 1) {
-                alert("Please drop only one file.");
+            if (files.length > 5) {
+                fileInputTextRef.current.textContent = "Add image(s)"
+                toast.warn("You may only upload a maximum of 5 images!");
                 return;
             }
 
             // Get the file
-            const file = files[0];
-
-            if (!file.type.startsWith("image/")) {
-                alert("Only image files are allowed.");
-                return;
+            for (const file of files) {
+                if (!file.type.startsWith("image/")) {
+                    toast.warn("Only image files are allowed.");
+                    return;
+                }
             }
 
             // Assign the file to the input
             fileInput.files = files;
 
+            fileInputTextRef.current.textContent = "Change image(s)"
             handleFile(files);
         }
 
@@ -87,7 +91,7 @@ export default function addItemForm(props) {
     function handleFileInput(e) {
         // Maximum 5 images
         if (e.target.files.length > 5) {
-            alert("You may only upload a maximum of 5 files!");
+            toast.warn("You may only upload a maximum of 5 images!");
             e.preventDefault();
             return;
         }
@@ -105,7 +109,7 @@ export default function addItemForm(props) {
         }
         props.setImage(imageURLs);
 
-        fileInputTextRef.current.textContent = "Change image";
+        fileInputTextRef.current.textContent = "Change image (s)";
     }
 
     function handleToggleItemFree(e) {
@@ -156,7 +160,7 @@ export default function addItemForm(props) {
             listings: arrayUnion(newListing)
         });
         await setDoc(listDocRef, newListing);
-        toast.success("Added Item");
+        toast.success("Added Item!");
         setIsLoading(false);
     }
 
