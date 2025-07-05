@@ -1,4 +1,4 @@
-import styles from "../../assets/css/modal.module.css";
+import styles from "../../assets/css/loadingmodal.module.css";
 
 export default function LoadingModal() {
     return (

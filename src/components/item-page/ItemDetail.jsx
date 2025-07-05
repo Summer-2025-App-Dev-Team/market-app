@@ -10,18 +10,19 @@ import {
   arrayUnion,
 } from "firebase/firestore";
 import { ref, update } from "firebase/database";
-import Slideshow from "./Slideshow";
 import chatIcon from "/chat-icon.png";
-import styles from "../../assets/css/itemdetail.module.css";
+import Slideshow from "./Slideshow";
 import useAuthStore from "../store/useAuthStore";
+import LoadingModal from "../global/LoadingModal";
+import styles from "../../assets/css/itemdetail.module.css";
 
 export default function ItemDetail() {
   const ID = useParams().id; //item id
   const [item, setItem] = useState(null); //the item variable which is set variable with setItem function
   const [loading, setLoading] = useState(true);
+  const [selectedImg, setSelectedImg] = useState(null);
   const zoomImageBgRef = useRef(null);
   const zoomImageRef = useRef(null);
-  const [selectedImg, setSelectedImg] = useState(null);
   const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
 
@@ -162,7 +163,7 @@ export default function ItemDetail() {
   }
 
   return (
-    loading ? <div className={styles.loadingWrapper}><div className={styles.loadingText}>Loading</div></div> :
+    loading ? <LoadingModal /> :
       <div className={styles.container}>
         {item?.image && <Slideshow image={item.image} setSelectedImg={setSelectedImg} />}
         <div className={styles.infoColumn}>

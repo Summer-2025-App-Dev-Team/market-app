@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import useAuthStore from "../store/useAuthStore";
 import upload from "../store/upload";
 import styles from "../../assets/css/additem.module.css";
-import LoadingModal from "./LoadingModal";
+import LoadingModal from "../global/LoadingModal";
 
 export default function addItemForm(props) {
     const [isLoading, setIsLoading] = useState(false);

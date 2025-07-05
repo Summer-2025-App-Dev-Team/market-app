@@ -126,27 +126,7 @@ button.contact:hover {
 .chatLink:hover>.chatIcon {
     background: #e0ebff;
 }
-.loadingWrapper{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-   
-    backdrop-filter: blur(5px) brightness(0.9);
-    -webkit-backdrop-filter: blur(5px) brightness(0.9);
-}
-.loadingText{
 
-    font-size: 80px;
-    font-weight: 600;
-    background: #5f78a6;
-    border: 2px solid #2073bb;
-    text-align: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 10px;
-    max-width: 500px;
-    max-height: 200px;
-}
 .status {
     font-size: 25px;
     color: #000000;
