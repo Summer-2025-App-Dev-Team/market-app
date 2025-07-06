@@ -1,7 +1,6 @@
 import { create } from "zustand";
 //                           ||
-//                           \/
-//                          name of the function to upadate the db
+//                           \/ name of the function to upadate the db
 const useChatStore = create((set) => ({//need paranthesis to return object, not running code ()=>{key:"value"}<-this is code block, not object. ()=>({key:"value"}) <-correct
   //making a function like useState that will be used to store the chat data
   rtdb: {}, //initial version of the db

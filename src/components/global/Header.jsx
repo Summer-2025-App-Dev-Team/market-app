@@ -5,10 +5,12 @@ import logo from "/app-logo.png";
 import UserPhoto from "./UserPhoto";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, useSearchParams, Link } from "react-router-dom";
+import { useNavigate, Link, data, useFetcher, useSearchParams } from "react-router-dom";
+import useChatStore from "./chatStore";
+import { get, onValue, ref } from "firebase/database";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../lib/firebase";
-
+import { db, realtimedb } from "../lib/firebase";
 // state: built-in object that store value that change over time in a component
 
 export default function Header({ scrollTargetRef }) {
@@ -22,7 +24,8 @@ export default function Header({ scrollTargetRef }) {
   let userRef = null;
   let userSnap;
   let userData;
-  let userChat;
+  let userchat; //caht ids of user
+  const setStore = useChatStore((state) => state.setStore);
 
   async function getUser() {
     // gets all necessary user datas
@@ -32,20 +35,32 @@ export default function Header({ scrollTargetRef }) {
       userData = userSnap.data();
     }
   }
+    let unsubscribes = [];
+    if (user) {
+      getUser().then(() => {
+        userchat = userData.chats; //getting all the chat ids
 
-  if (user) {
-    getUser().then(() => {
-      userChat = userData.chats; // getting all the chat ids 
+        if (userchat) {
+          const chatrooms = userchat.map((id) => {
+            // all different chats with different buyers
+            const chatRef = ref(realtimedb, `chats/${id}`); //accessing each whole chat(contains users, chats)
+            const unsubscribe = onValue(chatRef, (snapshot) => {
+              //checking if there is change in the referenece, if no, just pass.
+              //each chat
+              setStore(id, {
+                user1: snapshot.val().user1,
+                user2: snapshot.val().user2,
+                chats: snapshot.val().chats,
+              });
+            });
+            unsubscribes.push(unsubscribe); //add into unsubscribing functions list
+          });
+        }
+      });
+    }
 
-      if (userChat) {
-        const messages = userChat.map((id, data) => {
-          console.log(userChat)
-          console.log("id:", id);
-          console.log("data:", data);
-        });
-      }
-    });
-  }
+
+  
 
   function handleBurgerIconOnClick(e) {
     e.stopPropagation();

@@ -5,26 +5,15 @@ import { db } from "../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import useAuthStore from "../store/useAuthStore";
+import useChatStore from "../global/chatStore";
 
 export default function ChatHome() {
+  const chatStore = useChatStore((state) => state.rtdb); //zustand chat storage
+  console.log("chatstore",chatStore);
+
+
   // This is the default chat home component, when there is no specific chat room selected.
-  const [chats, setChats] = useState([]);
-  const user = useAuthStore((state) => state.user);
 
-    useEffect(() => {
-        const fetchChats = async () => {
-            if (!user) return;
-            const userDocRef = doc(db, "userStuff", user.uid);
-            const userSnap = await getDoc(userDocRef);
-            const chats = userSnap.data()?.chats ?? [];
-            setChats(chats);
-        };
-        fetchChats();
-    }, [user]);
-
-  if (chats == [] || chats.length === 0 || chats === undefined) {
-    // If there are no chats, display a message
-  }
   return (
     <div className={styles.container}>
       <ul className={styles.sidebar}>
@@ -32,15 +21,17 @@ export default function ChatHome() {
           <h1>Your chats</h1>
         </li>
 
-        {chats !== undefined &&
-        chats.length > 0 &&
-        chats != null &&
-        chats != [] ? (
-          chats.map((chat) => {
+        {chatStore !== undefined &&
+      
+        chatStore != null &&
+          chatStore != [] ? (
+            
+            Object.entries(chatStore).map(([chatid, chatdata]) => {
+            console.log(chatid)
             return (
-              <li key={chat}>
-                {/*//chat is the chatID*/}
-                <ChatRoomPreview chatId={chat} />
+              <li key={chatid}>
+                {/*//chatid is the chatID*/}
+                <ChatRoomPreview chatId={chatid} />
               </li>
             );
           })
