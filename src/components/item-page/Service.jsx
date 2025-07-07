@@ -4,7 +4,7 @@ import Slideshow from "./Slideshow";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 export default function Service(props) {
   const [username, setUsername] = useState("User");
@@ -19,6 +19,24 @@ export default function Service(props) {
     price = "No price set yet";
   }
 
+  let date;
+  if (props.availableUntil) {
+    date = props.availableUntil;
+    if (
+      typeof props.availableUntil === "object" &&
+      props.availableUntil !== null &&
+      typeof props.availableUntil.seconds === "number" &&
+      typeof props.availableUntil.nanoseconds === "number" &&
+      typeof props.availableUntil.toDate === "function"
+    ) {
+      // Firebase timestamp
+      date = new Date(props.availableUntil.seconds * 1000 + props.availableUntil.nanoseconds / 1e6);
+    }
+    date = date.toISOString().slice(0, 10);
+  } else {
+    date = "No date set yet";
+  }
+
   useEffect(() => {
     const fetchUsername = async () => {
       if (props.user) {
@@ -27,10 +45,10 @@ export default function Service(props) {
           const userSnap = await getDoc(userDocRef);
           if (userSnap.exists()) {
             setUsername(userSnap.data().name || "User");
-            console.log(userSnap.data())
             setProfilePicture(userSnap.data().photoURL || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png")
           }
-        } catch (error) {
+        }
+        catch (error) {
           console.error("Failed to fetch user name:", error);
         }
       }
@@ -48,7 +66,7 @@ export default function Service(props) {
       <Slideshow image={props.image} preview={true} />
       <div className={styles["item-info"]}>
         <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>
-        <span className={styles.date}>{props.availableUntil ? props.availableUntil : "No date yet"}</span>
+        <span className={styles.date}>{date}</span>
       </div><div className={styles["person-info"]}>
         <img className={styles.profile} src={profilePicture} />
         <p>{username}</p>

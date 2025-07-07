@@ -11,7 +11,6 @@ async function fetchAllListings() {
     try {
         const querySnapshot = await getDocs(collection(db, "allListings"));
         const listings = querySnapshot.docs.map(doc => doc.data());
-        console.log(listings);
         return listings;
     } catch (err) {
         console.error("Error fetching listings:", err);

@@ -164,6 +164,12 @@ export default function addItemForm(props) {
         setIsLoading(false);
     }
 
+    function handleDateOnChange(e) {
+        const value = e.target.value;
+        const date = new Date(value);
+        props.setDate(date);
+    }
+
     return (
         <>
             {isLoading && <LoadingModal />}
@@ -171,7 +177,6 @@ export default function addItemForm(props) {
                 <h3>Basic Info</h3>
                 <label htmlFor="name">Item name</label>
                 <input type="text" name="name" id="name" aria-label="name" placeholder="Name" maxLength={50} onChange={(e) => { props.setName(e.target.value) }} autoFocus required />
-                <label htmlFor="price">Item price</label>
                 <input ref={priceInputRef} type="number" name="price" id="price" placeholder="Price (SGD)" min={0.01} max={1000} step={0.01} aria-label="price" onChange={(e) => { props.setPrice(parseFloat(e.target.value)) }} required />
                 <label className={styles["toggle-free"]}>
                     Free
@@ -179,7 +184,7 @@ export default function addItemForm(props) {
                     <span></span>
                 </label>
                 <label htmlFor="date">Available until</label>
-                <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={(e) => { props.setDate(e.target.value) }} required />
+                <input ref={dateInputRef} type="date" name="date" id="date" placeholder="Available until" aria-label="date" onChange={handleDateOnChange} required />
                 <label ref={dropZoneRef} className={styles["add-image-button"]}>
                     <input ref={fileInputRef} type="file" accept="image/*" onChange={handleFileInput} hidden multiple />
                     {/* Changed from img to svg */}

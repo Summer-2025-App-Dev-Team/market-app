@@ -27,7 +27,7 @@ export default function AddItem() {
     const [image, setImage] = useState([]);
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [date, setDate] = useState("");
+    const [date, setDate] = useState(null);
     const [price, setPrice] = useState(0);
 
     return (
@@ -48,7 +48,7 @@ export default function AddItem() {
                 />
                 <div className={styles.preview}>
                     <h2>Preview</h2>
-                    <Service image={image} name={name} description={description} date={date} price={price} noStars={true} preview={true} />
+                    <Service image={image} name={name} description={description} availableUntil={date} price={price} noStars={true} preview={true} />
                 </div>
             </div>
         </div>
