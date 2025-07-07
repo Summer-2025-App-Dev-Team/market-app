@@ -60,12 +60,10 @@ export default function ItemDetail() {
         }
         if (data.status === "available") {
           let currentStatus = "n/a"
-          const endTime = data.availableUntil;
-          const normalizedEndTime = endTime.replace(" at ", " ");
-          const endTimeObj = new Date(normalizedEndTime);
+          const endTime = new Date(data.availableUntil.seconds * 1000 + data.availableUntil.nanoseconds / 1e6);
 
-          if (!isNaN(endTimeObj.getTime())) {
-            if (endTimeObj.getTime() < Date.now()) {
+          if (!isNaN(endTime.getTime())) {
+            if (endTime.getTime() < Date.now()) {
               currentStatus = "unavailable";
             } else {
               currentStatus = "available";
@@ -171,7 +169,7 @@ export default function ItemDetail() {
           {item?.availableUntil && (
             <div className={styles.status}>
               {item.status === "available"
-                ? <div className={styles.available}>Available until: {item.availableUntil}</div>
+                ? <div className={styles.available}>Available until: {new Date(item.availableUntil.seconds * 1000 + item.availableUntil.nanoseconds / 1e6).toISOString().slice(0, 10)}</div>
                 : item.status === "reserved"
                   ? <div className={styles.reserved}>Reserved</div>
                   : <div className={styles.unavailable}>Unavailable</div>}

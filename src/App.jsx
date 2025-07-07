@@ -12,8 +12,6 @@ import ChatRoom from "./components/chat/ChatRoom";
 import ItemPage from "./components/item-page/ItemPage";
 import AddItem from "./components/item-page/AddItem";
 import ItemDetail from "./components/item-page/ItemDetail";
-import Contact from "./components/contact/Contact";
-import About from "./components/about/About"
 import NotFoundPage from "./components/NotFoundPage";
 import "./App.css";
 import { ToastContainer } from 'react-toastify';
@@ -73,14 +71,6 @@ const router = createBrowserRouter([
       {
         path: "/add-item",
         element: <AddItem />
-      },
-      {
-        path: "/contact",
-        element: <Contact />
-      },
-      {
-        path: "/about",
-        element: <About />
       },
       {
         path: "*",
