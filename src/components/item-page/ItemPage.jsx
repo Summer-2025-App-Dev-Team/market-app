@@ -59,29 +59,29 @@ async function updateAllListingsToNewFormat() {
 
 export default function ItemPage() {
     //updateAllListingsToNewFormat();
-    useEffect(() => {
-        const handleElementOnScroll = (e) => {
-            // idk why but I have to -1 to the scrollWidth to make it work
-            const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
-            const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
+    // useEffect(() => {
+    //     const handleElementOnScroll = (e) => {
+    //         // idk why but I have to -1 to the scrollWidth to make it work
+    //         const isScrolledToRightEnd = e.target.scrollLeft + e.target.clientWidth >= e.target.scrollWidth - 1;
+    //         const isScrolledToLeftEnd = e.target.scrollLeft <= 0;
 
-            if (isScrolledToRightEnd) {
-                e.target.style.setProperty("--show-after-shadow", "0");
-            } else {
-                e.target.style.setProperty("--show-after-shadow", "1");
-            }
-            if (isScrolledToLeftEnd) {
-                e.target.style.setProperty("--show-before-shadow", "0");
-            } else {
-                e.target.style.setProperty("--show-before-shadow", "1");
-            }
-        }
-        document.getElementById("scroll-container").addEventListener("scroll", handleElementOnScroll);
+    //         if (isScrolledToRightEnd) {
+    //             e.target.style.setProperty("--show-after-shadow", "0");
+    //         } else {
+    //             e.target.style.setProperty("--show-after-shadow", "1");
+    //         }
+    //         if (isScrolledToLeftEnd) {
+    //             e.target.style.setProperty("--show-before-shadow", "0");
+    //         } else {
+    //             e.target.style.setProperty("--show-before-shadow", "1");
+    //         }
+    //     }
+    //     document.getElementById("scroll-container").addEventListener("scroll", handleElementOnScroll);
 
-        return () => {
-            document.removeEventListener("scroll", handleElementOnScroll);
-        }
-    }, []);
+    //     return () => {
+    //         document.removeEventListener("scroll", handleElementOnScroll);
+    //     }
+    // }, []);
 
     const [searchParams] = useSearchParams();
     // e.g. ?query=hello
@@ -149,7 +149,8 @@ export default function ItemPage() {
             </div>
             <p className={styles.description}></p>
             <SearchHeading searchParam={query} results={results} sortchange={sortChange} />
-            <FilterBar />
+            {/* <FilterBar /> */}
+            <hr />
             <ItemGrid results={results} />
         </div>
     )

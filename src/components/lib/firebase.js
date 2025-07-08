@@ -8,6 +8,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from 'firebase/database';
 import { getStorage } from "firebase/storage";
+// import { onSchedule } from "firebase-functions/v2/scheduler";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -30,3 +31,7 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const realtimedb = getDatabase(app);
 export const storage = getStorage(app);
+
+// exports.changeItemAvailability = onSchedule("every day 08:00", async (event) => {
+//   console.log("It is 08:00");
+// });
