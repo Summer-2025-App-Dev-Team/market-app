@@ -1,4 +1,4 @@
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { arrayUnion, doc, getDoc, setDoc, Timestamp, updateDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useEffect, useRef, useState } from "react";
 import { toast } from 'react-toastify';
@@ -62,6 +62,7 @@ export default function addItemForm(props) {
 
         // Set a 14 days future date as the maximum date
         const today = new Date();
+        today.setDate(today.getDate() + 1);
         const yyyy = today.getFullYear();
         const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
         const dd = String(today.getDate()).padStart(2, '0'); // Days are zero-based
@@ -150,7 +151,7 @@ export default function addItemForm(props) {
             price: itemIsFree ? "Free" : props.price,
             availableUntil: props.date,
             description: props.description,
-            createdAt: new Date(),
+            createdAt: Timestamp.fromDate(new Date()),
             status: "available",
             user: user.uid,
             image: imageURLs || null
@@ -162,11 +163,16 @@ export default function addItemForm(props) {
         await setDoc(listDocRef, newListing);
         toast.success("Added Item!");
         setIsLoading(false);
+
+        // Reload the page after 0.5 seconds
+        setTimeout(() => {
+            location.reload();
+        }, 500);
     }
 
     function handleDateOnChange(e) {
         const value = e.target.value;
-        const date = new Date(value);
+        const date = Timestamp.fromDate(new Date(value)); // Convert the time to UTC timestamp
         props.setDate(date);
     }
 

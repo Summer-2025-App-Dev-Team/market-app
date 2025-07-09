@@ -1,31 +1,48 @@
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 
 initializeApp();
 const db = getFirestore();
 
-export const scheduledDeleteExpiredDocs = onSchedule("every day 08:00", async () => {
+// This is going to run everyday at 08:00
+export const scheduledDeleteExpiredDocs = onSchedule({
+    schedule: "every day 08:00",
+    timeZone: "Asia/Singapore"
+}, async () => {
+    // Get current time
     const now = Timestamp.now();
 
+    // Get all items in allListings with the availableUntil property expired
     const snapshot = await db
         .collection("allListings")
         .where("availableUntil", "<=", now)
         .get();
 
-    const deletePromises = snapshot.docs.map((doc) => doc.ref.delete());
-    console.log(`Deleted ${deletePromises.length} expired documents.`);
-    await Promise.all(deletePromises);
-
-    // For email
-    const emailDoc = {
-        to: "yianxie52@gmail.com", // TODO: this should be changed to the seller's email later
-        message: {
-            subject: "Some item has expired!",
-            text: "This is the plain text part of the email",
-            html: `<p>Successfully deleted <b>${deletePromises.length}</b> expired documents</p>`
-        }
+    // If there is no item, return
+    if (snapshot.docs.length <= 0) {
+        console.log("No item expired today!");
+        return;
     }
 
-    await db.collection("mail").add(emailDoc);
+    snapshot.docs.map((doc) => {
+        console.log("Expired item:", doc);
+
+        getAuth()
+            .getUser(doc.data().user)
+            .then(async (userRecord) => {
+                const emailDoc = {
+                    to: userRecord.email,
+                    message: {
+                        subject: "Your item has expired!",
+                        html: `Your listed item, ${doc.data().name}, which is available until ${doc.data().availableUntil}, has expired.`
+                    }
+                };
+                await db.collection("mail").add(emailDoc);
+            })
+            .catch((error) => {
+                console.error("Error fetching user data:", error);
+            });
+    })
 });

@@ -22,16 +22,7 @@ export default function Service(props) {
   let date;
   if (props.availableUntil) {
     date = props.availableUntil;
-    if (
-      typeof props.availableUntil === "object" &&
-      props.availableUntil !== null &&
-      typeof props.availableUntil.seconds === "number" &&
-      typeof props.availableUntil.nanoseconds === "number" &&
-      typeof props.availableUntil.toDate === "function"
-    ) {
-      // Firebase timestamp
-      date = new Date(props.availableUntil.seconds * 1000 + props.availableUntil.nanoseconds / 1e6);
-    }
+    date = new Date(props.availableUntil.seconds * 1000 + props.availableUntil.nanoseconds / 1e6);
     date = date.toISOString().slice(0, 10);
   } else {
     date = "No date set yet";
