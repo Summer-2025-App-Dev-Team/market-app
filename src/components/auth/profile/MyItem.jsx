@@ -1,0 +1,64 @@
+import { useState, useEffect } from "react";
+import { db } from "../../lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import Service from "../../item-page/Service";
+
+export default function MyItem(props) {
+    const uid = props.uid;
+    const [userListings, setUserListings] = useState(null);
+
+    useEffect(() => {
+        async function fetchUserListings() {
+            const docRef = doc(db, "userStuff", uid);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const data = docSnap.data().listings;
+                for (const item of data) {
+                    if (
+                        item.createdAt &&
+                        typeof item.createdAt === "object" &&
+                        "seconds" in item.createdAt &&
+                        "nanoseconds" in item.createdAt
+                    ) {
+                        item.createdAt = new Date(
+                            item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1e6
+                        ).toLocaleString();
+                    }
+                }
+
+                setUserListings(data);
+            } else {
+                // The user does not have any listings
+                console.log("No such user document!");
+            }
+        }
+        fetchUserListings();
+    }, []);
+
+    return (
+        <article className={props.className}>
+            {
+                userListings ?
+                    userListings.map((listing) => {
+                        return (
+                            <Service
+                                name={listing.name}
+                                price={listing.price}
+                                image={listing.image}
+                                description={listing.description}
+                                availableUntil={listing.availableUntil}
+                                id={listing.id}
+                            />
+                        )
+                    })
+                    :
+                    <div>
+                        <h2>There are 2 reasons why you might see this:</h2>
+                        <p>1. Your profile does not have any listings</p>
+                        <p>2. The web-page is still loading</p>
+                    </div>
+            }
+        </article>
+    )
+}

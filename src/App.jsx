@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile/:uid",
-        element: <Profile />
+        element: <Profile />,
       },
       {
         path: "/chat",

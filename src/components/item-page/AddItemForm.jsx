@@ -122,7 +122,7 @@ export default function addItemForm(props) {
             props.setPrice("Free");
         }
         else {
-            props.setPrice(priceInputRef.current.value);
+            props.setPrice(parseFloat(priceInputRef.current.value));
         }
     }
 

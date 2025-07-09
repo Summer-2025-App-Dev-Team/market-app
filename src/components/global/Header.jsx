@@ -35,32 +35,29 @@ export default function Header({ scrollTargetRef }) {
       userData = userSnap.data();
     }
   }
-    let unsubscribes = [];
-    if (user) {
-      getUser().then(() => {
-        userchat = userData.chats; //getting all the chat ids
+  let unsubscribes = [];
+  if (user) {
+    getUser().then(() => {
+      userchat = userData.chats; //getting all the chat ids
 
-        if (userchat) {
-          const chatrooms = userchat.map((id) => {
-            // all different chats with different buyers
-            const chatRef = ref(realtimedb, `chats/${id}`); //accessing each whole chat(contains users, chats)
-            const unsubscribe = onValue(chatRef, (snapshot) => {
-              //checking if there is change in the referenece, if no, just pass.
-              //each chat
-              setStore(id, {
-                user1: snapshot.val().user1,
-                user2: snapshot.val().user2,
-                chats: snapshot.val().chats,
-              });
+      if (userchat) {
+        const chatrooms = userchat.map((id) => {
+          // all different chats with different buyers
+          const chatRef = ref(realtimedb, `chats/${id}`); //accessing each whole chat(contains users, chats)
+          const unsubscribe = onValue(chatRef, (snapshot) => {
+            //checking if there is change in the referenece, if no, just pass.
+            //each chat
+            setStore(id, {
+              user1: snapshot.val().user1,
+              user2: snapshot.val().user2,
+              chats: snapshot.val().chats,
             });
-            unsubscribes.push(unsubscribe); //add into unsubscribing functions list
           });
-        }
-      });
-    }
-
-
-  
+          unsubscribes.push(unsubscribe); //add into unsubscribing functions list
+        });
+      }
+    });
+  }
 
   function handleBurgerIconOnClick(e) {
     e.stopPropagation();
