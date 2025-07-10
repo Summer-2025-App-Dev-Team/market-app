@@ -1,13 +1,63 @@
+import { useEffect, useRef, useState } from "react";
+import { auth, db } from "../lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import Service from "../item-page/Service";
 import { useParams, useSearchParams, useNavigate } from "react-router-dom"
-import { useEffect } from "react";
 import UserTextData from "../global/UserTextData";
 import UserPhoto from "../global/UserPhoto";
 import MyItem from "./profile/MyItem";
 import BoughtItem from "./profile/BoughtItem";
 import styles from "../../assets/css/profile.module.css"
+import { toast } from "react-toastify";
+import useAuthStore from "../store/useAuthStore";
+import { updateProfile } from "firebase/auth";
+import upload from "../store/upload";
 
 export default function Profile() {
     const { uid } = useParams();
+    const [userListings, setUserListings] = useState(null);
+    const [view, setView] = useState(styles["my-items"]);
+    const [image, setImage] = useState(null);
+    const [isLoading, setLoading] = useState(false);
+    async function handleSubmit(e) {
+
+        e.preventDefault();
+        toast.info('starting upload')
+        try{
+            const user = useAuthStore.getState().user;
+            const setUser = useAuthStore.getState().setUser;
+        
+            if (!user) return;
+        
+            // Update photoURL
+            console.log("Starting upload...");
+            const imageURL = image ? await upload([image]) : null;
+            console.log("Finished upload!");
+            await updateProfile(auth.currentUser, {
+                photoURL: imageURL[0].url
+            });
+            const updatedUser = auth.currentUser;
+            setUser(updatedUser, true); // second param is rememberMe
+        }catch(err){
+            toast.warn('an error occured changing avatars');
+            console.log(err);
+        }
+        toast.success('photo uploaded, reload to see it')
+    }
+    function handleFile(e) {
+        const file = e.target.files[0];
+        try{
+            const imageURL = URL.createObjectURL(file);
+            const image = ({
+                file: file,
+                url: imageURL
+            });
+            setImage(image);
+        }catch(err){
+            toast.warn('an error occured handling the file');
+        }
+        
+    }
     const [searchParams, setSearchParams] = useSearchParams();
     const tab = searchParams.get("tab") || "";
     const navigate = useNavigate();
@@ -36,8 +86,50 @@ export default function Profile() {
                 </li>
             </ul>
 
-            {tab === "my-item" && <MyItem uid={uid} className={styles["my-items"]} />}
-            {tab === "bought-item" && <BoughtItem />}
+            <article className={styles["my-items"]}>
+                {
+                    userListings ?
+                        userListings.map((listing) => {
+                            return (
+                                <Service
+                                    name={listing.name}
+                                    price={listing.price}
+                                    image={listing.image}
+                                    description={listing.description}
+                                    availableUntil={listing.availableUntil}
+                                    id={listing.id}
+                                />
+                            )
+                        })
+                        :
+                        <div>
+                            <h2>There are 2 reasons why you might see this:</h2>
+                            <p>1. Your profile does not have any listings</p>
+                            <p>2. The web-page is still loading</p>
+                        </div>
+                }
+            </article>
+
+            <article className={styles["bought-items"]}>
+                <h1>Bought items</h1>
+                <p>Work in Progress!</p>
+            </article>
+
+            <article className={styles.settings}>
+                <h1>Settings</h1>
+                <p>Work in Progress!</p>
+                
+                <form onSubmit={handleSubmit}>
+                    <label className={styles["add-image-button"]}>
+                        <input type="file" accept="image/*" onChange={handleFile} hidden/>
+                        {/* Changed from img to svg */}
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4z"></path><path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10 10-4.49 10-10S17.51 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8"></path></svg>
+                        <span className={styles["file-upload-label"]}>Add new profile picture</span>
+                    </label>
+                    <button type="submit" disabled={isLoading}>{isLoading ? "Loading" : "Submit"}</button>
+                </form>
+                
+            </article>
         </div>
     )
 }

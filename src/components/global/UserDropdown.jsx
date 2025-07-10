@@ -50,6 +50,7 @@ export default function UserDropdown() {
 
     // If the user is logged in
     return (
+        //the long long svg's are saved things from a free svg library I think -> Boxicons
         <div className={`${styles["user-dropdown"]} ${styles["hide-mobile"]}`} onClick={handleOnClick}>
             <div className={styles["user"]}>
                 <UserTextData type="displayName" />
