@@ -1,6 +1,5 @@
-import { useEffect, useState, Fragment } from 'react';
+import { useEffect, useState } from 'react';
 import styles from "../../assets/css/itempage.module.css";
-import FilterBar from "./FilterBar";
 import { useSearchParams } from 'react-router-dom';
 import SearchHeading from './SearchHeading';
 import ItemGrid from './ItemGrid';
@@ -12,7 +11,8 @@ async function fetchAllListings() {
         const querySnapshot = await getDocs(collection(db, "allListings"));
         const listings = querySnapshot.docs.map(doc => doc.data());
         return listings;
-    } catch (err) {
+    }
+    catch (err) {
         console.error("Error fetching listings:", err);
         return [];
     }
@@ -23,8 +23,6 @@ async function updateAllListingsToNewFormat() {
     for (const userDoc of querySnapshot.docs) {
         const data = userDoc.data();
         const listings = data.listings;
-
-        const now = Date.now();
 
         const updatedListings = await Promise.all(listings.map(async (listing) => {
             let currentStatus = "Unknown";

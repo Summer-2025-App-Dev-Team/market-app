@@ -26,23 +26,26 @@ export const scheduledDeleteExpiredDocs = onSchedule({
         return;
     }
 
-    snapshot.docs.map((doc) => {
+    for (const doc of snapshot.docs) {
         console.log("Expired item:", doc);
 
-        getAuth()
-            .getUser(doc.data().user)
-            .then(async (userRecord) => {
-                const emailDoc = {
-                    to: userRecord.email,
-                    message: {
-                        subject: "Your item has expired!",
-                        html: `Your listed item, ${doc.data().name}, which is available until ${doc.data().availableUntil}, has expired.`
-                    }
-                };
-                await db.collection("mail").add(emailDoc);
-            })
-            .catch((error) => {
-                console.error("Error fetching user data:", error);
-            });
-    })
+        await doc.ref.set({
+            status: "unavailable"
+        });
+
+        try {
+            const userRecord = await getAuth().getUser(doc.data().user);
+            const emailDoc = {
+                to: userRecord.email,
+                message: {
+                    subject: "Your item has expired!",
+                    html: `Your listed item, ${doc.data().name}, which is available until ${doc.data().availableUntil.toDate().toLocaleDateString()}, has expired.`
+                }
+            };
+            await db.collection("mail").add(emailDoc);
+        }
+        catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    }
 });
