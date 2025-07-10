@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { db } from "../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import LoadingModel from "../../global/LoadingModal";
 import Service from "../../item-page/Service";
 
 export default function MyItem(props) {
@@ -51,13 +52,8 @@ export default function MyItem(props) {
                                 id={listing.id}
                             />
                         )
-                    })
-                    :
-                    <div>
-                        <h2>There are 2 reasons why you might see this:</h2>
-                        <p>1. Your profile does not have any listings</p>
-                        <p>2. The web-page is still loading</p>
-                    </div>
+                    }) :
+                    <LoadingModel />
             }
         </article>
     )

@@ -45,7 +45,7 @@
     font-size: 24px;
 }
 
-.profile .sidebar>li:not(:last-child)::after {
+.profile .sidebar>li:not(:last-child, :nth-last-child(2))::after {
     content: "";
     position: absolute;
     width: 95%;
@@ -64,6 +64,21 @@
 .profile .sidebar>li.active {
     color: white;
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+.profile .sidebar>li:last-child::before {
+    content: "";
+    position: absolute;
+    width: 95%;
+    height: 1px;
+    left: 50%;
+    top: -5px;
+    transform: translateX(-50%);
+    background-color: rgb(169, 169, 169);
+}
+
+.profile .sidebar>li:last-child {
+    margin-top: auto;
 }
 
 .profile .user {
