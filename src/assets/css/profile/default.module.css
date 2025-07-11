@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    user-select: none;
+}
+
+.container h1 {
+    font-size: 2rem;
+}
+
+.container p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center;
+}
