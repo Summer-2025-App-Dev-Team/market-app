@@ -1,4 +1,5 @@
 .service-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -8,12 +9,50 @@
     transition: 0.3s;
 }
 
-.service-wrapper:not(.preview) {
+.service-wrapper:not(.preview, .unavailable) {
     cursor: pointer;
 }
 
-.service-wrapper:not(.preview):hover {
+.service-wrapper:not(.preview, .unavailable):hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.service-wrapper.unavailable {
+    /* filter: brightness(0.5) blur(1px); */
+    user-select: none;
+    cursor: not-allowed;
+}
+
+.service-wrapper.unavailable * {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.service-wrapper.unavailable::after {
+    content: "Item Expired!";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    color: red;
+    z-index: 10;
+}
+
+.service-wrapper.unavailable .backdrop {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .item-info {

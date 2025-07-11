@@ -3,6 +3,7 @@ import { db } from "../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import LoadingModel from "../../global/LoadingModal";
 import Service from "../../item-page/Service";
+import styles from "../../../assets/css/profile/myitem.module.css";
 
 export default function MyItem(props) {
     const uid = props.uid;
@@ -38,7 +39,7 @@ export default function MyItem(props) {
     }, []);
 
     return (
-        <article className={props.className}>
+        <article className={styles["container"]}>
             {
                 userListings ?
                     userListings.map((listing) => {
@@ -49,6 +50,7 @@ export default function MyItem(props) {
                                 image={listing.image}
                                 description={listing.description}
                                 availableUntil={listing.availableUntil}
+                                status={listing.status}
                                 id={listing.id}
                             />
                         )

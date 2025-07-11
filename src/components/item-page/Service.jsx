@@ -4,7 +4,7 @@ import Slideshow from "./Slideshow";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useState, useEffect } from "react";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Service(props) {
   const [username, setUsername] = useState("User");
@@ -48,12 +48,8 @@ export default function Service(props) {
     fetchUsername();
   }, [props.user]);
 
-  function redirect(id) {
-    navigate(`/item/${id}`);
-  }
-
   return (
-    <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""}`} onClick={() => { !props.preview ? redirect(props.id) : ""; }}>
+    <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""} ${props.status === "unavailable" ? styles.unavailable : ""}`} onClick={() => { !props.preview && props.status === "available" ? navigate(`/item/${props.id}`) : ""; }}>
       <Slideshow image={props.image} preview={true} />
       <div className={styles["item-info"]}>
         <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>
@@ -63,6 +59,7 @@ export default function Service(props) {
         <p>{username}</p>
         {props.noStars ? "" : <Rating />}
       </div><span className={`${styles.price} ${price.toLowerCase() == "free" ? styles.free : ""}`}>{price}</span>
+      {props.status === "unavailable" ? <div className={styles.backdrop}></div> : ""}
     </div>
   )
 }

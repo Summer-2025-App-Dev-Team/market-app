@@ -6,6 +6,7 @@ import upload from "../../store/upload";
 import { toast } from "react-toastify";
 import { updateProfile } from "firebase/auth";
 import LoadingModal from "../../global/LoadingModal";
+import styles from "../../../assets/css/profile/settings.module.css";
 
 export default function Settings() {
     const user = useAuthStore((state) => state.user);

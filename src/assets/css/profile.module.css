@@ -110,16 +110,3 @@
 .profile>article {
     overflow: auto;
 }
-
-.profile>article.hide {
-    display: none !important;
-}
-
-.profile .my-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    justify-items: center;
-    gap: 10px;
-    width: 100%;
-    padding-block: 20px;
-}

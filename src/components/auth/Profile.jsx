@@ -37,7 +37,7 @@ export default function Profile() {
             </ul>
 
             {tab === "" && <Default uid={uid} />}
-            {tab === "my-item" && <MyItem uid={uid} className={styles["my-items"]} />}
+            {tab === "my-item" && <MyItem uid={uid} />}
             {tab === "bought-item" && <BoughtItem uid={uid} />}
             {tab === "settings" && <Settings uid={uid} />}
         </div>
