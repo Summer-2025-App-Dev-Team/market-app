@@ -22,6 +22,10 @@
     padding-block: 10px;
 }
 
+.profile .sidebar img {
+    user-select: none;
+}
+
 .profile .sidebar>li {
     position: relative;
     display: flex;
@@ -71,7 +75,7 @@
     width: 95%;
     height: 1px;
     left: 50%;
-    top: -5px;
+    top: -10px;
     transform: translateX(-50%);
     background-color: rgb(169, 169, 169);
 }
