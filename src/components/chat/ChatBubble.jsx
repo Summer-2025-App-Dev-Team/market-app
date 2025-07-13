@@ -1,14 +1,14 @@
-import styles from "../../assets/css/chat.module.css";
+import styles from "../../assets/css/chatbubble.module.css";
 
 export default function ChatBubble({ message, currentUserId }) {
   const isOwnMessage = message.sender === currentUserId;
 
-  const containerClass = `${styles.container} ${
-    isOwnMessage ? styles.own : styles.other
+  const containerClass = `${
+    isOwnMessage ? styles.ownContainer : styles.otherContainer
   }`;
 
-  const bubbleClass = `${styles.bubble} ${
-    isOwnMessage ? styles.bubbleOwn : styles.bubbleOther
+  const bubbleClass = `${
+    isOwnMessage ? styles.own : styles.other //applying both bubble class and one of own or other
   }`;
 
   const formattedTime = new Date(message.timestamp).toLocaleTimeString([], {

@@ -5,7 +5,13 @@ import logo from "/app-logo.png";
 import UserPhoto from "./UserPhoto";
 import useAuthStore from "../store/useAuthStore";
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, Link, data, useFetcher, useSearchParams } from "react-router-dom";
+import {
+  useNavigate,
+  Link,
+  data,
+  useFetcher,
+  useSearchParams,
+} from "react-router-dom";
 import useChatStore from "./chatStore";
 import { get, onValue, ref } from "firebase/database";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -24,9 +30,9 @@ export default function Header({ scrollTargetRef }) {
   let userRef = null;
   let userSnap;
   let userData;
-  let userchat; //caht ids of user
+  let userchat; //chat ids of user
   const setStore = useChatStore((state) => state.setStore);
-
+  const chatStore = useChatStore((state) => state.rtdb);
   async function getUser() {
     // gets all necessary user datas
     userRef = doc(db, "userStuff", user.uid);
@@ -156,6 +162,7 @@ export default function Header({ scrollTargetRef }) {
       document.removeEventListener("keydown", handleKeyDown);
       input.removeEventListener("focus", handleSearchInputFocus);
       input.removeEventListener("blur", handleSearchInputBlur);
+      unsubscribes.forEach((unsub) => unsub());
     };
   }, []);
 

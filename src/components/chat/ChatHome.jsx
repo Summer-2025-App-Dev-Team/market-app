@@ -9,8 +9,6 @@ import useChatStore from "../global/chatStore";
 
 export default function ChatHome() {
   const chatStore = useChatStore((state) => state.rtdb); //zustand chat storage
-  console.log("chatstore",chatStore);
-
 
   // This is the default chat home component, when there is no specific chat room selected.
 
@@ -21,13 +19,8 @@ export default function ChatHome() {
           <h1>Your chats</h1>
         </li>
 
-        {chatStore !== undefined &&
-      
-        chatStore != null &&
-          chatStore != [] ? (
-            
-            Object.entries(chatStore).map(([chatid, chatdata]) => {
-            console.log(chatid)
+        {chatStore !== undefined && chatStore != null && chatStore != [] ? (
+          Object.entries(chatStore).map(([chatid, chatdata]) => {
             return (
               <li key={chatid}>
                 {/*//chatid is the chatID*/}

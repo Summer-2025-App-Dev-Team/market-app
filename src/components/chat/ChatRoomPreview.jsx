@@ -27,37 +27,60 @@ export default function ChatRoomPreview({ chatId }) {
   const [idForLatestMessage, setIdForLatestMessage] = useState(""); //loop through the chat in rtdb and get the most recent timestamp(biggest number) and set the latest directory for the latest message and get the value of the latest message object
   const [MostrecentTimestamp, setRecentTimestamp] = useState(0);
   const [latestMessage, setLatestMessage] = useState("");
+  const [refresh, setRefresh] = useState(0);
   let oldestId;
 
   useEffect(() => {
-    console.log("current chat data", chatStore[chatId]);
     let oldestTimestamp = 0;
     let otherUserRef;
-    if (chatStore[chatId].user1 == user.uid) {
-      otherUserRef = doc(db, "userStuff", chatStore[chatId].user2);
-    } else {
-      otherUserRef = doc(db, "userStuff", chatStore[chatId].user1);
-    }
-    async function getUsers() {
-      const otherUserData = await getDoc(otherUserRef);
-      setOtherUser(otherUserData.data().name);
-      setSellerPhotoUrl(otherUserData.data().photoURL);
-    }
-    getUsers();
-
-    Object.entries(chatStore[chatId].chats).map(([key, element]) => {
-      if (element.timestamp >= oldestTimestamp) {
-        oldestTimestamp = element.timestamp;
-        oldestId = key;
+    try {
+      if (chatStore[chatId].user1 == user.uid) {
+        otherUserRef = doc(db, "userStuff", chatStore[chatId].user2);
+        console.log(chatStore[chatId].user2);
+      } else {
+        otherUserRef = doc(db, "userStuff", chatStore[chatId].user1);
       }
-    });
+      console.log(otherUserRef)
+    } catch (err) {
+      console.error(err);
+    }
+
+    async function getUsers() { //getting user info
+      const otherUserData = await getDoc(otherUserRef);
+      console.log(otherUserData.data(),"otheruser")
+      try {
+        setOtherUser(otherUserData.data().name);
+        setSellerPhotoUrl(otherUserData.data().photoURL);
+      } catch (err) {
+        console.error("failed to fetch");
+      }
+    }
+    getUsers().then(() => {console.log(otherUser)});
+    if (
+      chatStore != null &&
+      chatStore != undefined &&
+      chatStore[chatId].chats &&
+      chatStore[chatId].chats != undefined &&
+      chatStore[chatId] != undefined
+    ) {
+      Object.entries(chatStore[chatId].chats).map(([key, element]) => {
+        if (element.timestamp >= oldestTimestamp) {
+          oldestTimestamp = element.timestamp;
+          oldestId = key;
+        }
+      });
+    }
+
     setRecentTimestamp(oldestTimestamp);
     // setIdForLatestMessage(chatStore[chatId].chats);
-    console.log(oldestId);
-    console.log(oldestTimestamp);
-    console.log(chatStore[chatId].chats[oldestId].text);
-    setLatestMessage(chatStore[chatId].chats[oldestId].text);
-  }, [chatId]);
+    if (chatStore[chatId].chats) {
+      setLatestMessage(
+        chatStore[chatId].chats[oldestId].text
+          ? chatStore[chatId].chats[oldestId].text
+          : ""
+      );
+    }
+  }, [chatId, refresh]);
   {
     //   useEffect(() => {
     //     const chatRef = ref(realtimedb, `chats/${chatId}/chats`); // reference of chat texts in realtime database
@@ -194,10 +217,22 @@ export default function ChatRoomPreview({ chatId }) {
     //   }, [messages]);
   }
   return (
-    <Link to={"/chat/" + chatId} className={styles.chatPreview}>
-      <img src={sellerPhotoUrl} alt="seller" draggable={false} />
+    <Link
+      to={"/chat/" + chatId}
+      className={styles.chatPreview}
+      onClick={() => {
+        setRefresh((r) => {
+          r + 1;
+        });
+      }}
+    >
+      <img
+        src={sellerPhotoUrl ? sellerPhotoUrl : userPlaceholder}
+        alt="seller"
+        draggable={false}
+      />
       <div>
-        <h2>{otherUser}</h2>
+        <h2>{otherUser ? otherUser : "User"}</h2>
         <p>{latestMessage}</p>
       </div>
       <div className={styles.btns}>

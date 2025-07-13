@@ -1,6 +1,6 @@
 import ChatBubble from "./ChatBubble";
 import useAuthStore from "../store/useAuthStore"; 
-import styles from "../../assets/css/chat.module.css";
+import styles from "../../assets/css/messageContainer.module.css";
 
 export default function MessageContainer({ messages }) {
   const user = useAuthStore((state) => state.user);
