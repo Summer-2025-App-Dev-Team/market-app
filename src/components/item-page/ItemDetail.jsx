@@ -8,6 +8,7 @@ import {
   collection,
   updateDoc,
   arrayUnion,
+  setDoc,
 } from "firebase/firestore";
 import { ref, update } from "firebase/database";
 import chatIcon from "/chat-icon.png";
@@ -32,13 +33,14 @@ export default function ItemDetail() {
       const docRef = doc(db, "allListings", ID);
       const docSnap = await getDoc(docRef);
 
+
       const defaultRef = collection(db, "userStuff");
       const collectSnap = await getDocs(defaultRef);
-
       // not running code, but returning objects // Return an object explicitly : () => ({ key: value }) // Run a block of code : () => { let x = 1; return x; }
       collectSnap.docs.map((doc) => {
-        // looping inside each user
+        // looping inside each chatid
         const listing = doc.data().listings;
+        console.log(doc.data());
         listing.map((lists) => {
           if (ID == lists["id"]) {
             console.log(doc.id);
@@ -59,8 +61,11 @@ export default function ItemDetail() {
           ).toLocaleString();
         }
         if (data.status === "available") {
-          let currentStatus = "n/a"
-          const endTime = new Date(data.availableUntil.seconds * 1000 + data.availableUntil.nanoseconds / 1e6);
+          let currentStatus = "n/a";
+          const endTime = new Date(
+            data.availableUntil.seconds * 1000 +
+              data.availableUntil.nanoseconds / 1e6
+          );
 
           if (!isNaN(endTime.getTime())) {
             if (endTime.getTime() < Date.now()) {
@@ -83,12 +88,11 @@ export default function ItemDetail() {
   useEffect(() => {
     try {
       selectedImg.src;
-    }
-    catch {
+    } catch {
       return;
     }
 
-    selectedImg?.src ? zoomImageRef.current.src = selectedImg.src : "";
+    selectedImg?.src ? (zoomImageRef.current.src = selectedImg.src) : "";
     zoomImageBgRef.current.classList.add(styles.show);
 
     function handleClick(e) {
@@ -104,7 +108,7 @@ export default function ItemDetail() {
 
     return () => {
       document.removeEventListener("click", handleClick);
-    }
+    };
   }, [selectedImg]);
 
   /*item?.name && means that the code will return the right side component if the item is not null or undefined
@@ -127,9 +131,11 @@ export default function ItemDetail() {
 
     const expectedChatId = `${item.id}_${user.uid}_${item.user}`;
 
-    const existingChatId = buyerChats.includes(expectedChatId) && sellerChats.includes(expectedChatId) // Conditional operator to check if the chat ID already exists in both buyer and seller chats
-      ? expectedChatId // Check if the chat ID already exists in both buyer and seller chats. value for true
-      : undefined; // Check if the chat ID already exists in both buyer and seller chats. value for false
+    const existingChatId =
+      buyerChats.includes(expectedChatId) &&
+      sellerChats.includes(expectedChatId) // Conditional operator to check if the chat ID already exists in both buyer and seller chats
+        ? expectedChatId // Check if the chat ID already exists in both buyer and seller chats. value for true
+        : undefined; // Check if the chat ID already exists in both buyer and seller chats. value for false
     console.log("existingChatId", existingChatId);
     var chatId;
     if (existingChatId) {
@@ -138,13 +144,24 @@ export default function ItemDetail() {
       chatId = item.id + "_" + user.uid + "_" + item.user; // changed the chat ID to be more related to the item and users
       console.log("Creating new chat with ID:", chatId);
 
-      await updateDoc(buyUserDocRef, {
-        chats: arrayUnion(chatId), // adding the chat ID to the buyer's chats in firestore
-      });
+      // await updateDoc(buyUserDocRef, {
+      //   chats: arrayUnion(chatId), // adding the chat ID to the buyer's chats in firestore
+      // });
 
-      await updateDoc(sellUserDocRef, {
-        chats: arrayUnion(chatId), // adding the chat ID to the seller's chats in firestore
-      });
+      // await updateDoc(sellUserDocRef, {
+      //   chats: arrayUnion(chatId), // adding the chat ID to the seller's chats in firestore
+      // });
+
+      await setDoc(
+        buyUserDocRef,
+        { chats: arrayUnion(chatId) },//adds chatid if not existing already
+        { merge: true }//don't overwite whole doc
+      );
+      await setDoc(
+        buyUserDocRef,
+        { chats: arrayUnion(chatId) },
+        { merge: true }
+      );
 
       const chatRef = ref(realtimedb, `chats/${chatId}`);
 
@@ -160,45 +177,69 @@ export default function ItemDetail() {
     navigate("/chat/" + chatId);
   }
 
-  return (
-    loading ? <LoadingModal /> :
-      <div className={styles.container}>
-        {item?.image && <Slideshow image={item.image} setSelectedImg={setSelectedImg} />}
-        <div className={styles.infoColumn}>
-          {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
-          {item?.availableUntil && (
-            <div className={styles.status}>
-              {item.status === "available"
-                ? <div className={styles.available}>Available until: {new Date(item.availableUntil.seconds * 1000 + item.availableUntil.nanoseconds / 1e6).toISOString().slice(0, 10)}</div>
-                : item.status === "reserved"
-                  ? <div className={styles.reserved}>Reserved</div>
-                  : <div className={styles.unavailable}>Unavailable</div>}
-            </div>
-          )}
-          {item?.price && <p className={styles.priceHighlight}>{typeof item.price == "number" ? `$${item.price}` : item.price}</p>}
+  return loading ? (
+    <LoadingModal />
+  ) : (
+    <div className={styles.container}>
+      {item?.image && (
+        <Slideshow image={item.image} setSelectedImg={setSelectedImg} />
+      )}
+      <div className={styles.infoColumn}>
+        {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
+        {item?.availableUntil && (
+          <div className={styles.status}>
+            {item.status === "available" ? (
+              <div className={styles.available}>
+                Available until:{" "}
+                {new Date(
+                  item.availableUntil.seconds * 1000 +
+                    item.availableUntil.nanoseconds / 1e6
+                )
+                  .toISOString()
+                  .slice(0, 10)}
+              </div>
+            ) : item.status === "reserved" ? (
+              <div className={styles.reserved}>Reserved</div>
+            ) : (
+              <div className={styles.unavailable}>Unavailable</div>
+            )}
+          </div>
+        )}
+        {item?.price && (
+          <p className={styles.priceHighlight}>
+            {typeof item.price == "number" ? `$${item.price}` : item.price}
+          </p>
+        )}
 
-          {item?.description ? (
-            <p className={styles.description}>{item.description}</p>
-          ) : <p className={styles.description}>No description added yet</p>}
+        {item?.description ? (
+          <p className={styles.description}>{item.description}</p>
+        ) : (
+          <p className={styles.description}>No description added yet</p>
+        )}
 
-          {/* <div className={styles.chatButtonWrapper}> */}
-          {/* <button className={styles.buyButton}> */}
-          {/* when the buyers clicks the contact button*/}
-          {/* conditional rendering to check if the user is not the seller */}
-          {user?.uid && item?.user && user?.uid !== item.user && (
-            <button onClick={handleSeller} className={styles.chatLink}>
-              <img className={styles.chatIcon} src={chatIcon}></img>
-            </button>
-          )}
+        {/* <div className={styles.chatButtonWrapper}> */}
+        {/* <button className={styles.buyButton}> */}
+        {/* when the buyers clicks the contact button*/}
+        {/* conditional rendering to check if the user is not the seller */}
+        {user?.uid && item?.user && user?.uid !== item.user && (
+          <button onClick={handleSeller} className={styles.chatLink}>
+            <img className={styles.chatIcon} src={chatIcon}></img>
+          </button>
+        )}
 
-          {item?.createdAt && (
-            <p className={styles.createdAt}>Created at: {item.createdAt}</p>
-          )}
-        </div>
-
-        <div ref={zoomImageBgRef} className={styles.zoomImage}>
-          <img ref={zoomImageRef} src={null} alt="zoom-in picture" draggable={false} />
-        </div>
+        {item?.createdAt && (
+          <p className={styles.createdAt}>Created at: {item.createdAt}</p>
+        )}
       </div>
+
+      <div ref={zoomImageBgRef} className={styles.zoomImage}>
+        <img
+          ref={zoomImageRef}
+          src={null}
+          alt="zoom-in picture"
+          draggable={false}
+        />
+      </div>
+    </div>
   );
 }

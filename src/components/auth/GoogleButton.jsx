@@ -3,7 +3,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import useAuthStore from "../store/useAuthStore";
 import google_logo from "/google-logo.png";
 import { doc, setDoc } from "firebase/firestore";
-import styles from "../../assets/css/auth.module.css"
+import styles from "../../assets/css/auth.module.css";
 
 export default function GoogleLoginButton(props) {
   const setUser = useAuthStore((state) => state.setUser);
@@ -13,8 +13,9 @@ export default function GoogleLoginButton(props) {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-
+      console.log("photo", user.photoURL, user.displayName);
       console.log("Signed in user:", user);
+      console.log("uid", user.uid);
 
       setUser(user, true);
 
@@ -23,13 +24,10 @@ export default function GoogleLoginButton(props) {
         await setDoc(userDocRef, {
           name: user.displayName,
           photoURL: user.photoURL || null,
-          chats:[],
-          listings: []
+          chats: [],
+          listings: [],
         });
       }
-
-
-
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -37,10 +35,7 @@ export default function GoogleLoginButton(props) {
 
   return (
     <button onClick={handleLogin} className={styles["google-button"]}>
-      <img
-        src={google_logo}
-        alt="Google logo"
-      />
+      <img src={google_logo} alt="Google logo" />
       {props.mode == "signin" ? "Sign in" : "Sign up"} with Google
     </button>
   );
