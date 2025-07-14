@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase-admin/app';
 import { getFirestore, Timestamp } from 'firebase-admin/firestore';
-import { doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase-admin/auth';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 
@@ -64,11 +63,14 @@ export const scheduledDeleteExpiredDocs = onSchedule({
     }
 
     // This will update the userStuff collections
-    let updated = false;
     for (const doc of userStuffSnapshot.docs) {
         const data = doc.data();
+        let updated = false;
+
         const updatedListings = data.listings.map((listing) => {
             if (expiredItems.includes(listing.id) && listing.status !== "unavailable") {
+                console.log("User listing:", listing);
+
                 // If the item has expired
                 updated = true;
                 return {
@@ -76,6 +78,9 @@ export const scheduledDeleteExpiredDocs = onSchedule({
                     status: "unavailable"
                 }
             }
+
+            // Return the original listing if it doesn't need to be updated
+            return listing;
         });
 
         if (updated) {
