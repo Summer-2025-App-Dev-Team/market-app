@@ -56,7 +56,9 @@ async function updateAllListingsToNewFormat() {
 }
 
 export default function ItemPage() {
-    //updateAllListingsToNewFormat();
+    // updateAllListingsToNewFormat();
+
+    // TODO: remove if not needed (filter bar)
     // useEffect(() => {
     //     const handleElementOnScroll = (e) => {
     //         // idk why but I have to -1 to the scrollWidth to make it work
@@ -81,32 +83,45 @@ export default function ItemPage() {
     //     }
     // }, []);
 
-    const [searchParams] = useSearchParams();
     // e.g. ?query=hello
-    // When there is no query, automatically sets it to empty
-    const query = searchParams.get('q') || "";
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get('q') || ""; // When there is no query, automatically sets it to empty
 
-    const exampleResults = [];
-    const [results, setResults] = useState(exampleResults);
-    const [sortBy, setSortBy] = useState("rating");
+    const [results, setResults] = useState([]);
+    const [sortingMethod, setSortingMethod] = useState("");
 
     useEffect(() => {
         async function loadListings() {
             const listings = await fetchAllListings();
             const filtered = listings.filter(listing => {
-                return query == "" | listing.name?.toLowerCase().includes(query.toLowerCase());
+                return query === "" | listing.name?.toLowerCase().includes(query.toLowerCase());
             });
-            setResults(listings.length ? filtered : exampleResults);
+            setResults(listings.length ? filtered : []);
+
+            // Set the sorting method to alphabet (the default) after results are fetched
+            setSortingMethod("alphabet");
         }
         loadListings();
     }, [query]);
 
-    function sortChange(newSort) {
-        setSortBy(newSort);
+    useEffect(() => {
+        if (results.length < 1) {
+            return;
+        }
 
-        // Create a shallow copy of results and sort
         const sorted = [...results].sort((a, b) => {
-            if (newSort === "price") {
+            if (sortingMethod === "alphabet") {
+                if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                    return -1; // a comes before b
+                } else if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return 1; // a comes after b
+                }
+                return 0; // a and b are equal
+            }
+            else if (sortingMethod === "manner") {
+                // Sort by user manner score
+            }
+            else if (sortingMethod === "price") {
                 if (typeof a.price == "string" && typeof b.price == "number") {
                     // if a is string and b is number, then a is less than b
                     return 1;
@@ -120,10 +135,7 @@ export default function ItemPage() {
                 // if both are numbers, then sort by price
                 return a.price - b.price;
             }
-            else if (newSort === "rating") {
-                return b.rating - a.rating;
-            }
-            else if (newSort === "newest") {
+            else if (sortingMethod === "newest") {
                 if (b.availableUntil > a.availableUntil) {
                     return 1; // b is newer than a
                 }
@@ -138,7 +150,7 @@ export default function ItemPage() {
         });
 
         setResults(sorted);
-    }
+    }, [sortingMethod]);
 
     return (
         <div className={styles["item-page"]}>
@@ -146,7 +158,7 @@ export default function ItemPage() {
                 <h1>Items</h1>
             </div>
             <p className={styles.description}></p>
-            <SearchHeading searchParam={query} results={results} sortchange={sortChange} />
+            <SearchHeading searchParam={query} results={results} sortchange={setSortingMethod} />
             {/* <FilterBar /> */}
             <hr />
             <ItemGrid results={results} />

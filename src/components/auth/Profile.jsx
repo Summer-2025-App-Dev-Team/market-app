@@ -8,6 +8,7 @@ import Settings from "./profile/Settings";
 import styles from "../../assets/css/profile.module.css"
 
 export default function Profile() {
+    const validTab = ["my-item", "bought-item", "settings"];
     const { uid } = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
     const tab = searchParams.get("tab") || "";
@@ -36,7 +37,7 @@ export default function Profile() {
                 </li>
             </ul>
 
-            {tab === "" && <Default uid={uid} />}
+            {!validTab.includes(tab) && <Default uid={uid} />}
             {tab === "my-item" && <MyItem uid={uid} />}
             {tab === "bought-item" && <BoughtItem uid={uid} />}
             {tab === "settings" && <Settings uid={uid} />}

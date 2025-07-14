@@ -5,7 +5,7 @@ export default function LoadingModal() {
         <div className={styles.loadingOverlay}>
             <div className={styles.loadingModal}>
                 <div className={styles.spinner}></div>
-                <p className={styles.message}>Uploading...</p>
+                <p className={styles.message}>Loading...</p>
             </div>
         </div>
     );

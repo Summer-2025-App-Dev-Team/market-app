@@ -1,11 +1,14 @@
 import { useRef, useEffect, useState } from "react";
 import imagePlaceholder from "/image-placeholder.jpg";
 import styles from "../../assets/css/slideshow.module.css";
+import { toast } from "react-toastify";
 
 export default function Slideshow(props) {
+    const imgRefs = useRef([]);
     const imgSlideshowRef = useRef(null);
     const dotsRef = useRef(null);
     const [slideIndex, setSlideIndex] = useState(1);
+    const [loadedImgs, setLoadedImgs] = useState([]);
 
     useEffect(() => {
         const slides = imgSlideshowRef.current;
@@ -31,12 +34,52 @@ export default function Slideshow(props) {
         });
     }, [slideIndex]);
 
+    useEffect(() => {
+        function handleImgLoaded(e) {
+            setLoadedImgs(prev => [...prev, true]);
+        }
+
+        function handleLoadingError(e) {
+            toast.error("Error while loading images!");
+        }
+
+        imgRefs.current.forEach((img) => {
+            if (img) {
+                img.addEventListener("error", handleLoadingError);
+            }
+        });
+
+        imgRefs.current.forEach((img) => {
+            if (img) {
+                img.addEventListener("load", handleImgLoaded);
+            }
+        });
+
+        return () => {
+            imgRefs.current.forEach((img) => {
+                if (img) {
+                    img.removeEventListener("error", handleLoadingError);
+                }
+            });
+
+            imgRefs.current.forEach((img) => {
+                if (img) {
+                    img.removeEventListener("load", handleImgLoaded);
+                }
+            });
+        }
+    }, [imgRefs]);
+
+    useEffect(() => {
+        console.log(loadedImgs);
+    }, [loadedImgs])
+
     return (
         <div ref={imgSlideshowRef} className={styles["image-slideshow"]}>
             {
-                props.image.length <= 0 ? <img src={imagePlaceholder} className={styles.default} draggable={false} /> : props.image.map((img) => {
+                props.image.length <= 0 ? <img src={imagePlaceholder} className={styles.default} draggable={false} /> : props.image.map((img, index) => {
                     return (
-                        <img src={img.url ? img.url : imagePlaceholder} onClick={(e) => { props.setSelectedImg ? props.setSelectedImg(e.target) & e.stopPropagation() : "" }} draggable={false} />
+                        <img ref={(el) => (imgRefs.current[index] = el)} src={img.url ? img.url : imagePlaceholder} onClick={(e) => { props.setSelectedImg ? props.setSelectedImg(e.target) & e.stopPropagation() : "" }} draggable={false} />
                     )
                 })
             }

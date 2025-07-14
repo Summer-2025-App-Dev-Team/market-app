@@ -1,10 +1,12 @@
-import styles from "../../assets/css/itempage.module.css"
 import Service from "./Service"
+import LoadingModel from "../global/LoadingModal";
+import styles from "../../assets/css/itempage.module.css"
+import { useRef, useState } from "react";
 
 export default function ItemGrid(props) {
-    console.log("Results:", props.results);
-
+    const [loading, setLoading] = useState([]);
     let totalResults = props.results.length;
+
     const buttons = props.results.map((result) => {
         // If the item is not available, don't render it
         if (result.status !== "available") {

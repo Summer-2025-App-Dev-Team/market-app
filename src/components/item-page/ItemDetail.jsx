@@ -6,7 +6,6 @@ import {
   getDoc,
   getDocs,
   collection,
-  updateDoc,
   arrayUnion,
   setDoc,
 } from "firebase/firestore";
@@ -18,8 +17,8 @@ import LoadingModal from "../global/LoadingModal";
 import styles from "../../assets/css/itemdetail.module.css";
 
 export default function ItemDetail() {
-  const ID = useParams().id; //item id
-  const [item, setItem] = useState(null); //the item variable which is set variable with setItem function
+  const ID = useParams().id; // item id
+  const [item, setItem] = useState(null); // the item variable which is set variable with setItem function
   const [loading, setLoading] = useState(true);
   const [selectedImg, setSelectedImg] = useState(null);
   const zoomImageBgRef = useRef(null);
@@ -64,7 +63,7 @@ export default function ItemDetail() {
           let currentStatus = "n/a";
           const endTime = new Date(
             data.availableUntil.seconds * 1000 +
-              data.availableUntil.nanoseconds / 1e6
+            data.availableUntil.nanoseconds / 1e6
           );
 
           if (!isNaN(endTime.getTime())) {
@@ -133,7 +132,7 @@ export default function ItemDetail() {
 
     const existingChatId =
       buyerChats.includes(expectedChatId) &&
-      sellerChats.includes(expectedChatId) // Conditional operator to check if the chat ID already exists in both buyer and seller chats
+        sellerChats.includes(expectedChatId) // Conditional operator to check if the chat ID already exists in both buyer and seller chats
         ? expectedChatId // Check if the chat ID already exists in both buyer and seller chats. value for true
         : undefined; // Check if the chat ID already exists in both buyer and seller chats. value for false
     console.log("existingChatId", existingChatId);
@@ -154,8 +153,8 @@ export default function ItemDetail() {
 
       await setDoc(
         buyUserDocRef,
-        { chats: arrayUnion(chatId) },//adds chatid if not existing already
-        { merge: true }//don't overwite whole doc
+        { chats: arrayUnion(chatId) }, // adds chatid if not existing already
+        { merge: true } // don't overwite whole doc
       );
       await setDoc(
         buyUserDocRef,
@@ -193,7 +192,7 @@ export default function ItemDetail() {
                 Available until:{" "}
                 {new Date(
                   item.availableUntil.seconds * 1000 +
-                    item.availableUntil.nanoseconds / 1e6
+                  item.availableUntil.nanoseconds / 1e6
                 )
                   .toISOString()
                   .slice(0, 10)}
