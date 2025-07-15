@@ -1,7 +1,6 @@
-import { useRef, useEffect, useState } from "react";
 import imagePlaceholder from "/image-placeholder.jpg";
+import { useRef, useEffect, useState } from "react";
 import styles from "../../assets/css/slideshow.module.css";
-import { toast } from "react-toastify";
 
 export default function Slideshow(props) {
     const imgRefs = useRef([]);
@@ -35,19 +34,9 @@ export default function Slideshow(props) {
     }, [slideIndex]);
 
     useEffect(() => {
-        function handleImgLoaded(e) {
-            setLoadedImgs(prev => [...prev, true]);
+        function handleImgLoaded() {
+            setLoadedImgs([true, ...loadedImgs]);
         }
-
-        function handleLoadingError(e) {
-            toast.error("Error while loading images!");
-        }
-
-        imgRefs.current.forEach((img) => {
-            if (img) {
-                img.addEventListener("error", handleLoadingError);
-            }
-        });
 
         imgRefs.current.forEach((img) => {
             if (img) {
@@ -58,12 +47,6 @@ export default function Slideshow(props) {
         return () => {
             imgRefs.current.forEach((img) => {
                 if (img) {
-                    img.removeEventListener("error", handleLoadingError);
-                }
-            });
-
-            imgRefs.current.forEach((img) => {
-                if (img) {
                     img.removeEventListener("load", handleImgLoaded);
                 }
             });
@@ -71,8 +54,10 @@ export default function Slideshow(props) {
     }, [imgRefs]);
 
     useEffect(() => {
-        console.log(loadedImgs);
-    }, [loadedImgs])
+        if (loadedImgs.length === props.image.length) {
+            props.setLoadedServices ? props.setLoadedServices((prev) => [...prev, true]) : "";
+        }
+    }, [loadedImgs]);
 
     return (
         <div ref={imgSlideshowRef} className={styles["image-slideshow"]}>

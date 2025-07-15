@@ -1,10 +1,10 @@
 import Rating from "./Rating"
-import styles from "../../assets/css/service.module.css"
 import Slideshow from "./Slideshow";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import styles from "../../assets/css/service.module.css";
 
 export default function Service(props) {
   const [username, setUsername] = useState("User");
@@ -50,7 +50,7 @@ export default function Service(props) {
 
   return (
     <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""} ${props.status === "unavailable" ? styles.unavailable : ""}`} onClick={() => { !props.preview && props.status === "available" ? navigate(`/item/${props.id}`) : ""; }}>
-      <Slideshow image={props.image} />
+      <Slideshow image={props.image} setLoadedServices={props.setLoadedServices} />
       <div className={styles["item-info"]}>
         <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>
         <span className={styles.date}>{date}</span>

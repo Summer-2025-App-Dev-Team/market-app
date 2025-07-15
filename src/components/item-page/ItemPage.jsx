@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import styles from "../../assets/css/itempage.module.css";
-import { useSearchParams } from 'react-router-dom';
 import SearchHeading from './SearchHeading';
 import ItemGrid from './ItemGrid';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { collection, doc, getDocs, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import styles from "../../assets/css/itempage.module.css";
 
 async function fetchAllListings() {
     try {
@@ -87,8 +87,8 @@ export default function ItemPage() {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q') || ""; // When there is no query, automatically sets it to empty
 
-    const [results, setResults] = useState([]);
     const [sortingMethod, setSortingMethod] = useState("");
+    const [results, setResults] = useState([]);
 
     useEffect(() => {
         async function loadListings() {
