@@ -1,21 +1,19 @@
-import { data, Link, useFetcher, useParams } from "react-router-dom";
-import userPlaceholder from "/avatar-placeholder.png";
-import styles from "../../assets/css/chatroompreview.module.css";
-import { useEffect, useState } from "react";
-import { realtimedb, db } from "../lib/firebase";
-import { ref, onValue, off, set } from "firebase/database";
-import { doc, getDoc } from "firebase/firestore";
 import useAuthStore from "../store/useAuthStore";
-import { Dropdown } from "bootstrap";
 import useChatStore from "../global/chatStore";
+import userPlaceholder from "/avatar-placeholder.png";
+import { useEffect, useState } from "react";
+import { db } from "../lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import styles from "../../assets/css/chatroompreview.module.css";
 
 const randomIdforConfirmAndOptionBtn = crypto.randomUUID();
 
 export default function ChatRoomPreview({ chatId }) {
   const chatStore = useChatStore((state) => state.rtdb); //current chat store from zustand
 
-  //takes chatId as a property and looks for the chat room in Realtime Database and find out the particpants
-  //receives the chatID from firestore
+  // takes chatId as a property and looks for the chat room in Realtime Database and find out the participants
+  // receives the chatID from firestore
   // This component is used to display a preview of a chat room in the chat sidebar.
   // It shows the room name and the last message sent in the room.
   const user = useAuthStore((state) => state.user);
@@ -24,7 +22,7 @@ export default function ChatRoomPreview({ chatId }) {
   const [sellerPhotoUrl, setSellerPhotoUrl] = useState(userPlaceholder);
   const [showDropdown, setDropdown] = useState(false);
 
-  const [idForLatestMessage, setIdForLatestMessage] = useState(""); //loop through the chat in rtdb and get the most recent timestamp(biggest number) and set the latest directory for the latest message and get the value of the latest message object
+  const [idForLatestMessage, setIdForLatestMessage] = useState(""); // loop through the chat in rtdb and get the most recent timestamp(biggest number) and set the latest directory for the latest message and get the value of the latest message object
   const [MostrecentTimestamp, setRecentTimestamp] = useState(0);
   const [latestMessage, setLatestMessage] = useState("");
   const [refresh, setRefresh] = useState(0);
@@ -45,9 +43,9 @@ export default function ChatRoomPreview({ chatId }) {
       console.error(err);
     }
 
-    async function getUsers() { //getting user info
+    async function getUsers() { // getting user info
       const otherUserData = await getDoc(otherUserRef);
-      console.log(otherUserData.data(),"otheruser")
+      console.log(otherUserData.data(), "otheruser")
       try {
         setOtherUser(otherUserData.data().name);
         setSellerPhotoUrl(otherUserData.data().photoURL);
@@ -55,7 +53,7 @@ export default function ChatRoomPreview({ chatId }) {
         console.error("failed to fetch");
       }
     }
-    getUsers().then(() => {console.log(otherUser)});
+    getUsers().then(() => { console.log(otherUser) });
     if (
       chatStore != null &&
       chatStore != undefined &&
@@ -216,6 +214,7 @@ export default function ChatRoomPreview({ chatId }) {
     //     }
     //   }, [messages]);
   }
+
   return (
     <Link
       to={"/chat/" + chatId}

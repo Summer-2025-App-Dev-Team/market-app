@@ -1,39 +1,38 @@
-.inputContainer {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-top: 1px solid #ddd;
-    background-color: #f9f9f9;
-  }
-  
-  .input {
-    flex: 1;
-    padding: 10px 14px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    font-size: 16px;
-    outline: none;
-    background-color: white;
-  }
-  
-  .submit {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .submit:hover {
-    background-color: #0056b3;
-        
-  }
+.input-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 5px;
+}
 
-  .send{
-    width: 40px;
-  }
-  
+.input-form input {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  outline: none;
+  background-color: white;
+  transition: 0.3s;
+}
+
+.input-form input:focus {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.input-form button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 16px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.input-form button[type="submit"]:hover {
+  opacity: 0.8;
+}

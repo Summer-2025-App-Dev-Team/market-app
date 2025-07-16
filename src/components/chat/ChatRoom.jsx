@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import MessageContainer from "./MessageContainer";
 import useAuthStore from "../store/useAuthStore";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { realtimedb } from "../lib/firebase";
 import { ref, set, onValue, off } from "firebase/database";
 import { toast } from "react-toastify";
-import MessageContainer from "./MessageContainer";
 import styles from "../../assets/css/chatroom.module.css";
 
 export default function Chat() {
   const user = useAuthStore((state) => state.user);
+  const messageInputRef = useRef(null);
   const { uid: chatId } = useParams();
   const navigate = useNavigate();
 
@@ -68,24 +69,24 @@ export default function Chat() {
       text: input,
       timestamp: time,
     });
-      console.log("Message sent:", time);
-      
+
+    // Reset the input box to empty
+    messageInputRef.current.value = "";
   }
 
   return (
     <div>
       <MessageContainer messages={messages} />
-      <div className={styles.inputContainer}>
+      <form onSubmit={handleSubmit} className={styles["input-form"]}>
         <input
-          className={styles.input}
+          ref={messageInputRef}
           type="text"
           value={input}
+          placeholder="message..."
           onChange={(e) => setInput(e.target.value)}
         />
-        <button className={styles.submit} onClick={handleSubmit}>
-          Send
-        </button>
-      </div>
+        <button type="submit">Send</button>
+      </form>
     </div>
   );
 }
