@@ -9,23 +9,23 @@
     transition: 0.3s;
 }
 
-.service-wrapper:not(.preview, .unavailable) {
+.service-wrapper:not(.preview, .unavailable, :has(.loading-background)) {
     cursor: pointer;
 }
 
-.service-wrapper:not(.preview, .unavailable):hover {
+.service-wrapper:not(.preview, .unavailable, :has(.loading-background)):hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.service-wrapper.unavailable {
-    /* filter: brightness(0.5) blur(1px); */
+.service-wrapper.unavailable,
+.service-wrapper:has(.loading-background) {
+    pointer-events: none;
     user-select: none;
-    cursor: not-allowed;
 }
 
-.service-wrapper.unavailable * {
+.service-wrapper.unavailable *,
+.service-wrapper:has(.loading-background) * {
     pointer-events: none;
-    cursor: not-allowed;
 }
 
 .service-wrapper.unavailable::after {
@@ -53,6 +53,17 @@
     border-radius: 10px;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
+}
+
+.service-wrapper .loading-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    animation: fade 1s infinite alternate;
 }
 
 .item-info {
@@ -113,6 +124,16 @@
     color: rgb(77, 187, 77);
 }
 
+
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0.5;
+    }
+}
 
 @media only screen and (max-width: 565px) {
     .service-wrapper {

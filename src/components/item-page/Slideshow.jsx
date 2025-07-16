@@ -34,28 +34,43 @@ export default function Slideshow(props) {
     }, [slideIndex]);
 
     useEffect(() => {
-        function handleImgLoaded() {
-            setLoadedImgs([true, ...loadedImgs]);
+        function handleImgLoaded(index) {
+            setLoadedImgs(prev => {
+                // Update the array
+                const newLoadedImgs = [...prev];
+                newLoadedImgs[index] = true;
+
+                // Return the new array
+                return newLoadedImgs;
+            });
         }
 
-        imgRefs.current.forEach((img) => {
+        imgRefs.current.forEach((img, index) => {
             if (img) {
-                img.addEventListener("load", handleImgLoaded);
+                // Use another function because we need the index param
+                const loadHandler = () => handleImgLoaded(index);
+                img.addEventListener("load", loadHandler);
+
+                // Store the handler for cleanup
+                img._loadHandler = loadHandler;
             }
         });
 
+        // The clean up function
         return () => {
             imgRefs.current.forEach((img) => {
-                if (img) {
-                    img.removeEventListener("load", handleImgLoaded);
+                if (img && img._loadHandler) {
+                    img.removeEventListener("load", img._loadHandler);
+                    delete img._loadHandler;
                 }
             });
         }
-    }, [imgRefs]);
+    }, []);
 
     useEffect(() => {
-        if (loadedImgs.length === props.image.length) {
-            props.setLoadedServices ? props.setLoadedServices((prev) => [...prev, true]) : "";
+        // When all items in the array is true, or if there is no image provided, set loading to false
+        if (props.image.length === 0 || loadedImgs.every(item => item === true)) {
+            props.setLoading(false);
         }
     }, [loadedImgs]);
 
