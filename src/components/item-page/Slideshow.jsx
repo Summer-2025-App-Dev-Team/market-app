@@ -70,7 +70,7 @@ export default function Slideshow(props) {
     useEffect(() => {
         // When all items in the array is true, or if there is no image provided, set loading to false
         if (props.image.length === 0 || loadedImgs.every(item => item === true)) {
-            props.setLoading(false);
+            props.setLoading ? props.setLoading(false) : "";
         }
     }, [loadedImgs]);
 
