@@ -12,17 +12,23 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
-.container>div:first-child {
+.container>div.slideshow {
+    height: 100%;
     width: 50%;
-    max-height: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: rgba(211, 211, 211, 0.1);
     border-radius: 5px;
-    align-self: center;
+    padding: 10px;
 }
 
-.container>div:first-child>img {
+.container>div.slideshow>div>img {
     border-radius: 5px;
-    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+    cursor: zoom-in;
+}
+
+.container>div.slideshow>div>img:hover {
+    border: 2px solid rgba(0, 0, 255, 0.6);
 }
 
 .infoColumn {
@@ -169,7 +175,7 @@ button.contact:hover {
 }
 
 .zoomImage {
-    position: fixed;
+    position: fixed !important;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -177,9 +183,9 @@ button.contact:hover {
     height: 100vh;
     backdrop-filter: blur(5px) brightness(0.5);
     -webkit-backdrop-filter: blur(5px) brightness(0.5);
+    cursor: zoom-out;
     visibility: hidden;
     opacity: 0;
-    pointer-events: none;
     transition: 0.3s;
     z-index: 100;
 }
@@ -197,7 +203,9 @@ button.contact:hover {
     height: auto;
     left: 50%;
     top: 50%;
+    background-color: white;
     transform: translate(-50%, -50%);
+    cursor: default;
 }
 
 @keyframes fade {

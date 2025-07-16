@@ -52,7 +52,9 @@ export default function Service(props) {
 
   return (
     <div className={`${styles["service-wrapper"]} ${props.preview ? styles.preview : ""} ${props.status === "unavailable" ? styles.unavailable : ""}`} onClick={() => { !props.preview && props.status === "available" ? navigate(`/item/${props.id}`) : ""; }}>
-      <Slideshow image={props.image} setLoading={setLoading} />
+      <div className={styles["slideshow"]}>
+        <Slideshow image={props.image} setLoading={setLoading} />
+      </div>
       {loading ? <div className={styles["loading-background"]}>Loading...</div> : <>
         <div className={styles["item-info"]}>
           <span className={styles.name}>{props.name ? props.name : "No name set yet"}</span>

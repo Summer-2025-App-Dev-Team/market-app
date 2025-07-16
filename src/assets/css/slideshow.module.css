@@ -1,14 +1,16 @@
 .image-slideshow {
     position: relative;
-    max-height: 150px;
+    /* max-height: 150px; */
+    height: 100%;
     overflow: hidden;
 }
 
 .image-slideshow img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     width: 100%;
     height: auto;
-    border-radius: 10px;
-    aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
     user-select: none;

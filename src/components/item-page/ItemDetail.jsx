@@ -1,3 +1,7 @@
+import chatIcon from "/chat-icon.png";
+import Slideshow from "./Slideshow";
+import useAuthStore from "../store/useAuthStore";
+import LoadingModal from "../global/LoadingModal";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { db, realtimedb } from "../lib/firebase";
@@ -10,10 +14,6 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { ref, update } from "firebase/database";
-import chatIcon from "/chat-icon.png";
-import Slideshow from "./Slideshow";
-import useAuthStore from "../store/useAuthStore";
-import LoadingModal from "../global/LoadingModal";
 import styles from "../../assets/css/itemdetail.module.css";
 
 export default function ItemDetail() {
@@ -143,14 +143,6 @@ export default function ItemDetail() {
       chatId = item.id + "_" + user.uid + "_" + item.user; // changed the chat ID to be more related to the item and users
       console.log("Creating new chat with ID:", chatId);
 
-      // await updateDoc(buyUserDocRef, {
-      //   chats: arrayUnion(chatId), // adding the chat ID to the buyer's chats in firestore
-      // });
-
-      // await updateDoc(sellUserDocRef, {
-      //   chats: arrayUnion(chatId), // adding the chat ID to the seller's chats in firestore
-      // });
-
       await setDoc(
         buyUserDocRef,
         { chats: arrayUnion(chatId) }, // adds chatid if not existing already
@@ -180,9 +172,11 @@ export default function ItemDetail() {
     <LoadingModal />
   ) : (
     <div className={styles.container}>
-      {item?.image && (
-        <Slideshow image={item.image} setSelectedImg={setSelectedImg} />
-      )}
+      <div className={styles["slideshow"]}>
+        {item?.image && (
+          <Slideshow image={item.image} setSelectedImg={setSelectedImg} />
+        )}
+      </div>
       <div className={styles.infoColumn}>
         {item?.name && <h1 className={styles.productName}>{item.name}</h1>}
         {item?.availableUntil && (
@@ -235,7 +229,6 @@ export default function ItemDetail() {
         <img
           ref={zoomImageRef}
           src={null}
-          alt="zoom-in picture"
           draggable={false}
         />
       </div>
