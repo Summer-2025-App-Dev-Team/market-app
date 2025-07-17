@@ -23,6 +23,11 @@
 .container>div.slideshow>div>img {
     border-radius: 5px;
     border: 2px solid transparent;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    padding: 5px;
     transition: 0.3s;
     cursor: zoom-in;
 }
@@ -203,6 +208,7 @@ button.contact:hover {
     height: auto;
     left: 50%;
     top: 50%;
+    padding: 10px;
     background-color: white;
     transform: translate(-50%, -50%);
     cursor: default;

@@ -6,7 +6,7 @@
     height: max-content;
     border-radius: 10px;
     padding: 10px;
-    transition: 0.3s;
+    transition: box-shadow 0.3s;
 }
 
 .service-wrapper:not(.preview, .unavailable, :has(.loading-background)) {

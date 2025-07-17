@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { db } from "../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import LoadingModel from "../../global/LoadingModal";
@@ -7,7 +7,9 @@ import styles from "../../../assets/css/profile/myitem.module.css";
 
 export default function MyItem(props) {
     const uid = props.uid;
+    const navbarRef = useRef(null);
     const [userListings, setUserListings] = useState(null);
+    const [selectedServices, setSelectedServices] = useState([]);
 
     useEffect(() => {
         async function fetchUserListings() {
@@ -38,25 +40,65 @@ export default function MyItem(props) {
         fetchUserListings();
     }, []);
 
+    useEffect(() => {
+        // Adjust the navbar
+        if (selectedServices.length > 0) {
+            navbarRef.current.classList.add(styles["show"]);
+        } else {
+            navbarRef.current.classList.remove(styles["show"]);
+        }
+    }, [selectedServices]);
+
+    function handleSelectService(id) {
+        const checked = event.target.checked;
+        if (checked) {
+            // Add the selected service to the array
+            setSelectedServices(prev => [...prev, id]);
+        } else {
+            // Remove the selected service
+            const updatedArr = selectedServices.filter(serviceId => serviceId !== id);
+            setSelectedServices(updatedArr);
+        }
+    }
+
+    function confirmSold() {
+        // Return immediately if there is no item selected
+        if (selectedServices.length < 1) {
+            return;
+        }
+
+        console.log(selectedServices);
+    }
+
     return (
         <article className={styles["container"]}>
-            {
-                userListings ?
-                    userListings.map((listing) => {
-                        return (
-                            <Service
-                                name={listing.name}
-                                price={listing.price}
-                                image={listing.image}
-                                description={listing.description}
-                                availableUntil={listing.availableUntil}
-                                status={listing.status}
-                                id={listing.id}
-                            />
-                        )
-                    }) :
-                    <LoadingModel />
-            }
+            <div ref={navbarRef} className={styles["navbar"]}>
+                <button onClick={confirmSold}>Mark as sold</button>
+            </div>
+            <div className={styles["grid"]}>
+                {
+                    userListings ?
+                        userListings.map((listing) => {
+                            return (
+                                <div>
+                                    <Service
+                                        name={listing.name}
+                                        price={listing.price}
+                                        image={listing.image}
+                                        description={listing.description}
+                                        availableUntil={listing.availableUntil}
+                                        status={listing.status}
+                                        id={listing.id}
+                                    />
+                                    <label>
+                                        <input type="checkbox" onChange={() => { handleSelectService(listing.id) }} />
+                                        <span></span>
+                                    </label>
+                                </div>
+                            )
+                        }) : <LoadingModel />
+                }
+            </div>
         </article>
     )
 }
