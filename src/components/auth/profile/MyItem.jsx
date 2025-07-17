@@ -8,7 +8,9 @@ import styles from "../../../assets/css/profile/myitem.module.css";
 export default function MyItem(props) {
     const uid = props.uid;
     const navbarRef = useRef(null);
+    const [filter, setFilter] = useState("all");
     const [userListings, setUserListings] = useState(null);
+    const [results, setResults] = useState(null);
     const [selectedServices, setSelectedServices] = useState([]);
 
     useEffect(() => {
@@ -32,6 +34,7 @@ export default function MyItem(props) {
                 }
 
                 setUserListings(data);
+                setResults(data);
             } else {
                 // The user does not have any listings
                 console.log("No such user document!");
@@ -48,6 +51,25 @@ export default function MyItem(props) {
             navbarRef.current.classList.remove(styles["show"]);
         }
     }, [selectedServices]);
+
+    useEffect(() => {
+        let newArr;
+        switch (filter) {
+            case "all":
+                newArr = userListings ? [...userListings] : null;
+                break;
+
+            case "on-list":
+                newArr = userListings.filter(listing => listing.status === "available");
+                break;
+
+            case "expired":
+                newArr = userListings.filter(listing => listing.status === "unavailable");
+                break;
+        }
+
+        setResults(newArr)
+    }, [filter]);
 
     function handleSelectService(id) {
         const checked = event.target.checked;
@@ -72,13 +94,18 @@ export default function MyItem(props) {
 
     return (
         <article className={styles["container"]}>
-            <div ref={navbarRef} className={styles["navbar"]}>
+            <div ref={navbarRef} className={styles["tool-bar"]}>
                 <button onClick={confirmSold}>Mark as sold</button>
+            </div>
+            <div className={styles["filter-bar"]}>
+                <span className={filter === "all" ? styles["active"] : ""} onClick={() => { setFilter("all") }}>All</span>
+                <span className={filter === "on-list" ? styles["active"] : ""} onClick={() => { setFilter("on-list") }}>On-list</span>
+                <span className={filter === "expired" ? styles["active"] : ""} onClick={() => { setFilter("expired") }}>Expired</span>
             </div>
             <div className={styles["grid"]}>
                 {
-                    userListings ?
-                        userListings.map((listing) => {
+                    results ?
+                        results.map((listing) => {
                             return (
                                 <div>
                                     <Service
@@ -96,7 +123,7 @@ export default function MyItem(props) {
                                     </label>
                                 </div>
                             )
-                        }) : <LoadingModel />
+                        }) : <p>Loading...</p>
                 }
             </div>
         </article>
