@@ -18,7 +18,7 @@ export const scheduledDeleteExpiredDocs = onSchedule({
     const now = Timestamp.now();
 
     // Get all items in allListings with the availableUntil property expired
-    const allListingsSnapshot = await db
+    const allExpiredListingsSnapshot = await db
         .collection("allListings")
         .where("availableUntil", "<=", now)
         .get();
@@ -28,14 +28,23 @@ export const scheduledDeleteExpiredDocs = onSchedule({
         .get();
 
     // If there is no item, return
-    if (allListingsSnapshot.docs.length <= 0) {
+    if (allExpiredListingsSnapshot.docs.length <= 0) {
         console.log("No item expired today!");
         return;
     }
 
     // This will update the allListings collection
-    for (const doc of allListingsSnapshot.docs) {
-        console.log("Expired item:", doc);
+    for (const doc of allExpiredListingsSnapshot.docs) {
+        // Skip the old items
+        if (doc.data().status !== "available") continue;
+
+        // Automatically delete the item if it has been expired for more than a week
+        const oneWeekInMillis = 7 * 24 * 60 * 60 * 1000; // One week in milliseconds
+        if (now.toDate() - doc.data().availableUntil.toDate() >= oneWeekInMillis) {
+            await doc.ref.delete();
+            console.log(`Deleted expired item after 1 week: ${doc.id}`);
+            continue;
+        }
 
         // Update the status property
         await doc.ref.update({
@@ -68,9 +77,7 @@ export const scheduledDeleteExpiredDocs = onSchedule({
         let updated = false;
 
         const updatedListings = data.listings.map((listing) => {
-            if (expiredItems.includes(listing.id) && listing.status !== "unavailable") {
-                console.log("User listing:", listing);
-
+            if (expiredItems.includes(listing.id) && listing.status === "available") {
                 // If the item has expired
                 updated = true;
                 return {

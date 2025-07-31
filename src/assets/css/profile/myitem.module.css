@@ -1,3 +1,7 @@
+.container::-webkit-scrollbar {
+    display: none;
+}
+
 .container {
     position: relative;
     width: 100%;
@@ -8,7 +12,7 @@
 }
 
 .container>.tool-bar {
-    position: absolute;
+    position: fixed;
     background-color: rgba(211, 211, 211, 0.8);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     width: 100%;
@@ -160,4 +164,30 @@
 
 .container>.grid label>input:checked+span::after {
     display: block;
+}
+
+.container div.info {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.container div.info.show {
+    visibility: visible;
+    transform: translateY(0);
 }

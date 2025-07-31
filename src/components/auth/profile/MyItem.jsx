@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { db } from "../../lib/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import LoadingModel from "../../global/LoadingModal";
 import Service from "../../item-page/Service";
 import styles from "../../../assets/css/profile/myitem.module.css";
 
 export default function MyItem(props) {
     const uid = props.uid;
     const navbarRef = useRef(null);
+    const infoRef = useRef(null);
     const [filter, setFilter] = useState("all");
     const [userListings, setUserListings] = useState(null);
     const [results, setResults] = useState(null);
@@ -71,6 +71,23 @@ export default function MyItem(props) {
         setResults(newArr)
     }, [filter]);
 
+    useEffect(() => {
+        if (results) {
+            results.forEach((listing) => {
+                if (listing.status === "unavailable") {
+                    infoRef.current.classList.add(styles["show"]);
+                    const hideInfoTimeout = setTimeout(() => {
+                        infoRef.current.classList.remove(styles["show"]);
+                    }, 2000);
+
+                    return () => {
+                        clearTimeout(hideInfoTimeout);
+                    }
+                }
+            });
+        }
+    }, results);
+
     function handleSelectService(id) {
         const checked = event.target.checked;
         if (checked) {
@@ -89,7 +106,9 @@ export default function MyItem(props) {
             return;
         }
 
-        console.log(selectedServices);
+        selectedServices.forEach((service) => {
+            console.log(service);
+        });
     }
 
     return (
@@ -105,26 +124,32 @@ export default function MyItem(props) {
             <div className={styles["grid"]}>
                 {
                     results ?
-                        results.map((listing) => {
-                            return (
-                                <div>
-                                    <Service
-                                        name={listing.name}
-                                        price={listing.price}
-                                        image={listing.image}
-                                        description={listing.description}
-                                        availableUntil={listing.availableUntil}
-                                        status={listing.status}
-                                        id={listing.id}
-                                    />
-                                    <label>
-                                        <input type="checkbox" onChange={() => { handleSelectService(listing.id) }} />
-                                        <span></span>
-                                    </label>
-                                </div>
-                            )
-                        }) : <p>Loading...</p>
+                        results.length > 0 ?
+                            results.map((listing) => {
+                                return (
+                                    <div>
+                                        <Service
+                                            name={listing.name}
+                                            price={listing.price}
+                                            image={listing.image}
+                                            description={listing.description}
+                                            availableUntil={listing.availableUntil}
+                                            status={listing.status}
+                                            id={listing.id}
+                                        />
+                                        <label>
+                                            <input type="checkbox" onChange={() => { handleSelectService(listing.id) }} />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                )
+                            }) : <p>No item</p>
+                        : <p>Loading...</p>
                 }
+            </div>
+            <div ref={infoRef} className={styles["info"]}>
+                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M11 7h2v6h-2zM11 15h2v2h-2z"></path><path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path></svg>
+                <p>All expired items will be removed after 1 week of expiration</p>
             </div>
         </article>
     )
