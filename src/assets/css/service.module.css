@@ -70,7 +70,7 @@
     height: 150px;
 }
 
-.service-wrapper div.slideshow>div {
+.service-wrapper div.slideshow > div {
     border-radius: 10px 10px 0 0;
 }
 
@@ -81,12 +81,12 @@
     color: black;
 }
 
-.item-info>.name {
+.item-info > .name {
     font-size: 18px;
     font-weight: 500;
 }
 
-.item-info>.date {
+.item-info > .date {
     font-size: 14px;
     font-weight: 300;
 }
@@ -95,10 +95,9 @@
     display: flex;
     align-items: center;
     margin-block: 6px 3px;
-
 }
 
-.person-info>img.profile {
+.person-info > img.profile {
     height: 15px;
     width: 15px;
     object-fit: cover;
@@ -106,12 +105,12 @@
     flex-grow: 0;
 }
 
-.person-info>img.stars {
+.person-info > img.stars {
     height: 15px;
     width: auto;
 }
 
-.person-info>p {
+.person-info > p {
     align-items: center;
     justify-content: center;
     font-size: 14px;
@@ -131,7 +130,6 @@
 .free {
     color: rgb(77, 187, 77);
 }
-
 
 @keyframes fade {
     from {

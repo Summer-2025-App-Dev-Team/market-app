@@ -1,88 +1,88 @@
 .chatPreview {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  color: black;
-  text-decoration: none;
-  transition: 0.3s;
-  user-select: none;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s;
+    user-select: none;
+    cursor: pointer;
 }
 
 .chatPreview:hover {
-  background-color: rgba(211, 211, 211, 0.8);
+    background-color: rgba(211, 211, 211, 0.8);
 }
 
 .chatPreview:active {
-  background-color: rgba(211, 211, 211, 0.6);
+    background-color: rgba(211, 211, 211, 0.6);
 }
 
 .chatPreview img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 
 .chatPreview h2 {
-  font-size: 1rem;
-  font-weight: 500;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .chatPreview p {
-  font-size: 0.9rem;
-  font-weight: 400;
+    font-size: 0.9rem;
+    font-weight: 400;
 }
 
 .optionBtn {
-  background-color: transparent;
-  border: none;
-  width: 40px;
-  height: 40px;
-  padding: 5px;
-  margin-left: 5px;
-  border-radius: 50%;
-  transition: 0.3s;
-  cursor: pointer;
+    background-color: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 50%;
+    transition: 0.3s;
+    cursor: pointer;
 }
 
 .optionBtn:hover {
-  background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .optionBtn:active {
-  background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .optionBtn img {
-  width: 50%;
-  height: 50%;
-  object-fit: cover;
-  border-radius: 6px;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .confirm {
-  display: none;
-  height: 30px;
-  width: 30px;
-  border-radius: 10%;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  background: #fdecec;
-  border: 1px solid #ff0303;
-  padding: 5px;
-  object-fit: cover;
-  transition: 0.3s;
-  cursor: pointer;
-  visibility: hidden;
+    display: none;
+    height: 30px;
+    width: 30px;
+    border-radius: 10%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background: #fdecec;
+    border: 1px solid #ff0303;
+    padding: 5px;
+    object-fit: cover;
+    transition: 0.3s;
+    cursor: pointer;
+    visibility: hidden;
 }
 
 .confirm:hover {
-  transform: scale(1.03);
-  background: #ffbaba;
-  border: 1px solid #ff0303;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-  opacity: 0.8;
+    transform: scale(1.03);
+    background: #ffbaba;
+    border: 1px solid #ff0303;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    opacity: 0.8;
 }

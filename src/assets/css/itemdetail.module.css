@@ -12,7 +12,7 @@
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
 }
 
-.container>div.slideshow {
+.container > div.slideshow {
     height: 100%;
     width: 50%;
     background-color: rgba(211, 211, 211, 0.1);
@@ -20,7 +20,7 @@
     padding: 10px;
 }
 
-.container>div.slideshow>div>img {
+.container > div.slideshow > div > img {
     border-radius: 5px;
     border: 2px solid transparent;
     height: auto;
@@ -32,7 +32,7 @@
     cursor: zoom-in;
 }
 
-.container>div.slideshow>div>img:hover {
+.container > div.slideshow > div > img:hover {
     border: 2px solid rgba(0, 0, 255, 0.6);
 }
 
@@ -134,7 +134,7 @@ button.contact:hover {
     transition: 0.3s;
 }
 
-.chatLink:hover>.chatIcon {
+.chatLink:hover > .chatIcon {
     background: #e0ebff;
 }
 
@@ -200,7 +200,7 @@ button.contact:hover {
     opacity: 1;
 }
 
-.zoomImage>img {
+.zoomImage > img {
     position: relative;
     max-width: 80%;
     max-height: 80%;

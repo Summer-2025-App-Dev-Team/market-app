@@ -1,4 +1,4 @@
-import useAuthStore from '../store/useAuthStore';
+import useAuthStore from "../store/useAuthStore";
 
 export default function UserTextData(props) {
     const dataType = props.type;
@@ -8,17 +8,14 @@ export default function UserTextData(props) {
     try {
         data = user[dataType];
         // console.log(user);
-    }
-    catch (err) {
+    } catch (err) {
         // Might indicates that the user is not loaded yet
-    };
+    }
 
     // Still loading or not logged in
     if (user == undefined || user == null || !user[dataType]) {
         return null;
     }
 
-    return (
-        <span>{data}</span>
-    )
+    return <span>{data}</span>;
 }

@@ -13,4 +13,4 @@ root.render(
         <AuthListener />
         <App />
     </StrictMode>
-)
+);

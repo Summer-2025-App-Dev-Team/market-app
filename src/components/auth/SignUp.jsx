@@ -1,5 +1,5 @@
 import AuthHeading from "./AuthCardHeading";
-import GoogleButton from "./GoogleButton"
+import GoogleButton from "./GoogleButton";
 import SignUpForm from "./SignUpForm";
 import { Fragment } from "react";
 import stylesA from "../../assets/css/auth.module.css";
@@ -7,8 +7,8 @@ import stylesB from "../../assets/css/signup.module.css";
 
 const styles = {
     ...stylesA,
-    ...stylesB
-}
+    ...stylesB,
+};
 
 export default function SignUp() {
     return (
@@ -21,7 +21,5 @@ export default function SignUp() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
-
-

@@ -26,7 +26,7 @@
     user-select: none;
 }
 
-.profile .sidebar>li {
+.profile .sidebar > li {
     position: relative;
     display: flex;
     justify-content: center;
@@ -40,15 +40,15 @@
 }
 
 /* Prevent the user from clicking the span and svg element */
-.profile .sidebar>li>* {
+.profile .sidebar > li > * {
     pointer-events: none;
 }
 
-.profile .sidebar>li i {
+.profile .sidebar > li i {
     font-size: 24px;
 }
 
-.profile .sidebar>li:not(:last-child, :nth-last-child(2))::after {
+.profile .sidebar > li:not(:last-child, :nth-last-child(2))::after {
     content: "";
     position: absolute;
     width: 95%;
@@ -59,17 +59,17 @@
     background-color: rgb(169, 169, 169);
 }
 
-.profile .sidebar>li:not(:first-child) {
+.profile .sidebar > li:not(:first-child) {
     cursor: pointer;
 }
 
-.profile .sidebar>li:not(:first-child):hover,
-.profile .sidebar>li.active {
+.profile .sidebar > li:not(:first-child):hover,
+.profile .sidebar > li.active {
     color: white;
     background-color: rgba(0, 0, 0, 0.6);
 }
 
-.profile .sidebar>li:last-child::before {
+.profile .sidebar > li:last-child::before {
     content: "";
     position: absolute;
     width: 95%;
@@ -80,7 +80,7 @@
     background-color: rgb(169, 169, 169);
 }
 
-.profile .sidebar>li:last-child {
+.profile .sidebar > li:last-child {
     margin-top: auto;
 }
 
@@ -92,7 +92,7 @@
     padding-inline: 10px;
 }
 
-.profile .user>div {
+.profile .user > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,7 +100,7 @@
     font-size: 0.9rem;
 }
 
-.profile .user>div>span:first-child {
+.profile .user > div > span:first-child {
     font-weight: bold;
 }
 
@@ -111,6 +111,6 @@
     object-fit: cover;
 }
 
-.profile>article {
+.profile > article {
     overflow: auto;
 }

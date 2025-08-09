@@ -20,12 +20,12 @@
     background-color: rgba(211, 211, 211, 0.8);
 }
 
-.container form>section {
+.container form > section {
     position: relative;
     padding-block: 15px 10px;
 }
 
-.container form>section:not(:last-child)::after {
+.container form > section:not(:last-child)::after {
     content: "";
     position: absolute;
     width: 100%;
@@ -35,27 +35,27 @@
     background-color: rgba(211, 211, 211, 0.8);
 }
 
-.container form>section h2 {
+.container form > section h2 {
     font-size: 1.5rem;
 }
 
-.container form>section.profile-picture>div {
+.container form > section.profile-picture > div {
     margin-block: 5px;
 }
 
-.container form>section.profile-picture p {
+.container form > section.profile-picture p {
     font-size: 1.2rem;
     margin-bottom: 5px;
 }
 
-.container form>section.profile-picture img {
+.container form > section.profile-picture img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     user-select: none;
 }
 
-.container form>section.profile-picture .upload-btn {
+.container form > section.profile-picture .upload-btn {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -71,18 +71,18 @@
     transition: 0.3s;
 }
 
-.container form>section.profile-picture button.upload-btn {
+.container form > section.profile-picture button.upload-btn {
     background-color: rgb(45, 174, 45);
 }
 
-.container form>section.profile-picture .upload-btn.hide {
+.container form > section.profile-picture .upload-btn.hide {
     display: none;
 }
 
-.container form>section.profile-picture .upload-btn:hover {
+.container form > section.profile-picture .upload-btn:hover {
     opacity: 0.8;
 }
 
-.container form>section.profile-picture .upload-btn:active {
+.container form > section.profile-picture .upload-btn:active {
     opacity: 0.6;
 }

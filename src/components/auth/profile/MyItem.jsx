@@ -28,7 +28,8 @@ export default function MyItem(props) {
                         "nanoseconds" in item.createdAt
                     ) {
                         item.createdAt = new Date(
-                            item.createdAt.seconds * 1000 + item.createdAt.nanoseconds / 1e6
+                            item.createdAt.seconds * 1000 +
+                                item.createdAt.nanoseconds / 1e6
                         ).toLocaleString();
                     }
                 }
@@ -60,15 +61,19 @@ export default function MyItem(props) {
                 break;
 
             case "on-list":
-                newArr = userListings.filter(listing => listing.status === "available");
+                newArr = userListings.filter(
+                    (listing) => listing.status === "available"
+                );
                 break;
 
             case "expired":
-                newArr = userListings.filter(listing => listing.status === "unavailable");
+                newArr = userListings.filter(
+                    (listing) => listing.status === "unavailable"
+                );
                 break;
         }
 
-        setResults(newArr)
+        setResults(newArr);
     }, [filter]);
 
     useEffect(() => {
@@ -82,20 +87,22 @@ export default function MyItem(props) {
 
                     return () => {
                         clearTimeout(hideInfoTimeout);
-                    }
+                    };
                 }
             });
         }
-    }, results);
+    }, [results]);
 
     function handleSelectService(id) {
         const checked = event.target.checked;
         if (checked) {
             // Add the selected service to the array
-            setSelectedServices(prev => [...prev, id]);
+            setSelectedServices((prev) => [...prev, id]);
         } else {
             // Remove the selected service
-            const updatedArr = selectedServices.filter(serviceId => serviceId !== id);
+            const updatedArr = selectedServices.filter(
+                (serviceId) => serviceId !== id
+            );
             setSelectedServices(updatedArr);
         }
     }
@@ -117,40 +124,81 @@ export default function MyItem(props) {
                 <button onClick={confirmSold}>Mark as sold</button>
             </div>
             <div className={styles["filter-bar"]}>
-                <span className={filter === "all" ? styles["active"] : ""} onClick={() => { setFilter("all") }}>All</span>
-                <span className={filter === "on-list" ? styles["active"] : ""} onClick={() => { setFilter("on-list") }}>On-list</span>
-                <span className={filter === "expired" ? styles["active"] : ""} onClick={() => { setFilter("expired") }}>Expired</span>
+                <span
+                    className={filter === "all" ? styles["active"] : ""}
+                    onClick={() => {
+                        setFilter("all");
+                    }}
+                >
+                    All
+                </span>
+                <span
+                    className={filter === "on-list" ? styles["active"] : ""}
+                    onClick={() => {
+                        setFilter("on-list");
+                    }}
+                >
+                    On-list
+                </span>
+                <span
+                    className={filter === "expired" ? styles["active"] : ""}
+                    onClick={() => {
+                        setFilter("expired");
+                    }}
+                >
+                    Expired
+                </span>
             </div>
             <div className={styles["grid"]}>
-                {
-                    results ?
-                        results.length > 0 ?
-                            results.map((listing) => {
-                                return (
-                                    <div>
-                                        <Service
-                                            name={listing.name}
-                                            price={listing.price}
-                                            image={listing.image}
-                                            description={listing.description}
-                                            availableUntil={listing.availableUntil}
-                                            status={listing.status}
-                                            id={listing.id}
+                {results ? (
+                    results.length > 0 ? (
+                        results.map((listing) => {
+                            return (
+                                <div>
+                                    <Service
+                                        name={listing.name}
+                                        price={listing.price}
+                                        image={listing.image}
+                                        description={listing.description}
+                                        availableUntil={listing.availableUntil}
+                                        status={listing.status}
+                                        id={listing.id}
+                                    />
+                                    <label>
+                                        <input
+                                            type="checkbox"
+                                            onChange={() => {
+                                                handleSelectService(listing.id);
+                                            }}
                                         />
-                                        <label>
-                                            <input type="checkbox" onChange={() => { handleSelectService(listing.id) }} />
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                )
-                            }) : <p>No item</p>
-                        : <p>Loading...</p>
-                }
+                                        <span></span>
+                                    </label>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <p>No item</p>
+                    )
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
             <div ref={infoRef} className={styles["info"]}>
-                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} fill={"currentColor"} viewBox="0 0 24 24">{/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}<path d="M11 7h2v6h-2zM11 15h2v2h-2z"></path><path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path></svg>
-                <p>All expired items will be removed after 1 week of expiration</p>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={24}
+                    height={24}
+                    fill={"currentColor"}
+                    viewBox="0 0 24 24"
+                >
+                    {/* Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free */}
+                    <path d="M11 7h2v6h-2zM11 15h2v2h-2z"></path>
+                    <path d="M12 22c5.51 0 10-4.49 10-10S17.51 2 12 2 2 6.49 2 12s4.49 10 10 10m0-18c4.41 0 8 3.59 8 8s-3.59 8-8 8-8-3.59-8-8 3.59-8 8-8"></path>
+                </svg>
+                <p>
+                    All expired items will be removed after 1 week of expiration
+                </p>
             </div>
         </article>
-    )
+    );
 }

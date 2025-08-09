@@ -11,7 +11,7 @@
     interpolate-size: allow-keywords;
 }
 
-.container>.tool-bar {
+.container > .tool-bar {
     position: fixed;
     background-color: rgba(211, 211, 211, 0.8);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -24,13 +24,13 @@
     z-index: 100;
 }
 
-.container>.tool-bar.show {
+.container > .tool-bar.show {
     height: auto;
     visibility: visible;
     opacity: 1;
 }
 
-.container>.tool-bar>button {
+.container > .tool-bar > button {
     background: none;
     border: none;
     border-radius: 5px;
@@ -42,15 +42,15 @@
     cursor: pointer;
 }
 
-.container>.tool-bar>button:hover {
+.container > .tool-bar > button:hover {
     background: rgba(144, 144, 144, 0.5);
 }
 
-.container>.tool-bar>button:active {
+.container > .tool-bar > button:active {
     background: rgba(144, 144, 144, 0.8);
 }
 
-.container>.filter-bar {
+.container > .filter-bar {
     position: relative;
     display: flex;
     justify-content: center;
@@ -59,7 +59,7 @@
     margin-block: 25px 10px;
 }
 
-.container>.filter-bar::after {
+.container > .filter-bar::after {
     content: "";
     position: absolute;
     left: 50%;
@@ -71,19 +71,19 @@
     border-radius: 25%;
 }
 
-.container>.filter-bar>span {
+.container > .filter-bar > span {
     font-size: 1.2rem;
     transition: 0.3s;
     cursor: pointer;
 }
 
-.container>.filter-bar>span.active,
-.container>.filter-bar>span:hover {
+.container > .filter-bar > span.active,
+.container > .filter-bar > span:hover {
     color: skyblue;
     text-decoration: underline;
 }
 
-.container>.grid {
+.container > .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     justify-items: center;
@@ -93,22 +93,22 @@
     width: 100%;
 }
 
-.container>.grid>div {
+.container > .grid > div {
     position: relative;
 }
 
-.container>.grid>div:has(input:checked)>div {
+.container > .grid > div:has(input:checked) > div {
     outline: 2px solid blue;
 }
 
-.container>.grid>div>div:hover+label,
-.container>.grid label:hover,
-.container>.grid label:has(input:checked) {
+.container > .grid > div > div:hover + label,
+.container > .grid label:hover,
+.container > .grid label:has(input:checked) {
     visibility: visible;
     opacity: 1;
 }
 
-.container>.grid label {
+.container > .grid label {
     position: absolute;
     left: 0;
     top: 0;
@@ -119,18 +119,18 @@
     z-index: 10;
 }
 
-.container>.grid label * {
+.container > .grid label * {
     cursor: pointer;
 }
 
-.container>.grid label>input {
+.container > .grid label > input {
     position: absolute;
     width: 0;
     height: 0;
     opacity: 0;
 }
 
-.container>.grid label>span {
+.container > .grid label > span {
     position: absolute;
     top: 0;
     left: 0;
@@ -144,7 +144,7 @@
     transition: 0.3s;
 }
 
-.container>.grid label>span::after {
+.container > .grid label > span::after {
     content: "";
     display: none;
     position: absolute;
@@ -158,11 +158,11 @@
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.container>.grid label>input:checked+span {
+.container > .grid label > input:checked + span {
     background-color: rgba(33, 150, 243, 0.5);
 }
 
-.container>.grid label>input:checked+span::after {
+.container > .grid label > input:checked + span::after {
     display: block;
 }
 

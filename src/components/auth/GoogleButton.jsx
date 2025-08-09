@@ -6,37 +6,37 @@ import { doc, setDoc } from "firebase/firestore";
 import styles from "../../assets/css/auth.module.css";
 
 export default function GoogleLoginButton(props) {
-  const setUser = useAuthStore((state) => state.setUser);
+    const setUser = useAuthStore((state) => state.setUser);
 
-  const handleLogin = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("photo", user.photoURL, user.displayName);
-      console.log("Signed in user:", user);
-      console.log("uid", user.uid);
+    const handleLogin = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+            console.log("photo", user.photoURL, user.displayName);
+            console.log("Signed in user:", user);
+            console.log("uid", user.uid);
 
-      setUser(user, true);
+            setUser(user, true);
 
-      if (result._tokenResponse?.isNewUser) {
-        const userDocRef = doc(db, "userStuff", user.uid);
-        await setDoc(userDocRef, {
-          name: user.displayName,
-          photoURL: user.photoURL || null,
-          chats: [],
-          listings: [],
-        });
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
+            if (result._tokenResponse?.isNewUser) {
+                const userDocRef = doc(db, "userStuff", user.uid);
+                await setDoc(userDocRef, {
+                    name: user.displayName,
+                    photoURL: user.photoURL || null,
+                    chats: [],
+                    listings: [],
+                });
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+        }
+    };
 
-  return (
-    <button onClick={handleLogin} className={styles["google-button"]}>
-      <img src={google_logo} alt="Google logo" />
-      {props.mode == "signin" ? "Sign in" : "Sign up"} with Google
-    </button>
-  );
+    return (
+        <button onClick={handleLogin} className={styles["google-button"]}>
+            <img src={google_logo} alt="Google logo" />
+            {props.mode == "signin" ? "Sign in" : "Sign up"} with Google
+        </button>
+    );
 }

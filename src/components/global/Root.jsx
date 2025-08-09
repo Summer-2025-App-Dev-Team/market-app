@@ -1,7 +1,7 @@
-import Header from "./Header"
-import Footer from "./Footer"
-import { Outlet } from "react-router-dom"
-import { useRef } from "react"
+import Header from "./Header";
+import Footer from "./Footer";
+import { Outlet } from "react-router-dom";
+import { useRef } from "react";
 
 export default function Root() {
     const mainRef = useRef(null);
@@ -14,5 +14,5 @@ export default function Root() {
             </main>
             <Footer scrollTargetRef={mainRef} />
         </>
-    )
+    );
 }

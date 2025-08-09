@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .login,
 .signup,
 .forget-password {
-    background-color: #020A6E;
+    background-color: #020a6e;
     background-image: url("../background.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -27,26 +26,26 @@ form.input-form {
     align-items: center;
     width: 400px;
     height: fit-content;
-    color: #3A0082;
+    color: #3a0082;
     padding: 30px;
     margin-top: 50px;
     border-radius: 10px;
 }
 
-.auth-card>h1 {
+.auth-card > h1 {
     font-size: 40px;
     font-weight: bold;
     margin: 0;
     margin-bottom: 5px;
 }
 
-.auth-card>h2 {
+.auth-card > h2 {
     font-size: 16px;
     font-weight: 300;
     margin: 0;
 }
 
-.auth-card h2>a {
+.auth-card h2 > a {
     position: relative;
     color: black;
     text-decoration: none;
@@ -54,11 +53,11 @@ form.input-form {
     transition: 0.3s;
 }
 
-.auth-card h2>a:hover {
+.auth-card h2 > a:hover {
     color: rgb(31, 199, 255);
 }
 
-.auth-card h2>a::before {
+.auth-card h2 > a::before {
     content: "";
     position: absolute;
     bottom: 0;
@@ -69,11 +68,11 @@ form.input-form {
     transition: 0.3s;
 }
 
-.auth-card h2>a:hover::before {
+.auth-card h2 > a:hover::before {
     width: 100%;
 }
 
-.input-form>div,
+.input-form > div,
 .input-form div.password-div {
     display: flex;
     flex-direction: column;
@@ -88,12 +87,12 @@ form.input-form {
     width: 100%;
     border: none;
     outline: none;
-    color: #8F8F8F;
+    color: #8f8f8f;
     font-size: 14px;
     font-weight: 300;
 }
 
-.input-form input+label:not([for="remember-me"]) {
+.input-form input + label:not([for="remember-me"]) {
     display: inline-block;
     position: relative;
     width: 100%;
@@ -104,7 +103,7 @@ form.input-form {
     background-color: #777777;
 }
 
-.input-form input:focus+label:not([for="remember-me"]) {
+.input-form input:focus + label:not([for="remember-me"]) {
     background-color: #111111;
     animation: expand 0.3s ease-out forwards;
 }
@@ -119,37 +118,37 @@ form.input-form {
     font-size: 14px;
 }
 
-.input-form div.utils>div {
+.input-form div.utils > div {
     display: flex;
     flex-direction: row;
     gap: 3px;
     align-items: center;
 }
 
-.input-form div.utils>div>input {
+.input-form div.utils > div > input {
     width: 12.5px;
     height: 12.5px;
 }
 
-.input-form div.utils>div>input,
-.input-form div.utils>div>label {
+.input-form div.utils > div > input,
+.input-form div.utils > div > label {
     cursor: pointer;
 }
 
-.input-form div.utils>a {
+.input-form div.utils > a {
     color: #333;
     text-decoration: none;
     font-style: italic;
 }
 
-.input-form div.utils>a:hover {
+.input-form div.utils > a:hover {
     text-decoration: underline;
 }
 
 .input-form button {
     margin-top: 30px;
-    background-color: #170B2F;
-    color: #FDFDFD;
+    background-color: #170b2f;
+    color: #fdfdfd;
     width: 100%;
     padding: 10px 20px;
     border: none;
@@ -194,7 +193,7 @@ form.input-form {
     background-color: rgba(211, 211, 211, 0.6);
 }
 
-.google-button>img {
+.google-button > img {
     width: 20px;
     height: 20px;
 }
@@ -205,11 +204,11 @@ form.input-form {
         width: min(75%, 400px);
     }
 
-    .auth-card>h1 {
+    .auth-card > h1 {
         font-size: 24px;
     }
 
-    .auth-card>h2 {
+    .auth-card > h2 {
         font-size: 11px;
     }
 
@@ -228,13 +227,11 @@ form.input-form {
     }
 }
 
-
 @media only screen and (max-width: 320px) {
     .auth-card {
         width: 80%;
     }
 }
-
 
 @keyframes expand {
     from {

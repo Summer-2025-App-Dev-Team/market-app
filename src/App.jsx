@@ -14,77 +14,77 @@ import AddItem from "./components/item-page/AddItem";
 import ItemDetail from "./components/item-page/ItemDetail";
 import NotFoundPage from "./components/NotFoundPage";
 import "./App.css";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children: [
-      {
+    {
         path: "/",
-        element: <ItemPage />
-      },
-      {
-        path: "/item/:id",
-        element: <ItemDetail />
-      },
-      {
-        path: "/login",
-        element: <Login />
-      },
-      {
-        path: "/verify-auth",
-        element: <VerifyAuth />
-      },
-      {
-        path: "/success-screen",
-        element: <SuccessScreen />
-      },
-      {
-        path: "/logout",
-        element: <Logout />
-      },
-      {
-        path: "/signup",
-        element: <SignUp />
-      },
-      {
-        path: "/forget-password",
-        element: <ForgetPassword />
-      },
-      {
-        path: "/profile/:uid",
-        element: <Profile />,
-      },
-      {
-        path: "/chat",
-        element: <ChatHome />,
+        element: <Root />,
         children: [
-          {
-            path: ":uid",
-            element: <ChatRoom />
-          }
-        ]
-      },
-      {
-        path: "/add-item",
-        element: <AddItem />
-      },
-      {
-        path: "*",
-        element: <NotFoundPage />
-      }
-    ]
-  }
-])
+            {
+                path: "/",
+                element: <ItemPage />,
+            },
+            {
+                path: "/item/:id",
+                element: <ItemDetail />,
+            },
+            {
+                path: "/login",
+                element: <Login />,
+            },
+            {
+                path: "/verify-auth",
+                element: <VerifyAuth />,
+            },
+            {
+                path: "/success-screen",
+                element: <SuccessScreen />,
+            },
+            {
+                path: "/logout",
+                element: <Logout />,
+            },
+            {
+                path: "/signup",
+                element: <SignUp />,
+            },
+            {
+                path: "/forget-password",
+                element: <ForgetPassword />,
+            },
+            {
+                path: "/profile/:uid",
+                element: <Profile />,
+            },
+            {
+                path: "/chat",
+                element: <ChatHome />,
+                children: [
+                    {
+                        path: ":uid",
+                        element: <ChatRoom />,
+                    },
+                ],
+            },
+            {
+                path: "/add-item",
+                element: <AddItem />,
+            },
+            {
+                path: "*",
+                element: <NotFoundPage />,
+            },
+        ],
+    },
+]);
 
 export default function App() {
-  return (
-    <>
-      <RouterProvider router={router}></RouterProvider>
-      <ToastContainer />
-    </>
-  );
+    return (
+        <>
+            <RouterProvider router={router}></RouterProvider>
+            <ToastContainer />
+        </>
+    );
 }

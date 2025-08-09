@@ -6,5 +6,5 @@ export default function BoughtItem(props) {
             <h1>Bought items</h1>
             <p>Work in Progress!</p>
         </article>
-    )
+    );
 }

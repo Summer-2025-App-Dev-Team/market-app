@@ -17,7 +17,7 @@ export default function SuccessScreen() {
             buttonOnClick: () => {
                 navigate("/");
             },
-            buttonText: "Return to homepage"
+            buttonText: "Return to homepage",
         },
         reset: {
             title: "Password Reset!",
@@ -25,23 +25,29 @@ export default function SuccessScreen() {
             buttonOnClick: () => {
                 navigate("/login");
             },
-            buttonText: "Return to login"
-        }
-    }
+            buttonText: "Return to login",
+        },
+    };
 
     const styles = {
         ...styleA,
-        ...styleB
-    }
+        ...styleB,
+    };
 
     return (
         <div className={styles["success-screen"]} id="success-screen">
             <div className={`${styles["auth-card"]} ${styles["success-card"]}`}>
                 <AuthHeading head={message[type].title} />
                 <h2>{message[type].message}</h2>
-                <img src={tick_symbol} alt="tick-symbol.png" draggable={false} />
-                <button onClick={message[type].buttonOnClick}>{message[type].buttonText}</button>
+                <img
+                    src={tick_symbol}
+                    alt="tick-symbol.png"
+                    draggable={false}
+                />
+                <button onClick={message[type].buttonOnClick}>
+                    {message[type].buttonText}
+                </button>
             </div>
         </div>
-    )
+    );
 }

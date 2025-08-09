@@ -4,15 +4,15 @@ import { auth } from "../lib/firebase";
 import useAuthStore from "../store/useAuthStore";
 
 export default function AuthListener() {
-  const setUser = useAuthStore((state) => state.setUser);
+    const setUser = useAuthStore((state) => state.setUser);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user ?? null);
-    });
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user ?? null);
+        });
 
-    return () => unsubscribe();
-  }, [setUser]);
+        return () => unsubscribe();
+    }, [setUser]);
 
-  return null;
+    return null;
 }

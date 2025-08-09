@@ -1,4 +1,4 @@
-import useAuthStore from '../store/useAuthStore';
+import useAuthStore from "../store/useAuthStore";
 import imagePlaceHolder from "/image-placeholder.jpg";
 
 export default function UserPhoto(props) {
@@ -13,20 +13,10 @@ export default function UserPhoto(props) {
 
     // Since we are using client-side code, we can't actually get others users' profile picture
     if (user === null || user.uid !== uid) {
-        return (
-            <img
-                src={imagePlaceHolder}
-                alt="user"
-                draggable={false}
-            />
-        )
+        return <img src={imagePlaceHolder} alt="user" draggable={false} />;
     }
 
     return (
-        <img
-            src={photoURL || imagePlaceHolder}
-            alt="user"
-            draggable={false}
-        />
+        <img src={photoURL || imagePlaceHolder} alt="user" draggable={false} />
     );
 }

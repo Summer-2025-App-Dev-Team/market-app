@@ -1,68 +1,66 @@
 .messagesContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 12px;
-  height: 400px; /* or 100% if your layout allows */
-  overflow-y: auto;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    height: 400px; /* or 100% if your layout allows */
+    overflow-y: auto;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  margin: 4px 0;
+    display: flex;
+    flex-direction: column;
+    margin: 4px 0;
 }
-.status{
-  font-size: 25px;
-  color:#000000;
-  max-width: 200px;
-  align-items: center;
-  text-align: center;
-  .available{
-    background-color: #2cb506;
-    border-radius: 10px;
-  }
-  .unavailable{
-    background-color: #a22e00;
-    border-radius: 10px;
-  }
-  .reserved{
-    background-color: #cda30c;
-    border-radius: 10px;
-  }
-  
-
+.status {
+    font-size: 25px;
+    color: #000000;
+    max-width: 200px;
+    align-items: center;
+    text-align: center;
+    .available {
+        background-color: #2cb506;
+        border-radius: 10px;
+    }
+    .unavailable {
+        background-color: #a22e00;
+        border-radius: 10px;
+    }
+    .reserved {
+        background-color: #cda30c;
+        border-radius: 10px;
+    }
 }
 .own {
-  align-items: flex-end;
+    align-items: flex-end;
 }
 
 .other {
-  align-items: flex-start;
+    align-items: flex-start;
 }
 
 .bubble {
-  max-width: 60%;
-  padding: 8px 12px;
-  border-radius: 12px;
-  color: #000;
+    max-width: 60%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    color: #000;
 }
 
 .bubbleOwn {
-  background-color: #dcf8c6;
-  align-self: flex-end;
+    background-color: #dcf8c6;
+    align-self: flex-end;
 }
 
 .bubbleOther {
-  background-color: #f1f0f0;
-  align-self: flex-start;
+    background-color: #f1f0f0;
+    align-self: flex-start;
 }
 
 .timestamp {
-  font-size: 10px;
-  color: #888;
-  margin-top: 2px;
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
 }

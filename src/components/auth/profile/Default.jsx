@@ -21,8 +21,22 @@ export default function Default(props) {
     return (
         <article className={styles.container}>
             <UserPhoto uid={uid} />
-            {isUser ? <h1>Welcome, {user?.displayName}</h1> : <h1>Welcome to user {uid}'s profile page</h1>}
-            {isUser ? <p>You can manage your listed items and bought items by clicking the sidebar.</p> : <p>You can view their listed and bought items by clicking the sidebar.</p>}
+            {isUser ? (
+                <h1>Welcome, {user?.displayName}</h1>
+            ) : (
+                <h1>Welcome to user {uid}'s profile page</h1>
+            )}
+            {isUser ? (
+                <p>
+                    You can manage your listed items and bought items by
+                    clicking the sidebar.
+                </p>
+            ) : (
+                <p>
+                    You can view their listed and bought items by clicking the
+                    sidebar.
+                </p>
+            )}
         </article>
-    )
+    );
 }

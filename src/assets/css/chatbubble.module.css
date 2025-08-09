@@ -1,36 +1,36 @@
 .ownContainer {
-  align-items: flex-end;
-  align-self: flex-end;
-  width: fit-content;
+    align-items: flex-end;
+    align-self: flex-end;
+    width: fit-content;
 }
 
 .otherContainer {
-  align-items: flex-start;
-  align-self: flex-start;
-  width: fit-content;
+    align-items: flex-start;
+    align-self: flex-start;
+    width: fit-content;
 }
 
 .own {
-  align-self: flex-end;
-  align-items: flex-end;
-  padding: 8px 12px;
-  border-radius: 12px;
-  background-color: #8dc0f8;
-  color: #000;
+    align-self: flex-end;
+    align-items: flex-end;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background-color: #8dc0f8;
+    color: #000;
 }
 
 .other {
-  align-self: flex-start;
-  align-items: flex-start;
-  padding: 8px 12px;
-  border-radius: 12px;
-  background-color: #ffffff;
-  color: #000;
+    align-self: flex-start;
+    align-items: flex-start;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: #000;
 }
 
 .timestamp {
-  font-size: 10px;
-  color: #888;
-  margin-top: 2px;
-  text-align: right;
+    font-size: 10px;
+    color: #888;
+    margin-top: 2px;
+    text-align: right;
 }

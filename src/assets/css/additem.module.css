@@ -18,24 +18,24 @@
     gap: 75px;
 }
 
-.content>form,
-.content>div.preview {
+.content > form,
+.content > div.preview {
     background-color: white;
 }
 
-.content>form {
+.content > form {
     padding: 30px;
     border-radius: 5px;
     height: fit-content;
     width: 30%;
 }
 
-.content form>h1 {
+.content form > h1 {
     font-weight: bold;
 }
 
-.content>form>input,
-.content>form>textarea {
+.content > form > input,
+.content > form > textarea {
     display: block;
     width: 100%;
     padding: 7.5px;
@@ -44,11 +44,11 @@
     margin-block: 2px 20px;
 }
 
-.content>form>input:disabled {
+.content > form > input:disabled {
     cursor: not-allowed;
 }
 
-.content>form>input[type="number"] {
+.content > form > input[type="number"] {
     margin-block: 2px 3px;
 }
 
@@ -64,11 +64,11 @@
     user-select: none;
 }
 
-.toggle-free:hover>span {
+.toggle-free:hover > span {
     background-color: rgb(211, 211, 211);
 }
 
-.toggle-free>input {
+.toggle-free > input {
     position: absolute;
     opacity: 0;
     height: 0;
@@ -76,15 +76,15 @@
     cursor: pointer;
 }
 
-.toggle-free>input:checked+span {
+.toggle-free > input:checked + span {
     background-color: lightskyblue;
 }
 
-.toggle-free>input:checked+span::after {
+.toggle-free > input:checked + span::after {
     display: inline-block !important;
 }
 
-.toggle-free>span {
+.toggle-free > span {
     position: absolute;
     width: 1rem;
     height: 1rem;
@@ -96,7 +96,7 @@
     transition: 0.3s;
 }
 
-.toggle-free>span::after {
+.toggle-free > span::after {
     content: "";
     display: none;
     position: absolute;
@@ -142,14 +142,14 @@
     background-color: #e0f7fa;
 }
 
-.content form>div.inputs {
+.content form > div.inputs {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-.content form>div.inputs>div {
+.content form > div.inputs > div {
     width: 50%;
 }
 
@@ -165,12 +165,12 @@
     overflow: auto;
 }
 
-.content form>h3 {
+.content form > h3 {
     font-weight: 500;
     font-size: 20px;
 }
 
-.content form>label {
+.content form > label {
     display: block;
     margin-top: 5px;
 }
@@ -179,7 +179,7 @@
     display: inline-block;
 }
 
-.content form>button {
+.content form > button {
     border: none;
     padding: 7.5px 15px;
     border-radius: 5px;
@@ -191,11 +191,11 @@
     transition: 0.3s;
 }
 
-.content form>button:hover {
+.content form > button:hover {
     opacity: 0.8;
 }
 
-.content form>button:active {
+.content form > button:active {
     opacity: 0.6;
 }
 
@@ -207,7 +207,7 @@
     border-radius: 5px;
 }
 
-.preview>h2 {
+.preview > h2 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 30px;

@@ -16,34 +16,45 @@ const upload = async (files) => {
         for (let i = 0; i < totalFiles; i++) {
             const file = files[i].file;
             const date = new Date();
-            const storageRef = ref(storage, "images/" + date.getTime() + "_" + file.name);
+            const storageRef = ref(
+                storage,
+                "images/" + date.getTime() + "_" + file.name
+            );
 
             const uploadTask = uploadBytesResumable(storageRef, file);
 
-            uploadTask.on('state_changed',
+            uploadTask.on(
+                "state_changed",
                 (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(`Upload is ${progress}% done for file ${i + 1}.`);
+                    const progress =
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    console.log(
+                        `Upload is ${progress}% done for file ${i + 1}.`
+                    );
                 },
                 (error) => {
                     reject("Something went wrong: " + error.code);
                 },
                 () => {
-                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                        URLs.push({ url: downloadURL });
-                        completedUploads++;
+                    getDownloadURL(uploadTask.snapshot.ref)
+                        .then((downloadURL) => {
+                            URLs.push({ url: downloadURL });
+                            completedUploads++;
 
-                        // Only resolve when all uploads are complete
-                        if (completedUploads === totalFiles) {
-                            resolve(URLs);
-                        }
-                    }).catch((error) => {
-                        reject("Failed to get download URL: " + error.message);
-                    });
+                            // Only resolve when all uploads are complete
+                            if (completedUploads === totalFiles) {
+                                resolve(URLs);
+                            }
+                        })
+                        .catch((error) => {
+                            reject(
+                                "Failed to get download URL: " + error.message
+                            );
+                        });
                 }
             );
         }
     });
-}
+};
 
-export default upload
+export default upload;

@@ -6,7 +6,8 @@ export default function Footer({ scrollTargetRef }) {
 
     useEffect(() => {
         function handleScroll(e) {
-            const isAtBottom = el.clientHeight + el.scrollTop >= el.scrollHeight - 1;
+            const isAtBottom =
+                el.clientHeight + el.scrollTop >= el.scrollHeight - 1;
 
             if (isAtBottom) {
                 footerRef.current.classList.add(styles.show);
@@ -21,12 +22,12 @@ export default function Footer({ scrollTargetRef }) {
         el.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
-        }
+        };
     }, []);
 
     return (
         <footer ref={footerRef} className={styles.footer}>
             &copy; 2025 | SAS Market App
         </footer>
-    )
+    );
 }
